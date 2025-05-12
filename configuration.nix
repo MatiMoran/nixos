@@ -126,7 +126,6 @@
      gimp
      xclip
      tldr
-     rofi
      vlc
      keepassxc
      redshift
