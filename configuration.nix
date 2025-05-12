@@ -14,6 +14,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.supportedFilesystems = [ "ntfs" ];
+  boot.kernelModules = [ "uinput" ];
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -69,11 +70,13 @@
     };
   };
 
+  users.groups.uinput = {};
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.matias = {
     isNormalUser = true;
     description = "matias";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "input" "uinput"];
     packages = with pkgs; [];
   };
 
@@ -83,7 +86,11 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  programs.thunar.enable = true;
+  programs = {
+    thunar.enable = true;
+    zsh.enable = true;
+  };
+  users.defaultUserShell = pkgs.zsh;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -112,8 +119,10 @@
      tmux
      fd
      ripgrep
+     fzf
      bat
      zoxide
+     kanata
      gimp
      xclip
      tldr
@@ -158,6 +167,20 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+
+  systemd.services.kanata = {
+    description = "Kanata Service";
+    requires = [ "local-fs.target" ];
+    after = [ "local-fs.target" ];
+
+    serviceConfig = {
+      ExecStart = "${pkgs.kanata}/bin/kanata -c /home/matias/.config/kanata/config.kbd";
+      Restart = "no";
+    };
+
+    wantedBy = [ "sysinit.target" ];
+  };
+
   system.stateVersion = "24.11"; # Did you read the comment?
 
 }
