@@ -180,6 +180,10 @@
     wantedBy = [ "sysinit.target" ];
   };
 
+  fonts.packages = with pkgs; [
+    (nerdfonts.override { fonts = [ "CascadiaCode"]; })
+  ];
+
   system.stateVersion = "24.11"; # Did you read the comment?
 
 }
