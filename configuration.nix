@@ -45,28 +45,33 @@
   };
 
   # Configure keymap in X11
-  services.xserver = {
-    enable = true;
-    xkb = {
-      layout = "us";
-      variant = "";
-    };
+  services = {
 
-    desktopManager = {
-      xterm.enable = false;
-    };
+    pipewire.pulse.enable = true;
 
-    displayManager = {
-      defaultSession = "none+i3";
-    };
-
-    windowManager.i3 = {
+    xserver = {
       enable = true;
-      extraPackages = with pkgs; [
-        dmenu
-	i3status
-	i3blocks
-      ];
+      xkb = {
+        layout = "us";
+        variant = "";
+      };
+
+      desktopManager = {
+        xterm.enable = false;
+      };
+
+      displayManager = {
+        defaultSession = "none+i3";
+      };
+
+      windowManager.i3 = {
+        enable = true;
+        extraPackages = with pkgs; [
+          dmenu
+	      i3status
+	      i3blocks
+        ];
+      };
     };
   };
 
@@ -106,6 +111,7 @@
      curl
      htop
      lsof
+     pulseaudio
      pavucontrol
      stow
      bc
