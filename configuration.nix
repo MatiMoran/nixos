@@ -15,6 +15,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.supportedFilesystems = [ "ntfs" ];
   boot.kernelModules = [ "uinput" ];
+  boot.initrd.kernelModules = [ "amdgpu" ];
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -44,6 +45,8 @@
 
     xserver = {
       enable = true;
+      videoDrivers = [ "amdgpu" ];
+
       xkb = {
         layout = "us";
         variant = "";
