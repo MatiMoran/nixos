@@ -39,6 +39,7 @@
     LC_TIME = "es_AR.UTF-8";
   };
 
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   # Configure keymap in X11
   services = {
 
