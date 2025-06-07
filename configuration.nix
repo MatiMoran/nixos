@@ -190,7 +190,7 @@
   };
 
   fonts.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "CascadiaCode"]; })
+    nerd-fonts.caskaydia-cove
   ];
 
   system.stateVersion = "24.11"; # Did you read the comment?
