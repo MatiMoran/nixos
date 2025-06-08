@@ -39,6 +39,7 @@
     LC_TIME = "es_AR.UTF-8";
   };
 
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   # Configure keymap in X11
   services = {
 
@@ -101,52 +102,52 @@
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
-     git
-     neovim
-     unzip
-     zip
-     curl
-     picom
-     curl
-     htop
-     lsof
-     pulseaudio
-     pavucontrol
-     sysstat
-     linuxKernel.packages.linux_6_14.cpupower
-     stow
-     bc
-     rofi
-     feh
-     gcc
-     gnumake
-     clang
-     sox
-     dunst
-     tmux
-     fd
-     ripgrep
-     fzf
-     bat
-     zoxide
-     kanata
-     gimp
-     xclip
-     tldr
-     vlc
-     keepassxc
-     redshift
-     flameshot
-     qbittorrent
-     android-file-transfer
      alacritty
-     zsh
-     zsh-completions
-     zsh-autosuggestions
-     zsh-syntax-highlighting
-     zsh-fzf-tab
+     android-file-transfer
+     bat
+     bc
      brave
      calibre
+     clang
+     curl
+     curl
+     dunst
+     fd
+     feh
+     flameshot
+     fzf
+     gcc
+     gimp
+     git
+     gnumake
+     htop
+     kanata
+     keepassxc
+     linuxKernel.packages.linux_6_14.cpupower
+     lsof
+     neovim
+     pavucontrol
+     picom
+     pulseaudio
+     qbittorrent
+     redshift
+     ripgrep
+     rofi
+     sox
+     stow
+     sysstat
+     tldr
+     tmux
+     unzip
+     vlc
+     xclip
+     zip
+     zoxide
+     zsh
+     zsh-autosuggestions
+     zsh-completions
+     zsh-fzf-tab
+     zsh-syntax-highlighting
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -189,7 +190,7 @@
   };
 
   fonts.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "CascadiaCode"]; })
+    nerd-fonts.caskaydia-cove
   ];
 
   system.stateVersion = "24.11"; # Did you read the comment?
