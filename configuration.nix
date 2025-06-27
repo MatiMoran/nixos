@@ -138,6 +138,7 @@
      sysstat
      tldr
      tmux
+     ungoogled-chromium
      unzip
      vlc
      xclip
