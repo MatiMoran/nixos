@@ -65,6 +65,12 @@
 
     pipewire.pulse.enable = true;
 
+    displayManager = {
+      autoLogin.user = "matias";
+      autoLogin.enable = true;
+      defaultSession = "none+i3";
+    };
+ 
     xserver = {
       enable = true;
       videoDrivers = [ "amdgpu" ];
@@ -76,12 +82,6 @@
 
       desktopManager = {
         xterm.enable = false;
-      };
-
-      displayManager = {
-        autoLogin.user = "matias";
-        autoLogin.enable = true;
-        defaultSession = "none+i3";
       };
 
       windowManager.i3 = {
