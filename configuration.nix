@@ -79,6 +79,8 @@
       };
 
       displayManager = {
+        autoLogin.user = "matias";
+        autoLogin.enable = true;
         defaultSession = "none+i3";
       };
 
