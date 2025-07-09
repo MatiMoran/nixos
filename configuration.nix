@@ -11,8 +11,28 @@
     ];
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader = {
+    systemd-boot.enable = false;
+    efi = {
+      canTouchEfiVariables = true;
+      # assuming /boot is the mount point of the  EFI partition in NixOS (as the installation section recommends).
+      efiSysMountPoint = "/boot";
+    };
+    grub = {
+      enable = true;
+      device = "nodev";
+      useOSProber = true;
+      efiSupport = true;
+      extraEntries = ''
+          menuentry "Reboot" {
+              reboot
+          }
+          menuentry "Poweroff" {
+              halt
+          }
+      '';
+    };
+  };
   boot.supportedFilesystems = [ "ntfs" ];
   boot.kernelModules = [ "uinput" ];
   boot.initrd.kernelModules = [ "amdgpu" ];
