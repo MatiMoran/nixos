@@ -148,6 +148,7 @@
      linuxKernel.packages.linux_6_14.cpupower
      lsof
      neovim
+     nodejs_22
      pavucontrol
      picom
      pulseaudio
