@@ -137,6 +137,7 @@
      flameshot
      fzf
      gcc
+     gdb
      gimp
      git
      gnumake
