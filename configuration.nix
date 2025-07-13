@@ -114,6 +114,7 @@
   nixpkgs.config.allowUnfree = true;
 
   programs = {
+    nix-ld.enable = true;
     thunar.enable = true;
     zsh.enable = true;
   };
