@@ -149,6 +149,7 @@
      lsof
      neovim
      nodejs_22
+     p7zip
      pavucontrol
      picom
      pulseaudio
