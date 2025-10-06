@@ -149,6 +149,7 @@
      lsof
      neovim
      nodejs_22
+     obsidian
      pavucontrol
      picom
      pulseaudio
