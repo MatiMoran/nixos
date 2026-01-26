@@ -65,6 +65,8 @@
 
     pipewire.pulse.enable = true;
 
+    tumbler.enable = true; # Thumbnail support for images
+
     displayManager = {
       autoLogin.user = "matias";
       autoLogin.enable = true;
