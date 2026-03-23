@@ -147,7 +147,7 @@
      htop
      kanata
      keepassxc
-     linuxKernel.packages.linux_6_14.cpupower
+     #linuxKernel.packages.linux_6_14.cpupower
      lsof
      neovim
      nodejs_22
