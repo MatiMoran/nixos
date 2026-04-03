@@ -141,7 +141,8 @@
      fzf
      gcc
      gdb
-     gimp
+     gimp-with-plugins
+     gimpPlugins.resynthesizer
      git
      gnumake
      htop
