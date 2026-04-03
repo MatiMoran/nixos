@@ -148,6 +148,7 @@
      htop
      kanata
      keepassxc
+     libreoffice
      linuxKernel.packages.linux_6_18.cpupower
      lsof
      neovim
