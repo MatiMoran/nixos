@@ -154,6 +154,7 @@
      neovim
      nodejs_22
      obsidian
+     opencode
      pavucontrol
      picom
      pulseaudio
