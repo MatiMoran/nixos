@@ -156,9 +156,10 @@
      obsidian
      opencode
      pavucontrol
-     picom
-     pulseaudio
-     qbittorrent
+      picom
+      pulseaudio
+      python3
+      qbittorrent
      redshift
      ripgrep
      rofi
