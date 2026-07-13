@@ -133,7 +133,6 @@
      calibre
      clang
      curl
-     curl
      dunst
      fd
      feh
@@ -156,10 +155,10 @@
      obsidian
      opencode
      pavucontrol
-      picom
-      pulseaudio
-      python3
-      qbittorrent
+     picom
+     pulseaudio
+     python3
+     qbittorrent
      redshift
      ripgrep
      rofi
