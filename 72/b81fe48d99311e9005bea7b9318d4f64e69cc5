@@ -1,0 +1,23 @@
+home/programs/aerospace.nix
+  s_0b44fe5d3df242::t_09917014c25b79 1-7
+home/programs/aerospace/aerospace.toml
+  s_0b44fe5d3df242::t_a50f96c08516d5 1-146
+home/darwin.nix
+  s_0b44fe5d3df242::t_8d5272a089c404 6
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "72b81fe48d99311e9005bea7b9318d4f64e69cc5",
+  "prompts": {},
+  "sessions": {
+    "s_0b44fe5d3df242": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f2edd72d-e479-498b-8a4f-b11843ace104",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "matmoran_meli <matiasnicolas.moran@mercadolibre.com>"
+    }
+  }
+}
