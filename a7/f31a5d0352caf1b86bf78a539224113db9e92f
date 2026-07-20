@@ -1,0 +1,21 @@
+home/programs/git.nix
+  s_3b213a18d33e4e::t_50acbef747458d 1-11
+home/darwin.nix
+  s_3b213a18d33e4e::t_a8cfc0bec1f19f 7
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "a7f31a5d0352caf1b86bf78a539224113db9e92f",
+  "prompts": {},
+  "sessions": {
+    "s_3b213a18d33e4e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "74b845b5-b190-4734-988c-3a7a4db5a5e6",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "matmoran_meli <matiasnicolas.moran@mercadolibre.com>"
+    }
+  }
+}
