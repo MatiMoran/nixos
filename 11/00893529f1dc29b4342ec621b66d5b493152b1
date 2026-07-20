@@ -1,0 +1,51 @@
+home/darwin.nix
+  s_89f93a6660f520::t_c83e83fdc81ba2 7
+home/programs/claude.nix
+  s_89f93a6660f520::t_ab045a86f67550 1-15
+home/darwin/claude/CLAUDE.md
+  s_89f93a6660f520::t_83e5c9ca18f04b 1-28
+home/darwin/claude/scripts/confirm-destructive.sh
+  s_89f93a6660f520::t_52df322fb224e7 1-52
+home/darwin/claude/skills/grid/SKILL.md
+  s_89f93a6660f520::t_ad173e2e389701 1-195
+home/darwin/claude/skills/grid/evals/evals.json
+  s_89f93a6660f520::t_067049cab3b05e 1-20
+home/darwin/claude/skills/grid/references/styling.md
+  s_89f93a6660f520::t_8b28f0cdbd0c78 1-188
+home/darwin/claude/skills/jira/SKILL.md
+  s_89f93a6660f520::t_e4fa220931b51d 1-168
+home/darwin/claude/skills/jira/evals/evals.json
+  s_89f93a6660f520::t_ea071a3e8ce0eb 1-105
+home/darwin/claude/skills/pr-ready/SKILL.md
+  s_89f93a6660f520::t_deb09383732a33 1-170
+home/darwin/claude/skills/queriator/SKILL.md
+  s_89f93a6660f520::t_658be109a08a9c 1-181
+home/darwin/claude/skills/queriator/references/examples/bidshading_adx_line_item_lookup.sql
+  s_89f93a6660f520::t_83fbe3d67fb329 1-58
+home/darwin/claude/skills/queriator/scripts/run_query.sh
+  s_89f93a6660f520::t_1296d438d452dd 1-28
+home/darwin/claude/skills/slack-polish/SKILL.md
+  s_89f93a6660f520::t_eb25eb861a2c5f 1-169
+home/darwin/claude/skills/slack-polish/evals/evals.json
+  s_89f93a6660f520::t_a29d6534f293de 1-23
+home/darwin/claude/skills/slack-polish/references/audience.md
+  s_89f93a6660f520::t_c0ae52d836dddf 1-28
+home/darwin/claude/statusline-command.sh
+  s_89f93a6660f520::t_5b2dfffc6849a5 1-37
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "1100893529f1dc29b4342ec621b66d5b493152b1",
+  "prompts": {},
+  "sessions": {
+    "s_89f93a6660f520": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8def3022-adeb-4649-9ee9-aaaa0aeee736",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "matmoran_meli <matiasnicolas.moran@mercadolibre.com>"
+    }
+  }
+}
