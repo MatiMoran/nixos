@@ -4,6 +4,7 @@
   imports = [
     ./default.nix
     ./programs/aerospace.nix
+    ./programs/claude.nix
     ./programs/git.nix
   ];
 

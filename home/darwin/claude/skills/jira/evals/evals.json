@@ -1,0 +1,105 @@
+{
+  "skill_name": "jira",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Transition MLDSP-762 to In Progress",
+      "expected_output": "The issue MLDSP-762 should be transitioned to In Progress status. The response should confirm the new status and include the Jira URL.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "confirms-transition",
+          "description": "Response explicitly states MLDSP-762 was transitioned or moved"
+        },
+        {
+          "name": "mentions-in-progress-status",
+          "description": "Response mentions 'In Progress' as the resulting status"
+        },
+        {
+          "name": "includes-jira-url",
+          "description": "Response includes the Jira URL for MLDSP-762 (mercadolibre.atlassian.net/browse/MLDSP-762)"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Create a bug ticket in MLDSP: payment gateway times out when processing orders over $500",
+      "expected_output": "A new Bug issue should be created in project MLDSP with the given summary. Response should include the new issue key and Jira URL.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "returns-new-issue-key",
+          "description": "Response includes a new Jira issue key (e.g. MLDSP-NNN)"
+        },
+        {
+          "name": "correct-issue-type-bug",
+          "description": "Response confirms the issue type is Bug"
+        },
+        {
+          "name": "includes-jira-url",
+          "description": "Response includes the Jira URL for the new issue"
+        },
+        {
+          "name": "summary-matches-request",
+          "description": "Created issue summary relates to payment gateway / timeout"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Show me my open issues in MLDSP",
+      "expected_output": "A list of open issues in MLDSP assigned to the current user, showing issue key, summary, and status for each.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "returns-issue-list",
+          "description": "Response lists at least one issue (or clearly states none found)"
+        },
+        {
+          "name": "shows-key-and-summary",
+          "description": "Each listed issue includes both the issue key (MLDSP-NNN) and a summary"
+        },
+        {
+          "name": "structured-format",
+          "description": "Results are presented in a structured format (table or bullet list), not just prose"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Move MLDSP-762 to the current sprint",
+      "expected_output": "MLDSP-762 should be added to the active sprint. Response should confirm the sprint name and that the issue was moved.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "confirms-sprint-move",
+          "description": "Response confirms the issue was moved/added to a sprint"
+        },
+        {
+          "name": "names-the-sprint",
+          "description": "Response mentions the sprint name (e.g. S01/06-Q2-2026)"
+        },
+        {
+          "name": "includes-jira-url",
+          "description": "Response includes the Jira URL for MLDSP-762"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Assign MLDSP-762 to me",
+      "expected_output": "MLDSP-762 should be assigned to Matias Nicolas Moran (matiasnicolas.moran@mercadolibre.com). Response confirms the assignment.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "confirms-assignment",
+          "description": "Response confirms MLDSP-762 was assigned"
+        },
+        {
+          "name": "names-the-assignee",
+          "description": "Response mentions 'Matias' or the email address matiasnicolas.moran@mercadolibre.com"
+        }
+      ]
+    }
+  ]
+}

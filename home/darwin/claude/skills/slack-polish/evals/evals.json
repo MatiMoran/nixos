@@ -1,0 +1,23 @@
+{
+  "skill_name": "slack-polish",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Revisame este mensaje que le quiero mandar a mi lider (no es tecnico, es de negocio): \"ojo que el throttler del DSP está roto desde ayer y nadie lo arregló todavía, ya perdimos plata\"",
+      "expected_output": "Mensaje mejorado en tono más calmado y profesional, sin jerga técnica (explica qué es el throttler o lo parafrasea de forma comprensible para no técnico), con contexto de impacto de negocio claro, más breve y sin sonar alarmista. Bullet points explicando qué se cambió y por qué.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Está bien este mensaje para mandar al canal #dsp-general? \"necesito que alguien me ayude con la query de bid shading, no funciona y no sé por qué, ya probé de todo\"",
+      "expected_output": "Mensaje mejorado que agrega contexto específico sobre qué se probó o qué error da (sin inventar detalles), sugiere agregar contexto si falta, mejora el tono para ser más directo y accionable. El canal es técnico entonces no hace falta simplificar jerga. Bullet points con cambios.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Pulime esto para mandarle a un compañero técnico: \"hola, viste el PR que hice? tiene unos cambios en el pipeline de display que creo que estan bien pero no estoy 100% seguro de la parte del throttler, si podes revisar estaría bueno, gracias\"",
+      "expected_output": "Mensaje que mantiene el tono amigable pero elimina el relleno ('creo que están bien pero no estoy 100% seguro'), es más directo sobre qué específicamente revisar, preserva términos técnicos (PR, pipeline, display, throttler). Breve y claro. Bullet points con cambios explicados.",
+      "files": []
+    }
+  ]
+}
