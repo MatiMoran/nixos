@@ -165,7 +165,6 @@
      stow
      sysstat
      tldr
-     tmux
      unar
      ungoogled-chromium
      unzip

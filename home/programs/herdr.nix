@@ -1,12 +1,16 @@
 { pkgs, ... }:
 
+let
+  aiCmd = if pkgs.stdenv.isDarwin then "claude" else "opencode";
+  aiLabel = if pkgs.stdenv.isDarwin then "claude" else "opencode";
+in
 {
   home.packages = with pkgs; [ herdr jq ];
 
   home.file.".local/scripts/herdr-project-open" = {
     executable = true;
     text = ''
-      #!/bin/bash
+      #!${pkgs.bash}/bin/bash
 
       DIRS=$(fd -H -d 2 . ''${COMMON_DIRS:-$HOME $HOME/Repos} --type d 2>/dev/null)
       DESTINATION=$(echo "$DIRS" | fzf --no-preview)
@@ -23,11 +27,11 @@
       fi
 
       if [ -n "$POETRY_ACTIVATE" ]; then
-          CMD_CLAUDE="$POETRY_ACTIVATE && claude"
+          CMD_AI="$POETRY_ACTIVATE && ${aiCmd}"
           CMD_SHELL="$POETRY_ACTIVATE"
           CMD_EDITOR="$POETRY_ACTIVATE && nvim ."
       else
-          CMD_CLAUDE="claude"
+          CMD_AI="${aiCmd}"
           CMD_SHELL=""
           CMD_EDITOR="nvim ."
       fi
@@ -47,7 +51,7 @@
               jq -r '.result.tab_id // .result.tab.tab_id')
           T_SHELL=$(herdr tab create --workspace "$WS_ID" --label "shell" --cwd "$DESTINATION" --no-focus | \
               jq -r '.result.tab_id // .result.tab.tab_id')
-          T_CLAUDE=$(herdr tab create --workspace "$WS_ID" --label "claude" --cwd "$DESTINATION" --no-focus | \
+          T_AI=$(herdr tab create --workspace "$WS_ID" --label "${aiLabel}" --cwd "$DESTINATION" --no-focus | \
               jq -r '.result.tab_id // .result.tab.tab_id')
 
           [ -n "$AUTO_TAB" ] && herdr tab close "$AUTO_TAB" 2>/dev/null
@@ -61,7 +65,7 @@
 
           herdr pane run "$(pane_for "$T_EDITOR")" "$CMD_EDITOR"
           [ -n "$CMD_SHELL" ] && herdr pane run "$(pane_for "$T_SHELL")" "$CMD_SHELL"
-          herdr pane run "$(pane_for "$T_CLAUDE")" "$CMD_CLAUDE"
+          herdr pane run "$(pane_for "$T_AI")" "$CMD_AI"
 
           herdr tab focus "$T_SHELL"
           herdr workspace focus "$WS_ID"
