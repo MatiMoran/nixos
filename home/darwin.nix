@@ -4,6 +4,7 @@
   imports = [
     ./default.nix
     ./programs/aerospace.nix
+    ./programs/git.nix
   ];
 
   home.username = "matmoran";
