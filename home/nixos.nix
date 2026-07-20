@@ -4,6 +4,7 @@
   imports = [
     ./default.nix
     ./programs/sink-toggler.nix
+    ./programs/dunst.nix
   ];
 
   programs.alacritty.settings.font.size = 14.0;
