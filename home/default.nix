@@ -14,4 +14,14 @@
   };
 
   programs.home-manager.enable = true;
+
+  # Zsh plugins shared between platforms
+  home.file.".config/zsh/plugins/zsh-autosuggestions".source =
+    "${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions";
+
+  home.file.".config/zsh/plugins/zsh-completions".source =
+    "${pkgs.zsh-completions}/share/zsh-completions";
+
+  home.file.".config/zsh/plugins/zsh-syntax-highlighting".source =
+    "${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting";
 }
