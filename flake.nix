@@ -17,7 +17,8 @@
 
   outputs = { self, nixpkgs, home-manager, nix-darwin, ... } @ inputs:
   let
-    user = "matias";
+    nixosUser = "matias";
+    darwinUser = "matmoran";
   in
   {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
@@ -29,7 +30,7 @@
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
-            users.${user} = import ./home/nixos.nix;
+            users.${nixosUser} = import ./home/nixos.nix;
           };
         }
       ];
@@ -44,7 +45,7 @@
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
-            users.${user} = import ./home/darwin.nix;
+            users.${darwinUser} = import ./home/darwin.nix;
           };
         }
       ];
