@@ -1,0 +1,20 @@
+{
+  "skill_name": "grid",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Quiero subir a Grid un dashboard con el CTR promedio por placement de MLA para los últimos 7 días. Los datos los saco de MELIDATA.ADVERTISING, evento display_bid_win, site MLA, target_goal CPC. Quiero un bar chart horizontal ordenado de mayor a menor CTR, dark theme, y el link para compartir con mi equipo.",
+      "expected_output": "La skill debe: verificar VPN/gcloud, correr la query BQ, generar un HTML dark theme con bar chart Plotly usando /d/_libs/, subir con curl a grid.melioffice.com y mostrar el view_url."
+    },
+    {
+      "id": 2,
+      "prompt": "Generame un HTML listo para subir a Grid con un gráfico de líneas que muestre la evolución horaria del win rate de la última semana. No necesito correr queries ahora, solo el template con datos de ejemplo embebidos y el dark theme correcto.",
+      "expected_output": "La skill debe: leer references/styling.md, generar un HTML completo con Plotly usando /d/_libs/plotly.min.js, dark theme (#0d1117, #161b22, #e6edf3), datos de ejemplo embebidos en JS, y listo para subir."
+    },
+    {
+      "id": 3,
+      "prompt": "Ya tengo un dashboard subido en Grid (doc_id: 01KPYHS1H2W6TD6YFBXHK3999Y). Quiero compartirlo con gabriel.gajardocea@mercadolibre.cl y mandarlo al canal #dsp-display en Slack con el mensaje 'Nuevo reporte de win rate disponible'.",
+      "expected_output": "La skill debe: correr el curl de share con el doc_id, share_with y slack_to correctos apuntando a grid.melioffice.com/api/v1/engine/run/json."
+    }
+  ]
+}

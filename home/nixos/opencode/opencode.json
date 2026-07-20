@@ -1,0 +1,65 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "tui": {
+    "showThinking": false
+  },
+  "permission": {
+    "read": {
+      "*": "allow",
+      "*.env": "deny",
+      "*.env.*": "deny",
+      "*.env.example": "allow"
+    },
+    "edit": "allow",
+    "bash": {
+      "*": "ask",
+
+      "git add *": "allow",
+      "git commit *": "allow",
+      "git push *": "allow",
+      "git log *": "allow",
+      "git diff *": "allow",
+      "git status *": "allow",
+      "git branch *": "allow",
+      "git show *": "allow",
+      "git ls-files *": "allow",
+
+      "ls *": "allow",
+      "cat *": "allow",
+      "head *": "allow",
+
+      "gh pr create *": "allow",
+
+      "poetry version *": "allow",
+      "poetry init *": "allow",
+      "poetry env info *": "allow",
+      "poetry lock *": "allow",
+
+      "rm -rf *": "ask",
+      "rm -f *": "ask",
+      "mv *": "ask",
+      "dd *": "deny",
+      "diskutil *": "deny",
+      "mkfs *": "deny",
+      "shred *": "deny",
+      "> *": "deny",
+      "git reset --hard *": "deny",
+      "git clean -f *": "deny",
+      "git push --force *": "deny",
+      "git checkout -- . *": "deny",
+      "chmod -R *": "deny",
+      "chown *": "deny",
+      "fdisk *": "deny",
+      "kill -9 *": "deny",
+      "killall *": "deny",
+      "shutdown *": "deny",
+      "reboot *": "deny",
+      "curl * | sh *": "deny",
+      "curl * | bash *": "deny",
+      "wget * | sh *": "deny",
+      "wget * | bash *": "deny",
+      ":(){:|:&};:": "deny"
+    },
+    "external_directory": "ask"
+  }
+}

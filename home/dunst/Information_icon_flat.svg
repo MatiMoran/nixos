@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="620"
+   height="620"
+   viewBox="0 0 62 62"
+   version="1.1"
+   id="svg31"
+   sodipodi:docname="Bilgi_icon.svg"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview33"
+     pagecolor="#ffffff"
+     bordercolor="#999999"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="0.66245342"
+     inkscape:cx="126.0466"
+     inkscape:cy="286.05785"
+     inkscape:window-width="1366"
+     inkscape:window-height="705"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg31" />
+  <defs
+     id="defs19">
+    <rect
+       x="-134.34907"
+       y="366.81824"
+       width="295.86986"
+       height="313.98434"
+       id="rect16093" />
+    <radialGradient
+       id="a"
+       cx="32.5"
+       cy="29.5"
+       fx="32.5"
+       fy="29.5"
+       r="26.5"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.0648,0,0,1.06482,-71.493305,-6.5667197)">
+      <stop
+         offset="0"
+         stop-color="silver"
+         id="stop2" />
+      <stop
+         offset=".88"
+         stop-color="silver"
+         id="stop4" />
+      <stop
+         offset="1"
+         stop-color="silver"
+         stop-opacity="0"
+         id="stop6" />
+    </radialGradient>
+    <linearGradient
+       id="b"
+       x1="42.986"
+       x2="22.014"
+       y1="7.013"
+       y2="51.987"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(0.12970714,1.0376569)"
+       xlink:href="#c">
+      <stop
+         offset="0"
+         stop-color="#9ecefe"
+         id="stop9" />
+      <stop
+         offset="1"
+         stop-color="#1388ee"
+         id="stop11" />
+    </linearGradient>
+    <linearGradient
+       id="c"
+       x1="54.51"
+       x2="9.547"
+       y1="41.179"
+       y2="16.249"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(0.12970714,1.0376569)">
+      <stop
+         offset="0"
+         stop-color="#1976d9"
+         id="stop14" />
+      <stop
+         offset="1"
+         stop-color="#3e73d3"
+         id="stop16" />
+    </linearGradient>
+  </defs>
+  <circle
+     cx="30.827801"
+     cy="31.584797"
+     r="25.799999"
+     fill="url(#b)"
+     stroke="url(#c)"
+     stroke-width="2"
+     id="circle23"
+     style="fill:#1976d9;fill-opacity:1;stroke:#1976d9;stroke-opacity:1" />
+  <path
+     fill="#ffffff"
+     d="m 53.756259,41.155135 a 24.823,24.824 0 1 1 0.181,-0.463"
+     opacity="0.08"
+     id="path29" />
+  <text
+     xml:space="preserve"
+     style="font-size:53.3333px;line-height:1.25;font-family:sans-serif;stroke-width:0.1"
+     x="23.531506"
+     y="49.58482"
+     id="text9505"><tspan
+       sodipodi:role="line"
+       id="tspan9503"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:53.3333px;font-family:'Liberation Serif';-inkscape-font-specification:'Liberation Serif Bold';fill:#ffffff;fill-opacity:1;stroke-width:0.1"
+       x="23.531506"
+       y="49.58482">i</tspan></text>
+  <text
+     xml:space="preserve"
+     transform="scale(0.1)"
+     id="text16091"
+     style="line-height:1.25;font-family:sans-serif;font-size:12px;white-space:pre;shape-inside:url(#rect16093)" />
+</svg>

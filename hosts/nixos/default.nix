@@ -63,7 +63,45 @@
   # Configure keymap in X11
   services = {
 
-    pipewire.pulse.enable = true;
+    pipewire = {
+      pulse.enable = true;
+      extraConfig.pipewire-pulse = {
+        "10-custom-cmds" = {
+          "pulse.cmd" = [
+            { "cmd" = "load-module"; "args" = "module-always-sink"; "flags" = []; }
+            { "cmd" = "load-module"; "args" = "module-combine-sink sink_name=combined sink_properties=device.description=CombinedSink slaves=alsa_output.usb-Kingston_Technology_Company_HyperX_Cloud_Flight_Wireless-00.analog-stereo,alsa_output.pci-0000_00_1f.3.analog-stereo"; "flags" = []; }
+            { "cmd" = "set-default-sink"; "args" = "alsa_output.usb-Kingston_Technology_Company_HyperX_Cloud_Flight_Wireless-00.analog-stereo"; "flags" = []; }
+            { "cmd" = "set-default-source"; "args" = "alsa_input.usb-Kingston_Technology_Company_HyperX_Cloud_Flight_Wireless-00.mono-fallback"; "flags" = []; }
+          ];
+        };
+        "20-app-rules" = {
+          "pulse.rules" = [
+            {
+              "matches" = [
+                { "application.process.binary" = "teams"; }
+                { "application.process.binary" = "teams-insiders"; }
+                { "application.process.binary" = "skypeforlinux"; }
+              ];
+              "actions" = { "quirks" = [ "force-s16-info" ]; };
+            }
+            {
+              "matches" = [ { "application.process.binary" = "firefox"; } ];
+              "actions" = { "quirks" = [ "remove-capture-dont-move" ]; };
+            }
+            {
+              "matches" = [ { "application.name" = "~speech-dispatcher.*"; } ];
+              "actions" = {
+                "update-props" = {
+                  "pulse.min.req" = "512/48000";
+                  "pulse.min.quantum" = "512/48000";
+                  "pulse.idle.timeout" = 5;
+                };
+              };
+            }
+          ];
+        };
+      };
+    };
 
     tumbler.enable = true; # Thumbnail support for images
 
@@ -115,6 +153,12 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    config.common.default = "*";
+  };
+
   programs = {
     nix-ld.enable = true;
     thunar.enable = true;
@@ -125,7 +169,6 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-     alacritty
      android-file-transfer
      bat
      bc
@@ -136,7 +179,6 @@
      dunst
      fd
      feh
-     flameshot
      fzf
      gcc
      gdb
@@ -145,12 +187,10 @@
      git
      gnumake
      htop
-     kanata
      keepassxc
      libreoffice
      linuxKernel.packages.linux_6_18.cpupower
      lsof
-     neovim
      nodejs_22
      obsidian
      opencode
@@ -166,7 +206,6 @@
      stow
      sysstat
      tldr
-     tmux
      unar
      ungoogled-chromium
      unzip

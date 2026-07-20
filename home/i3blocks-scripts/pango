@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+echo -n "<span foreground='$5' background='$6' size='x-large'>$1</span>"
+
+echo -n "<span background='$5'>"
+echo -n "<span foreground='$8' size='x-large'>$2</span>"
+echo -n "<span foreground='$7' size='small' rise='2pt'>$3</span>"
+echo -n "</span>"
+
+echo -n "<span foreground='$6' background='$5' size='x-large'>$4</span>"
+echo ""

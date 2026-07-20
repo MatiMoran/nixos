@@ -1,0 +1,34 @@
+[volume]
+command=~/.config/i3blocks/scripts/pango "" "  " "$(~/.config/i3blocks/scripts/volume -f '{volume}%')" " " "#ff931f" "#2e2e2e" "#2e2e2e" "#2e2e2e"
+markup=pango
+interval=1
+
+[weather]
+command=~/.config/i3blocks/scripts/pango "" "" "$(~/.config/i3blocks/scripts/weather -c '-34.49,-58.51')" "" "#2e2e2e" "#81A1C1" "#ffffff" "#ff931f"
+markup=pango
+interval=60
+
+[disk]
+command=~/.config/i3blocks/scripts/pango "" "  " "$(~/.config/i3blocks/scripts/disk -f '{used}/{total} {uunit}B' -tc '{pfree}' '<' 20 -tc '{pfree}' '<' 10)" " " "#ff7e33" "#2e2e2e" "#2e2e2e" "#2e2e2e"
+markup=pango
+interval=60
+
+[memory]
+command=~/.config/i3blocks/scripts/pango "" " " "$(~/.config/i3blocks/scripts/memory -f '{used}/{total} {uunit}B')" "" "#2e2e2e" "#81A1C1" "#ffffff" "#ff7e33"
+markup=pango
+interval=5
+
+[cpu]
+command=~/.config/i3blocks/scripts/pango "" "  " "$(~/.config/i3blocks/scripts/cpu -f '{speed} {uspeed} ({percent}%)')" " " "#fa5e1f" "#2e2e2e" "#2e2e2e" "#2e2e2e"
+markup=pango
+interval=5
+
+[date]
+command=~/.config/i3blocks/scripts/pango "" " " "$(date +"%d-%m-%Y")" "" "#2e2e2e" "#81A1C1" "#ffffff" "#fa5e1f"
+markup=pango
+interval=1
+
+[time]
+command=~/.config/i3blocks/scripts/pango "" "  " "$(date +"%H:%M:%S")" " " "#ec3f13" "#2e2e2e" "#2e2e2e" "#2e2e2e"
+markup=pango
+interval=1

@@ -1,0 +1,83 @@
+#------------------------------
+# macOS platform setup
+#------------------------------
+
+export COMMON_DIRS="$HOME $HOME/Repos"
+export BROWSER="google-chrome"
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+#------------------------------
+# Shared config
+#------------------------------
+source ~/nixos/home/zsh/common.zsh
+
+#------------------------------
+# macOS-specific aliases
+#------------------------------
+alias d='dirs -v'
+
+# Media suffix aliases
+alias -s pdf=open
+alias -s svg=open
+alias -s html=open
+alias -s htm=open
+alias -s url=open
+
+alias -s jpg=open
+alias -s jpeg=open
+alias -s png=open
+alias -s gif=open
+alias -s webp=open
+alias -s bmp=open
+alias -s ico=open
+
+#------------------------------
+# Work tools (MeLi)
+#------------------------------
+export RANGER_FURY_LOCATION=/Users/matmoran/.fury #Added by Fury CLI
+export RANGER_FURY_VENV_LOCATION=/Users/matmoran/.fury/fury_venv #Added by Fury CLI
+
+# Added by Fury CLI installation process
+export FURY_BIN_LOCATION="/Users/matmoran/.fury/fury_venv/bin"
+export PATH="$PATH:$FURY_BIN_LOCATION"
+
+export ANTHROPIC_MODEL="claude-sonnet-4-6[1m]"
+
+# Added by git-ai installer
+export PATH="/Users/matmoran/.git-ai/bin:$PATH"
+
+# >>> es-wrapper initialize >>>
+export PATH="$HOME/.es-wrapper/bin:$PATH"
+
+unalias source 2>/dev/null
+unalias . 2>/dev/null
+source() {
+    builtin source "$@"
+    local ret=$?
+    if [[ -n "$VIRTUAL_ENV" ]]; then
+        export PATH="$HOME/.es-wrapper/bin:$PATH"
+    fi
+    return $ret
+}
+alias .='source'
+
+_es_wrapper_guard() {
+    case ":$PATH:" in
+        *":$HOME/.es-wrapper/bin:"*)
+            if [[ "$PATH" != "$HOME/.es-wrapper/bin:"* ]]; then
+                export PATH="$HOME/.es-wrapper/bin:${PATH//$HOME\/.es-wrapper\/bin:/}"
+            fi
+            ;;
+        *)
+            export PATH="$HOME/.es-wrapper/bin:$PATH"
+            ;;
+    esac
+}
+precmd_functions+=(_es_wrapper_guard)
+# <<< es-wrapper initialize <<<
+
+# Internal Python Registry
+export PIP_INDEX_URL='https://pypi.artifacts.furycloud.io/simple'
+export UV_INDEX_URL='https://pypi.artifacts.furycloud.io/simple'
+
+export PATH="$HOME/.fury/fury_venv/bin:$PATH"
