@@ -3,6 +3,7 @@
 {
   imports = [
     ./programs/alacritty.nix
+    ./programs/herdr.nix
   ];
 
   home = {
