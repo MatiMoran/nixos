@@ -10,6 +10,8 @@
     ./programs/flameshot.nix
     ./programs/mime.nix
     ./programs/opencode.nix
+    ./programs/rofi.nix
+    ./programs/gtk.nix
   ];
 
   programs.alacritty.settings.font.size = 14.0;
