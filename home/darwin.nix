@@ -3,6 +3,7 @@
 {
   imports = [
     ./default.nix
+    ./programs/aerospace.nix
   ];
 
   home.username = "matmoran";
