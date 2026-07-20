@@ -4,6 +4,7 @@
   imports = [
     ./programs/alacritty.nix
     ./programs/herdr.nix
+    ./programs/nvim.nix
   ];
 
   home = {

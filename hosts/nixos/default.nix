@@ -153,7 +153,6 @@
      libreoffice
      linuxKernel.packages.linux_6_18.cpupower
      lsof
-     neovim
      nodejs_22
      obsidian
      opencode
