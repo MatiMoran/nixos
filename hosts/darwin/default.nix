@@ -22,6 +22,7 @@
   ];
 
   programs.zsh.enable = true;
+  programs.zsh.enableCompletion = false;
 
   system.stateVersion = 5;
 }
