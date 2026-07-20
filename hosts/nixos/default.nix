@@ -115,6 +115,12 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    config.common.default = "*";
+  };
+
   programs = {
     nix-ld.enable = true;
     thunar.enable = true;
@@ -135,7 +141,6 @@
      dunst
      fd
      feh
-     flameshot
      fzf
      gcc
      gdb
