@@ -4,8 +4,8 @@ Inventario completo de paquetes actuales en Homebrew, categorizados para migraci
 
 ## Estado
 
-- **Migrado a Nix**: Alacritty (`programs.alacritty` via home-manager)
-- **Pendiente**: todo lo demás (listado abajo)
+- **Migrado a Nix**: Alacritty, Aerospace, Herdr, Kanata, Flameshot, Neovim, Obsidian, VSCode, Google Cloud SDK (via home-manager)
+- **Pendiente**: el resto (listado abajo)
 
 ---
 
@@ -19,7 +19,6 @@ Agregar a `hosts/darwin/default.nix` (`environment.systemPackages`) o `home/darw
 | `fd` | `fd` (ya en darwin config) |
 | `fzf` | `fzf` (ya en darwin config) |
 | `ripgrep` | `ripgrep` (ya en darwin config) |
-| `tmux` | `tmux` (ya en darwin config) |
 | `git` | `git` (ya en darwin config) |
 | `zoxide` | `zoxide` (ya en darwin config) |
 | `gh` | `gh` |
@@ -59,13 +58,13 @@ Requieren `nixpkgs.config.allowUnfree = true` en `hosts/darwin/default.nix`.
 | Homebrew cask | nixpkgs |
 |---|---|
 | `alacritty` | **Ya migrado** via `programs.alacritty` |
-| `gimp` | `gimp` |
-| `keepassxc` | `keepassxc` |
-| `obsidian` | `obsidian` (unfree) |
-| `vlc` | `vlc` (unfree) |
-| `visual-studio-code` | `vscode` (unfree) |
-| `gcloud-cli` | `google-cloud-sdk` |
-| `flameshot` | `flameshot` |
+| `gimp` | No disponible en `aarch64-darwin` — instalar manualmente o vía Homebrew |
+| `keepassxc` | No compila en `aarch64-darwin` (falla `qtmacextras`) — instalar manualmente o vía Homebrew |
+| ~~`obsidian`~~ | **Ya migrado** (unfree) |
+| `vlc` | No disponible en `aarch64-darwin` — instalar manualmente o vía Homebrew |
+| ~~`visual-studio-code`~~ | **Ya migrado** (unfree) |
+| ~~`gcloud-cli`~~ | **Ya migrado** |
+| `flameshot` | `flameshot` (solo Linux) |
 
 ---
 
@@ -75,12 +74,12 @@ Estos paquetes vienen de taps personalizados o son muy recientes para nixpkgs.
 
 | Cask/Formula | Origen | Alternativa |
 |---|---|---|
-| `aerospace` | `nikitabobko/tap` | Verificar nixpkgs; si no está, usar `homebrew.casks` en nix-darwin |
+| ~~`aerospace`~~ | — | **Ya migrado** via `home.packages = [ pkgs.aerospace ]` |
 | `claude-code` | Anthropic | Instalar via `npm install -g @anthropic-ai/claude-code` o mantener en Homebrew |
 | `codex` | OpenAI | Instalar manualmente |
 | `gstreamer-runtime` | — | Verificar nixpkgs (`gst_all_1`) |
 | `acli` | `atlassian/acli` | Sin equivalente en nixpkgs |
-| `herdr` | `vjeantet/tap` | Sin equivalente en nixpkgs |
+| ~~`herdr`~~ | — | **Ya migrado** via `home.packages = [ pkgs.herdr ]` |
 | `alerter` | `asmvik/formulae` | Sin equivalente en nixpkgs; alternativa: `terminal-notifier` |
 
 ---

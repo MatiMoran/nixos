@@ -12,6 +12,12 @@
   home.username = "matmoran";
   home.homeDirectory = "/Users/matmoran";
 
+  home.packages = with pkgs; [
+    obsidian
+    vscode
+    google-cloud-sdk
+  ];
+
   programs.alacritty.settings.font.size = 17.0;
 
   xdg.configFile."herdr/plugins/agent-notify/herdr-plugin.toml".text = ''
