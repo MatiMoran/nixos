@@ -6,6 +6,7 @@
     ./programs/aerospace.nix
     ./programs/claude.nix
     ./programs/git.nix
+    ./programs/zsh.nix
   ];
 
   home.username = "matmoran";
