@@ -12,6 +12,7 @@
     ./programs/opencode.nix
     ./programs/rofi.nix
     ./programs/gtk.nix
+    ./programs/zsh-nixos.nix
   ];
 
   programs.alacritty.settings.font.size = 14.0;
