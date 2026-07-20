@@ -1,0 +1,27 @@
+home/zsh/common.zsh
+  s_a6fa9358b76d6d::t_0786fc4256da25 1-326
+home/nixos/zshrc
+  s_a6fa9358b76d6d::t_226115b4a4ecd0 1-38
+home/darwin/zshrc
+  s_a6fa9358b76d6d::t_ab8824cca21eab 2,6-7,10,12,15,19,35,43,49,52
+home/nixos.nix
+  s_a6fa9358b76d6d::t_1ccc100611bdfd 15
+home/programs/zsh-nixos.nix
+  s_a6fa9358b76d6d::t_8876f3bf606b46 1-7
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "efb18a9ba58b2e65715469e3dfc5970f34cc4e78",
+  "prompts": {},
+  "sessions": {
+    "s_a6fa9358b76d6d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e8d09663-2050-4588-9f5b-871dbc2d2c7d",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "matmoran_meli <matiasnicolas.moran@mercadolibre.com>"
+    }
+  }
+}
