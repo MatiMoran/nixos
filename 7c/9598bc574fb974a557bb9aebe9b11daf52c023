@@ -1,0 +1,30 @@
+hosts/darwin/default.nix
+  s_aa36aee33fb268::t_3da8e73cc0a2ad 21-24
+  s_aa36aee33fb268::t_c7a0b35a389414 6-8
+.pre-commit-config.yaml
+  s_aa36aee33fb268::t_78aeb53e0b36cb 1
+home/darwin.nix
+  s_aa36aee33fb268::t_c85f2da2c78c71 8-10
+docs/homebrew-migration.md
+  s_aa36aee33fb268::t_f3a6c2833d700f 1-100
+home/default.nix
+  s_aa36aee33fb268::t_5981a779ade627 1,9-10
+flake.nix
+  s_aa36aee33fb268::t_7b08f3e7632034 20-21,33,48
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "7c9598bc574fb974a557bb9aebe9b11daf52c023",
+  "prompts": {},
+  "sessions": {
+    "s_aa36aee33fb268": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c5e1594f-e16c-4a2a-9b55-1503a15fc0df",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "matmoran_meli <matiasnicolas.moran@mercadolibre.com>"
+    }
+  }
+}
