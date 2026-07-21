@@ -1,19 +1,38 @@
-# NixOS Configuration
+# NixOS + macOS Configuration
 
-This repository contains my NixOS system configuration.
+Multi-platform system configuration using [Nix flakes](https://nixos.wiki/wiki/Flakes), [home-manager](https://github.com/nix-community/home-manager), and [nix-darwin](https://github.com/LnL7/nix-darwin).
 
-## Rebuilding the System
+## Rebuilding
 
 After making changes to the configuration, rebuild and activate with:
 
+**NixOS (Linux):**
 ```bash
 sudo nixos-rebuild switch --flake ~/nixos
 ```
 
-## Usage
+**macOS (Darwin):**
+```bash
+sudo darwin-rebuild switch --flake ~/nixos#darwin
+```
 
-- `nixos-rebuild switch` - Build and activate the new configuration
-- `nixos-rebuild test` - Build and activate temporarily (doesn't persist after reboot)
-- `nixos-rebuild build-vm` - Build a VM with the configuration
+## Structure
 
-For more options, see the [NixOS manual](https://nixos.org/manual/nixos/stable/).
+```
+modules/
+├── nixos/      # NixOS system modules (audio, boot, desktop, fonts, networking, etc.)
+├── darwin/     # macOS system modules (fonts, packages, system, users)
+├── home/       # Home Manager modules (window manager, terminal, editor, shell, git, etc.)
+├── hosts/      # Host-specific NixOS and Darwin configurations
+└── defaults.nix
+lib/
+└── shared.nix  # Shared values (usernames, device IDs, common packages)
+docs/           # Additional documentation
+```
+
+## Tech Stack
+
+- **[nixpkgs](https://github.com/NixOS/nixpkgs)** (unstable) — packages and system modules
+- **[home-manager](https://github.com/nix-community/home-manager)** — user-level configuration
+- **[nix-darwin](https://github.com/LnL7/nix-darwin)** — macOS system management
+- **[flake-parts](https://github.com/hercules-ci/flake-parts)** + **[import-tree](https://github.com/vic/import-tree)** — flake organization

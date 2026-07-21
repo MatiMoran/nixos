@@ -1,0 +1,38 @@
+#------------------------------
+# NixOS platform setup
+#------------------------------
+
+export COMMON_DIRS="$HOME $HOME/Database/files $HOME/Database/files/Vault/files/Repos/Personal $HOME/Database/files/Repos/UBA $HOME/.local"
+export DISPLAY=:0.0
+alias open='xdg-open'
+export BROWSER="brave"
+
+#------------------------------
+# Shared config
+#------------------------------
+source ~/nixos/dotfiles/zsh/common.zsh
+
+#------------------------------
+# NixOS-specific additions
+#------------------------------
+
+# GNU ls supports --group-directories-first unlike macOS BSD ls
+alias ll='ls -hlF --group-directories-first --color'
+alias lla='ls -ahlF --group-directories-first --color'
+
+LS_COLORS=$(cat $XDG_CONFIG_HOME/zsh/.ls-colors)
+
+# Media suffix aliases
+alias -s pdf=open
+alias -s svg=open
+alias -s html=open
+alias -s htm=open
+alias -s url=open
+
+alias -s jpg=open
+alias -s jpeg=open
+alias -s png=open
+alias -s gif=open
+alias -s webp=open
+alias -s bmp=open
+alias -s ico=open
