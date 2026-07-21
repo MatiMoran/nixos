@@ -72,16 +72,16 @@
         system = "aarch64-darwin";
         specialArgs = { inherit self; };
         modules = [
-          self.nixosModules.nix-settings
-          self.nixosModules.users
-          self.nixosModules.packages
-          self.nixosModules.fonts
-          self.nixosModules.system
+          self.darwinModules.nix-settings
+          self.darwinModules.users
+          self.darwinModules.packages
+          self.darwinModules.fonts
+          self.darwinModules.system
           home-manager.darwinModules.home-manager {
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              users.${shared.username.darwin} = {
+              users.${shared.username.darwin} = { pkgs, ... }: {
                 imports = [
                   ./hm-modules/shared.nix
                   ./hm-modules/alacritty.nix
@@ -94,7 +94,7 @@
                 ];
                 home.username = shared.username.darwin;
                 home.homeDirectory = "/Users/${shared.username.darwin}";
-                home.packages = with nixpkgs.legacyPackages.aarch64-darwin; [
+                home.packages = with pkgs; [
                   obsidian
                   vscode
                   google-cloud-sdk
@@ -152,6 +152,46 @@
             };
           }
         ];
+      };
+
+      darwinModules = {
+        nix-settings = { pkgs, ... }: {
+          nix.settings.experimental-features = [ "nix-command" "flakes" ];
+          nixpkgs.config.allowUnfree = true;
+        };
+
+        users = { pkgs, ... }: {
+          users.users.${shared.username.darwin} = {
+            home = "/Users/${shared.username.darwin}";
+          };
+        };
+
+        packages = { pkgs, ... }: {
+          environment.systemPackages = with pkgs; [
+            bat
+            curl
+            fd
+            fzf
+            git
+            ripgrep
+            unzip
+            zip
+            zoxide
+            zsh
+          ];
+          programs.zsh.enable = true;
+          programs.zsh.enableCompletion = false;
+        };
+
+        fonts = { pkgs, ... }: {
+          fonts.packages = with pkgs; [
+            nerd-fonts.caskaydia-cove
+          ];
+        };
+
+        system = { ... }: {
+          system.stateVersion = 5;
+        };
       };
 
       nixosModules = {
