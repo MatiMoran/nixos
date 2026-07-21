@@ -1,0 +1,60 @@
+{ lib, ... }:
+
+{
+  config.nixosModules = lib.mkAfter [
+    ({ pkgs, ... }: {
+      environment.systemPackages = with pkgs; [
+        android-file-transfer
+        bat
+        bc
+        brave
+        calibre
+        clang
+        curl
+        dunst
+        fd
+        feh
+        fzf
+        gcc
+        gdb
+        gimp-with-plugins
+        gimpPlugins.resynthesizer
+        git
+        gnumake
+        htop
+        keepassxc
+        libreoffice
+        linuxKernel.packages.linux_6_18.cpupower
+        lsof
+        nodejs_22
+        obsidian
+        opencode
+        pavucontrol
+        picom
+        pulseaudio
+        python3
+        qbittorrent
+        redshift
+        ripgrep
+        rofi
+        sox
+        stow
+        sysstat
+        tldr
+        unar
+        ungoogled-chromium
+        unzip
+        vlc
+        vscode
+        xclip
+        zip
+        zoxide
+        zsh
+        zsh-autosuggestions
+        zsh-completions
+        zsh-fzf-tab
+        zsh-syntax-highlighting
+      ];
+    })
+  ];
+}
