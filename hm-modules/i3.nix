@@ -197,44 +197,44 @@
     exec_always xsetwacom --set "Wacom One by Wacom S Pen eraser" MapToOutput $m1
   '';
 
-  xdg.configFile."i3/wallpaper.jpeg".source = ../i3/wallpaper.jpeg;
+  xdg.configFile."i3/wallpaper.jpeg".source = ../home/i3/wallpaper.jpeg;
   xdg.configFile."i3/lock.sh" = {
     executable = true;
-    source = ../i3/lock.sh;
+    source = ../home/i3/lock.sh;
   };
 
-  xdg.configFile."i3blocks/config".source = ../i3blocks-config;
+  xdg.configFile."i3blocks/config".source = ../home/i3blocks-config;
 
   xdg.configFile."i3blocks/scripts/cpu" = {
     executable = true;
-    source = ../i3blocks-scripts/cpu;
+    source = ../home/i3blocks-scripts/cpu;
   };
   xdg.configFile."i3blocks/scripts/date" = {
     executable = true;
-    source = ../i3blocks-scripts/date;
+    source = ../home/i3blocks-scripts/date;
   };
   xdg.configFile."i3blocks/scripts/disk" = {
     executable = true;
-    source = ../i3blocks-scripts/disk;
+    source = ../home/i3blocks-scripts/disk;
   };
   xdg.configFile."i3blocks/scripts/memory" = {
     executable = true;
-    source = ../i3blocks-scripts/memory;
+    source = ../home/i3blocks-scripts/memory;
   };
   xdg.configFile."i3blocks/scripts/pango" = {
     executable = true;
-    source = ../i3blocks-scripts/pango;
+    source = ../home/i3blocks-scripts/pango;
   };
   xdg.configFile."i3blocks/scripts/volume" = {
     executable = true;
-    source = ../i3blocks-scripts/volume;
+    source = ../home/i3blocks-scripts/volume;
   };
   xdg.configFile."i3blocks/scripts/volume-pulseaudio" = {
     executable = true;
-    source = ../i3blocks-scripts/volume-pulseaudio;
+    source = ../home/i3blocks-scripts/volume-pulseaudio;
   };
   xdg.configFile."i3blocks/scripts/weather" = {
     executable = true;
-    source = ../i3blocks-scripts/weather;
+    source = ../home/i3blocks-scripts/weather;
   };
 }

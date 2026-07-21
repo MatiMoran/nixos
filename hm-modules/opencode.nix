@@ -2,7 +2,7 @@
 
 let
   repoDir = "${config.home.homeDirectory}/nixos";
-  opencodeSrc = "${repoDir}/home/nixos/opencode";
+  opencodeSrc = "${repoDir}/home/opencode";
 in
 {
   home.file = {

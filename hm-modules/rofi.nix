@@ -4,6 +4,6 @@
   programs.rofi = {
     enable = true;
     terminal = "alacritty";
-    theme = ../rofi/Theme.rasi;
+    theme = ../home/rofi/Theme.rasi;
   };
 }

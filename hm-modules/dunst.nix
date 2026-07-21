@@ -373,8 +373,8 @@
     '';
   };
 
-  xdg.configFile."dunst/error-svgrepo-com.svg".source = ../dunst/error-svgrepo-com.svg;
-  xdg.configFile."dunst/hxh-ringtone.ogg".source = ../dunst/hxh-ringtone.ogg;
-  xdg.configFile."dunst/Information_icon_flat.svg".source = ../dunst/Information_icon_flat.svg;
-  xdg.configFile."dunst/risk-icon.svg".source = ../dunst/risk-icon.svg;
+  xdg.configFile."dunst/error-svgrepo-com.svg".source = ../home/dunst/error-svgrepo-com.svg;
+  xdg.configFile."dunst/hxh-ringtone.ogg".source = ../home/dunst/hxh-ringtone.ogg;
+  xdg.configFile."dunst/Information_icon_flat.svg".source = ../home/dunst/Information_icon_flat.svg;
+  xdg.configFile."dunst/risk-icon.svg".source = ../home/dunst/risk-icon.svg;
 }

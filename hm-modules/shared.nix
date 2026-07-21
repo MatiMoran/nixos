@@ -1,12 +1,6 @@
 { pkgs, lib, ... }:
 
 {
-  imports = [
-    ./programs/alacritty.nix
-    ./programs/herdr.nix
-    ./programs/nvim.nix
-  ];
-
   home = {
     username = lib.mkDefault "matias";
     homeDirectory = lib.mkDefault "/home/matias";
@@ -15,7 +9,6 @@
 
   programs.home-manager.enable = true;
 
-  # Zsh plugins shared between platforms
   home.file.".config/zsh/plugins/zsh-autosuggestions".source =
     "${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions";
 

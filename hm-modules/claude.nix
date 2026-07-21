@@ -2,7 +2,7 @@
 
 let
   repoDir = "${config.home.homeDirectory}/nixos";
-  claudeSrc = "${repoDir}/home/darwin/claude";
+  claudeSrc = "${repoDir}/home/claude";
 in
 {
   home.file = {

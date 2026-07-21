@@ -36,5 +36,5 @@
     };
   };
 
-  home.file.".themes/Material-Black-Cherry".source = ../themes/Material-Black-Cherry;
+  home.file.".themes/Material-Black-Cherry".source = ../home/themes/Material-Black-Cherry;
 }
