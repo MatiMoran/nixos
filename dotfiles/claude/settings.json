@@ -71,17 +71,6 @@
         ]
       }
     ],
-    "PostToolUse": [
-      {
-        "matcher": "*",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/Users/matmoran/.git-ai/bin/git-ai checkpoint claude --hook-input stdin"
-          }
-        ]
-      }
-    ],
     "PreToolUse": [
       {
         "matcher": "Bash",
@@ -89,15 +78,6 @@
           {
             "type": "command",
             "command": "bash ~/.claude/scripts/confirm-destructive.sh"
-          }
-        ]
-      },
-      {
-        "matcher": "*",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/Users/matmoran/.git-ai/bin/git-ai checkpoint claude --hook-input stdin"
           }
         ]
       }

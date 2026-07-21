@@ -43,9 +43,6 @@ export PATH="$PATH:$FURY_BIN_LOCATION"
 
 export ANTHROPIC_MODEL="claude-sonnet-4-6[1m]"
 
-# Added by git-ai installer
-export PATH="/Users/matmoran/.git-ai/bin:$PATH"
-
 # >>> es-wrapper initialize >>>
 export PATH="$HOME/.es-wrapper/bin:$PATH"
 
