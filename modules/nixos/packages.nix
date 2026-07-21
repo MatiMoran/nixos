@@ -38,9 +38,7 @@
         ripgrep
         rofi
         sox
-        stow
         sysstat
-        tldr
         unar
         ungoogled-chromium
         unzip

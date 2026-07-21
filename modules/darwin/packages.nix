@@ -8,6 +8,7 @@
         curl
         fd
         fzf
+        gh
         git
         ripgrep
         unzip
