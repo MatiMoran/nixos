@@ -4,6 +4,7 @@
   config.darwinModules = lib.mkAfter [
     ({ pkgs, ... }: {
       environment.systemPackages = with pkgs; [
+        awscli2
         bat
         curl
         fd
