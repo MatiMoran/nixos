@@ -157,8 +157,8 @@ zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zsh/.zcompcache"
 zstyle ':completion:*' menu no
 
-#source $ZSH_PLUGINS/fzf-tab/fzf-tab.plugin.zsh
-#zstyle ':fzf-tab:*' continuous-trigger 'tab'
+source $ZSH_PLUGINS/fzf-tab/fzf-tab.plugin.zsh
+zstyle ':fzf-tab:*' continuous-trigger 'tab'
 
 #------------------------------
 # FZF

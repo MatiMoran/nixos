@@ -19,6 +19,9 @@
 
       home.file.".config/zsh/plugins/zsh-syntax-highlighting".source =
         "${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting";
+
+      home.file.".config/zsh/plugins/fzf-tab".source =
+        "${pkgs.zsh-fzf-tab}/share/fzf-tab";
     })
   ];
 }
