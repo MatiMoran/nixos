@@ -71,7 +71,7 @@ function fuzzy_open {
 zle -N fuzzy_open
 
 function project_open {
-    ~/.local/scripts/herdr-project-open
+    ~/.local/scripts/tmux-project-open
     zle accept-line
 }
 
@@ -319,8 +319,11 @@ export BAT_THEME="Visual Studio Dark+"
 source $ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 #------------------------------
-# Starts herdr
+# Session multiplexer
 #------------------------------
-if [ -z "$HERDR_SOCKET_PATH" ]; then
-    herdr
+# if [ -z "$HERDR_SOCKET_PATH" ]; then
+#     herdr
+# fi
+if [ -z "$TMUX" ]; then
+    tmux new-session -A -s main
 fi
