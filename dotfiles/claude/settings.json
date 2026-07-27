@@ -1,4 +1,76 @@
 {
+  "effortLevel": "high",
+  "enabledPlugins": {
+    "dataflow-develop-toolkit@meli-claude-marketplace": true,
+    "fda@meli-claude-marketplace": true,
+    "frontend-design@claude-plugins-official": true,
+    "fury-cli@meli-claude-marketplace": true,
+    "meli-genai-costs@meli-claude-marketplace": true,
+    "skill-creator@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "cyber-plugins-marketplace": {
+      "source": {
+        "source": "git",
+        "url": "git@github.com:melisource/fury_cyber-plugins-marketplace.git"
+      }
+    },
+    "meli-claude-marketplace": {
+      "autoUpdate": true,
+      "source": {
+        "source": "git",
+        "url": "git@github.com:melisource/fury_meli-claude-marketplace.git"
+      }
+    }
+  },
+  "hooks": {
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "async": true,
+            "command": "true",
+            "type": "command"
+          }
+        ],
+        "matcher": ""
+      }
+    ],
+    "PostToolUse": [
+      {
+        "hooks": [],
+        "matcher": "*"
+      }
+    ],
+    "PreToolUse": [
+      {
+        "hooks": [
+          {
+            "command": "bash ~/.claude/scripts/confirm-destructive.sh",
+            "type": "command"
+          }
+        ],
+        "matcher": "Bash"
+      },
+      {
+        "hooks": [],
+        "matcher": "*"
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "async": true,
+            "command": "true",
+            "type": "command"
+          }
+        ],
+        "matcher": ""
+      }
+    ]
+  },
+  "language": "espanol",
   "permissions": {
     "allow": [
       "Bash(bq version *)",
@@ -31,6 +103,12 @@
       "mcp__claude_ai_Atlassian__transitionJiraIssue",
       "mcp__claude_ai_Slack__slack_read_thread"
     ],
+    "ask": [
+      "Bash(mv *)",
+      "Bash(rm -f *)",
+      "Bash(rm -rf *)"
+    ],
+    "defaultMode": "plan",
     "deny": [
       "Bash(chmod -R *)",
       "Bash(chown *)",
@@ -50,98 +128,19 @@
       "Bash(shutdown *)",
       "Bash(wget * | bash *)",
       "Bash(wget * | sh *)"
-    ],
-    "ask": [
-      "Bash(mv *)",
-      "Bash(rm -f *)",
-      "Bash(rm -rf *)"
-    ],
-    "defaultMode": "plan"
-  },
-  "hooks": {
-    "Notification": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "true",
-            "async": true
-          }
-        ]
-      }
-    ],
-    "PreToolUse": [
-      {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash ~/.claude/scripts/confirm-destructive.sh"
-          }
-        ]
-      }
-    ],
-    "Stop": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "true",
-            "async": true
-          }
-        ]
-      }
     ]
   },
+  "remoteControlAtStartup": false,
+  "skipAutoPermissionPrompt": true,
   "statusLine": {
-    "type": "command",
-    "command": "bash ~/.claude/statusline-command.sh"
+    "command": "bash ~/.claude/statusline-command.sh",
+    "type": "command"
   },
-  "enabledPlugins": {
-    "fury-cli@meli-claude-marketplace": true,
-    "github@fury-services-claude-plugins": true,
-    "google-workspace@fury-services-claude-plugins": true,
-    "meli-genai-costs@meli-claude-marketplace": true,
-    "prompt-improver@fury-services-claude-plugins": true,
-    "skill-creator@claude-plugins-official": true,
-    "verdiflow@fury-services-claude-plugins": true,
-    "fda@meli-claude-marketplace": true,
-    "dataflow-develop-toolkit@meli-claude-marketplace": true,
-    "meli-security-expert@cyber-plugins-marketplace": true
-  },
-  "extraKnownMarketplaces": {
-    "fury-services-claude-plugins": {
-      "source": {
-        "source": "github",
-        "repo": "melisource/fury_services-claude-plugins"
-      },
-      "autoUpdate": true
-    },
-    "meli-claude-marketplace": {
-      "source": {
-        "source": "git",
-        "url": "git@github.com:melisource/fury_meli-claude-marketplace.git"
-      },
-      "autoUpdate": true
-    },
-    "cyber-plugins-marketplace": {
-      "source": {
-        "source": "git",
-        "url": "git@github.com:melisource/fury_cyber-plugins-marketplace.git"
-      }
-    }
-  },
-  "language": "espanol",
-  "effortLevel": "high",
+  "theme": "dark",
+  "useAutoModeDuringPlan": true,
   "voice": {
     "enabled": true,
     "mode": "hold"
   },
-  "theme": "dark",
-  "remoteControlAtStartup": false,
-  "skipAutoPermissionPrompt": true,
-  "useAutoModeDuringPlan": true,
   "voiceEnabled": true
 }
