@@ -67,8 +67,8 @@ Keep these in mind throughout. They're the "why" behind every change:
 **Mode B — Slack thread URL or message ID**: The user shares a link like
 `https://mercadolibre.slack.com/archives/C.../p...` or a raw message ID.
 
-1. Call `mcp__claude_ai_Slack__slack_read_thread` with the channel and
-   thread timestamp extracted from the URL.
+1. Use the available Slack tool to read the thread with the channel and thread
+   timestamp extracted from the URL.
    - From a permalink URL: channel is the segment after `/archives/` (e.g. `C012AB3CD`),
      thread_ts is the numeric part after `/p` with a `.` inserted after the 10th digit
      (e.g. `p1234567890123456` → `1234567890.123456`).
@@ -76,8 +76,8 @@ Keep these in mind throughout. They're the "why" behind every change:
    or the one the user highlighted.
 3. Note: participants, channel name, and thread history. This context shapes the
    improvement (avoid repeating info already said, adjust tone to the conversation).
-4. Call `mcp__claude_ai_Slack__slack_list_channel_members` only if you need to
-   gauge the audience size of a channel (skip for DMs and small known groups).
+4. Use the available Slack tool to list channel members only if you need to gauge
+   the audience size of a channel (skip for DMs and small known groups).
 
 ---
 

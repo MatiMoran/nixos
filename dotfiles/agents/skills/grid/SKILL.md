@@ -49,9 +49,9 @@ Si falta alguno:
 Solo si `gcloud auth list` no muestra cuenta activa:
 
 ```bash
-# El usuario lo corre con ! en el prompt de Claude Code
-! gcloud auth login EMAIL@mercadolibre.com
-! gcloud auth application-default login
+# Pedir al usuario que lo ejecute en su terminal si el agente no puede autenticar
+gcloud auth login EMAIL@mercadolibre.com
+gcloud auth application-default login
 ```
 
 Verificar con:
@@ -63,15 +63,15 @@ bq query --nouse_legacy_sql "SELECT 1 AS test"
 
 ## Fase 3 — Instalar la grid-skill (primera vez)
 
-La grid-skill es un componente local que se descarga de Grid. Va en `.claude.local/skills/` (gitignoreado — no va al repo compartido).
+La grid-skill es un componente local que se descarga de Grid. Va en `.agents/local/skills/` (gitignoreado — no va al repo compartido).
 
 ```bash
 curl -o /tmp/grid-skill.zip https://grid.melioffice.com/skill
-mkdir -p .claude.local/skills/grid-skill
+mkdir -p .agents/local/skills/grid-skill
 unzip -o /tmp/grid-skill.zip -d /tmp/grid-skill-tmp
-cp -r /tmp/grid-skill-tmp/grid-skill/. .claude.local/skills/grid-skill/
+cp -r /tmp/grid-skill-tmp/grid-skill/. .agents/local/skills/grid-skill/
 rm -rf /tmp/grid-skill.zip /tmp/grid-skill-tmp
-ls .claude.local/skills/grid-skill/
+ls .agents/local/skills/grid-skill/
 ```
 
 Si el servidor responde HTTP 426 en algún paso posterior, la skill está desactualizada — repetir este paso.

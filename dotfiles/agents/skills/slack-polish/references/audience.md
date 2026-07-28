@@ -9,7 +9,7 @@ Format for entries:
 - **Richie**: `Técnico` — Data engineer, ETL, embeddings y validaciones de modelos. Stack: S3, FDA, Dataflow, BigQuery. Equipo DSP-ML.
 - **German** (geromeroacev): `Técnico` — Backend engineer, bidding y autobudget logic. Trabaja en brand ads, spend plan y PR reviews.
 - **Doris Salazar**: `Técnico` — Líder equipo bidder/pacing. Diseña esquemas BigQuery, migración de tablas, arquitectura de nueva pacing app.
-- **Franco Jofre**: `Semi-técnico` — Analytics/BI, Looker y Claude Code. Hace dashboards, explora MCPs, entiende queries pero no es backend.
+- **Franco Jofre**: `Semi-técnico` — Analytics/BI, Looker y herramientas agénticas. Hace dashboards, explora MCPs, entiende queries pero no es backend.
 - **Basti**: `Semi-técnico` — Manager del manager directo del usuario (su lider directa es Alejandra; Basti es el lider de Alejandra). Gestión del equipo DSP-ML, prioridades, backlog y visibilidad. Usar tono muy deferente: nunca pedir accionables directos, sino invitar a opinar o alinearse.
 - **Andy**: `Semi-técnico` — Backend engineer, arquitectura GCP. Dataflow, Cloud Functions, decisiones de infra. Foco en arquitectura más que en código.
 - **Guarno** (Juan Sebastian Guarnizo Leon): `Semi-técnico` — Data/DevOps. Investiga performance de infraestructura FDA, S3, tareas pegadas.

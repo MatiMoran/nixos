@@ -162,8 +162,9 @@ Only execute after the user has explicitly approved.
 - **Never skip the draft.** Even if the user says "just do it", show the draft
   first. The whole point of this skill is that the user reviews before anything
   is written.
-- **Never add AI attribution.** No `Co-Authored-By: Claude`, no mentions of AI
-  in any artifact — CHANGELOG, PR body, Slack message, or commits.
+- **Never add AI attribution.** No AI `Co-Authored-By` lines and no mentions of
+  AI tools, vendors, models, or agents in any artifact — CHANGELOG, PR body,
+  Slack message, or commits.
 - **Match the file's style.** The CHANGELOG format varies across projects. Read
   the file and match what's there, don't impose a different style.
 - **Handle existing [Unreleased] content.** If there are already entries in the
