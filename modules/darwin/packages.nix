@@ -6,6 +6,7 @@
       environment.systemPackages = with pkgs; [
         awscli2
         bat
+        codex
         curl
         fd
         fzf

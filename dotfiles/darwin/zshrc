@@ -77,7 +77,7 @@ precmd_functions+=(_es_wrapper_guard)
 export PIP_INDEX_URL='https://pypi.artifacts.furycloud.io/simple'
 export UV_INDEX_URL='https://pypi.artifacts.furycloud.io/simple'
 
-export PATH="$HOME/.fury/fury_venv/bin:$PATH"
-
 # Added by git-ai installer on Mon Jul 27 11:07:57 -03 2026
 export PATH="/Users/matmoran/.git-ai/bin:$PATH"
+
+export PATH="$HOME/.fury/fury_venv/bin:$PATH"
