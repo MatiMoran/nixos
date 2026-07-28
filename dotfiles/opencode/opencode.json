@@ -11,6 +11,9 @@
       "*.env.example": "allow"
     },
     "edit": "allow",
+    "skill": {
+      "*": "allow"
+    },
     "bash": {
       "*": "ask",
       "cat *": "allow",
