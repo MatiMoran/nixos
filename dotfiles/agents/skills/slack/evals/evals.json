@@ -1,5 +1,5 @@
 {
-  "skill_name": "slack-polish",
+  "skill_name": "slack",
   "evals": [
     {
       "id": 1,
@@ -17,6 +17,18 @@
       "id": 3,
       "prompt": "Pulime esto para mandarle a un compañero técnico: \"hola, viste el PR que hice? tiene unos cambios en el pipeline de display que creo que estan bien pero no estoy 100% seguro de la parte del throttler, si podes revisar estaría bueno, gracias\"",
       "expected_output": "Mensaje que mantiene el tono amigable pero elimina el relleno ('creo que están bien pero no estoy 100% seguro'), es más directo sobre qué específicamente revisar, preserva términos técnicos (PR, pipeline, display, throttler). Breve y claro. Bullet points con cambios explicados.",
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "Exportá los hilos completos del canal C05D6AERCLB entre 2026-07-01 y 2026-07-03 a alertas.md",
+      "expected_output": "Debe usar scripts/export_slack_threads.py con el comando export, channel_id C05D6AERCLB, rango de fechas indicado y salida alertas.md. No debe pulir ni reescribir mensajes.",
+      "files": []
+    },
+    {
+      "id": 5,
+      "prompt": "Usá el contexto que tenés de Basti para mejorar este mensaje: \"necesito que me confirmes si seguimos con esto o lo frenamos\"",
+      "expected_output": "Debe consultar el contexto conocido de Basti, aplicar tono deferente, evitar pedir accionables directos y reformular como invitación a opinar o alinear próximos pasos.",
       "files": []
     }
   ]

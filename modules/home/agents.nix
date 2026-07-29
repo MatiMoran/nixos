@@ -13,7 +13,7 @@
         "jira"
         "pr-ready"
         "queriator"
-        "slack-polish"
+        "slack"
       ];
       sharedSkillLinks = builtins.listToAttrs (map
         (name: {

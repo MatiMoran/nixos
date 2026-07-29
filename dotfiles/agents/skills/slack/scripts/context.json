@@ -1,0 +1,113 @@
+{
+  "user": {
+    "id": "U06R84Y498R",
+    "username": "matmoran",
+    "display_name": "Mati"
+  },
+  "audiences": {
+    "people": [
+      {
+        "name": "Richie",
+        "slack_id": "U066LNFKA5B",
+        "handle": null,
+        "level": "Técnico",
+        "context": "Data engineer, ETL, embeddings y validaciones de modelos. Stack: S3, FDA, Dataflow, BigQuery. Equipo DSP-ML."
+      },
+      {
+        "name": "German",
+        "slack_id": "U08QNSG6NVB",
+        "handle": "geromeroacev",
+        "level": "Técnico",
+        "context": "Backend engineer, bidding y autobudget logic. Trabaja en brand ads, spend plan y PR reviews."
+      },
+      {
+        "name": "Doris Salazar",
+        "slack_id": "U06AWL703B7",
+        "handle": null,
+        "level": "Técnico",
+        "context": "Líder equipo bidder/pacing. Diseña esquemas BigQuery, migración de tablas, arquitectura de nueva pacing app."
+      },
+      {
+        "name": "Franco Jofre",
+        "slack_id": "U08P36LUB97",
+        "handle": null,
+        "level": "Semi-técnico",
+        "context": "Analytics/BI, Looker y herramientas agénticas. Hace dashboards, explora MCPs, entiende queries pero no es backend."
+      },
+      {
+        "name": "Basti",
+        "slack_id": "U03TV67RK7U",
+        "handle": null,
+        "level": "Semi-técnico",
+        "context": "Manager del manager directo del usuario (su lider directa es Alejandra; Basti es el lider de Alejandra). Gestión del equipo DSP-ML, prioridades, backlog y visibilidad.",
+        "tone": "Usar tono muy deferente: nunca pedir accionables directos, sino invitar a opinar o alinearse."
+      },
+      {
+        "name": "Andy",
+        "slack_id": "U0B0P6Q5U0P",
+        "handle": null,
+        "level": "Semi-técnico",
+        "context": "Backend engineer, arquitectura GCP. Dataflow, Cloud Functions, decisiones de infra. Foco en arquitectura más que en código."
+      },
+      {
+        "name": "Guarno",
+        "slack_id": "U04ACLR7C2V",
+        "handle": "Juan Sebastian Guarnizo Leon",
+        "level": "Semi-técnico",
+        "context": "Data/DevOps. Investiga performance de infraestructura FDA, S3, tareas pegadas."
+      },
+      {
+        "name": "Nacho",
+        "slack_id": "U05854QGNG1",
+        "handle": null,
+        "level": "Semi-técnico",
+        "context": "Backend developer. Builds, dependencias Python (poetry, torch), resolución de problemas de entorno."
+      },
+      {
+        "name": "Santi",
+        "slack_id": "U0AEXRGB479",
+        "handle": null,
+        "level": "Semi-técnico",
+        "context": "Backend developer. Mismo stack que Nacho."
+      }
+    ],
+    "groups": [
+      {
+        "name": "@ml-display-tls",
+        "level": "Semi-técnico",
+        "context": "Grupo de Technical Leads del equipo Display. Superiores del usuario.",
+        "tone": "Tono deferente, no pedir accionables directos."
+      },
+      {
+        "name": "@ml-display-pls",
+        "level": "Semi-técnico",
+        "context": "Grupo de People/Product Leads del equipo Display. Superiores del usuario.",
+        "tone": "Tono deferente, no pedir accionables directos."
+      }
+    ],
+    "channels": [
+      {
+        "name": "#dsp-ml-devs",
+        "id": null,
+        "monitored": true,
+        "level": "Técnico",
+        "context": "Canal del equipo de desarrollo ML/backend. Audiencia de ingenieros, entiende toda la jerga técnica."
+      },
+      {
+        "name": "#dsp-bidder-ml",
+        "id": null,
+        "monitored": true,
+        "level": "Técnico",
+        "context": "Visibilidad de procesos de bidding y budget. Audiencia técnica mixta del equipo DSP."
+      },
+      {
+        "name": "#dsp-ml-monitors",
+        "id": "C05D6AERCLB",
+        "monitored": false,
+        "level": "Semi-técnico",
+        "context": "Canal público de monitoreo, visible para toda la organización.",
+        "tone": "Tono siempre formal y polite, evitar lenguaje muy interno o crudo."
+      }
+    ]
+  }
+}
