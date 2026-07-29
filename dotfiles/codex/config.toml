@@ -1,14 +1,10 @@
-# Codex CLI configuration managed by this Nix dotfiles repo.
-# Runtime state, auth tokens, history, logs, and sqlite databases stay outside Nix.
-
-model_reasoning_effort = "high"
 approval_policy = "on-request"
-sandbox_mode = "workspace-write"
-
+model_reasoning_effort = "high"
 notify = [
     "/Users/matmoran/.codex/computer-use/Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient",
     "turn-ended",
 ]
+sandbox_mode = "workspace-write"
 
 [desktop]
 ambient-suggestions-enabled = true
@@ -101,6 +97,9 @@ enabled = true
 [plugins."visualize@openai-bundled"]
 enabled = true
 
+[projects."/Users/matmoran"]
+trust_level = "trusted"
+
 [projects."/Users/matmoran/Documents/Codex/2026-07-16/como"]
 trust_level = "trusted"
 
@@ -110,13 +109,10 @@ trust_level = "trusted"
 [projects."/Users/matmoran/Repos/Meli/wiki"]
 trust_level = "trusted"
 
-[projects."/Users/matmoran/nixos"]
-trust_level = "trusted"
-
-[projects."/Users/matmoran"]
-trust_level = "trusted"
-
 [projects."/Users/matmoran/Repos/Notes"]
+trust_level = "trusted"
+
+[projects."/Users/matmoran/nixos"]
 trust_level = "trusted"
 
 [tui.model_availability_nux]
