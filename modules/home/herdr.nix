@@ -1,7 +1,7 @@
 { lib, ... }:
 
 {
-  config.homeManager.sharedModules = lib.mkAfter [
+  config.homeManager.nixosModules = lib.mkAfter [
     ({ pkgs, lib, ... }:
 
     let
@@ -122,6 +122,19 @@
           fi
         '';
       };
+
+      home.file.".config/zsh/multiplexer.zsh".text = ''
+        if [ -z "$HERDR_SOCKET_PATH" ]; then
+            herdr
+        fi
+
+        function project_open {
+            ~/.local/scripts/herdr-project-open
+            zle accept-line
+        }
+        zle -N project_open
+        bindkey '^p' project_open
+      '';
 
       xdg.configFile."herdr/plugins/os-notifier/herdr-plugin.toml".text = ''
         id = "os-notifier"

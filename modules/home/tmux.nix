@@ -1,7 +1,7 @@
 { lib, ... }:
 
 {
-  config.homeManager.sharedModules = lib.mkAfter [
+  config.homeManager.darwinModules = lib.mkAfter [
     ({ pkgs, lib, ... }:
 
     let
@@ -86,6 +86,19 @@
           fi
         '';
       };
+
+      home.file.".config/zsh/multiplexer.zsh".text = ''
+        if [ -z "$TMUX" ]; then
+            tmux new-session -A -s main
+        fi
+
+        function project_open {
+            ~/.local/scripts/tmux-project-open
+            zle accept-line
+        }
+        zle -N project_open
+        bindkey '^p' project_open
+      '';
     })
   ];
 }

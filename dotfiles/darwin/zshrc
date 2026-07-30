@@ -81,3 +81,8 @@ export UV_INDEX_URL='https://pypi.artifacts.furycloud.io/simple'
 export PATH="/Users/matmoran/.git-ai/bin:$PATH"
 
 export PATH="$HOME/.fury/fury_venv/bin:$PATH"
+
+#------------------------------
+# Multiplexer (provided by home-manager module)
+#------------------------------
+[[ -f ~/.config/zsh/multiplexer.zsh ]] && source ~/.config/zsh/multiplexer.zsh

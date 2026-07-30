@@ -70,13 +70,6 @@ function fuzzy_open {
 
 zle -N fuzzy_open
 
-function project_open {
-    ~/.local/scripts/tmux-project-open
-    zle accept-line
-}
-
-zle -N project_open
-
 #------------------------------
 # Default Apps
 #------------------------------
@@ -171,7 +164,6 @@ FZF_ALT_C_COMMAND= FZF_CTRL_T_COMMAND= source <(fzf --zsh)
 
 bindkey -v
 bindkey '^f' fuzzy_open
-bindkey '^p' project_open
 bindkey '^y' autosuggest-accept
 bindkey '^n' forward-word
 bindkey '^z' undo
@@ -318,12 +310,4 @@ export BAT_THEME="Visual Studio Dark+"
 #------------------------------
 source $ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-#------------------------------
-# Session multiplexer
-#------------------------------
-# if [ -z "$HERDR_SOCKET_PATH" ]; then
-#     herdr
-# fi
-if [ -z "$TMUX" ]; then
-    tmux new-session -A -s main
-fi
+[[ -f ~/.config/zsh/multiplexer.zsh ]] && source ~/.config/zsh/multiplexer.zsh

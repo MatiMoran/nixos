@@ -36,3 +36,8 @@ alias -s gif=open
 alias -s webp=open
 alias -s bmp=open
 alias -s ico=open
+
+#------------------------------
+# Multiplexer (provided by home-manager module)
+#------------------------------
+[[ -f ~/.config/zsh/multiplexer.zsh ]] && source ~/.config/zsh/multiplexer.zsh
