@@ -17,10 +17,17 @@ description: >
 
 # Jira Skill
 
-Interact with Jira at `mercadolibre.atlassian.net` via the `mcp-atlassian` MCP
-server. All tools are prefixed `mcp__mcp-atlassian__jira_*`.
+Interact with Jira at `mercadolibre.atlassian.net` via the `mcp__claude_ai_MELI_Atlassian__` MCP tools.
 
 **Default project:** `MLDSP` — use it when the user doesn't specify a project.
+
+**Default cloudId:** `a55c251b-e222-488f-8975-3ccdf0a0db6f`
+
+---
+
+## Session Setup (Step 0 — always do this first)
+
+Before calling any Jira tool, check if a `session_id` from `create_meli_session` already exists in the conversation. If yes, reuse it. If not, call `mcp__claude_ai_MELI_Atlassian__create_meli_session` once. The same `session_id` covers all MCP providers (Jira, Slack, GitHub, etc.) — never create more than one per conversation.
 
 ---
 
@@ -28,21 +35,17 @@ server. All tools are prefixed `mcp__mcp-atlassian__jira_*`.
 
 | Tool | Purpose |
 |------|---------|
-| `jira_get_issue` | Fetch issue details |
-| `jira_search` | JQL search |
-| `jira_create_issue` | Create a new issue |
-| `jira_update_issue` | Edit fields (summary, description, priority, etc.) |
-| `jira_get_transitions` | List available status transitions for an issue |
-| `jira_transition_issue` | Move issue to a new status |
-| `jira_add_comment` | Post a comment |
-| `jira_get_agile_boards` | List boards for a project |
-| `jira_get_sprints_from_board` | List sprints (active/future/closed) |
-| `jira_add_issues_to_sprint` | Move issue(s) to a sprint |
-| `jira_get_sprint_issues` | List issues in a sprint |
-| `jira_create_issue_link` | Link two issues (blocks, relates to, etc.) |
-| `jira_get_link_types` | List available link types |
-| `jira_get_user_profile` | Look up a user's accountId by email |
-| `jira_get_all_projects` | List all accessible projects |
+| `mcp__claude_ai_MELI_Atlassian__getJiraIssue` | Fetch issue details |
+| `mcp__claude_ai_MELI_Atlassian__searchJiraIssuesUsingJql` | JQL search |
+| `mcp__claude_ai_MELI_Atlassian__createJiraIssue` | Create a new issue |
+| `mcp__claude_ai_MELI_Atlassian__editJiraIssue` | Edit fields (epic, assignee, description, etc.) |
+| `mcp__claude_ai_MELI_Atlassian__getTransitionsForJiraIssue` | List available status transitions |
+| `mcp__claude_ai_MELI_Atlassian__transitionJiraIssue` | Move issue to a new status |
+| `mcp__claude_ai_MELI_Atlassian__addCommentToJiraIssue` | Post a comment |
+| `mcp__claude_ai_MELI_Atlassian__createIssueLink` | Link two issues (blocks, relates to, etc.) |
+| `mcp__claude_ai_MELI_Atlassian__getIssueLinkTypes` | List available link types |
+| `mcp__claude_ai_MELI_Atlassian__lookupJiraAccountId` | Look up a user's accountId by email |
+| `mcp__claude_ai_MELI_Atlassian__getVisibleJiraProjects` | List all accessible projects |
 
 ---
 
@@ -50,15 +53,15 @@ server. All tools are prefixed `mcp__mcp-atlassian__jira_*`.
 
 ### Viewing an Issue
 
-Fetch with `jira_get_issue`. Present the result clearly:
+Fetch with `getJiraIssue`. Present the result clearly:
 - Key, summary, status, assignee, priority, issue type
 - Description (summarize if long)
-- Sprint (from `customfield_10020` if present)
+- Epic/parent if present
 - Recent comments if relevant
 
 ### Searching Issues
 
-Use `jira_search` with JQL. Common patterns:
+Use `searchJiraIssuesUsingJql` with JQL. Common patterns:
 - My open issues: `assignee = currentUser() AND statusCategory != Done ORDER BY updated DESC`
 - Project backlog: `project = MLDSP AND sprint is EMPTY AND statusCategory != Done`
 - Current sprint: `project = MLDSP AND sprint in openSprints() ORDER BY status ASC`
@@ -68,101 +71,102 @@ Present results as a compact list: `KEY — Summary (Status, Assignee)`.
 
 ### Creating an Issue
 
-Use `jira_create_issue`. Required fields:
-- `project_key`: default `MLDSP` unless specified
+Use `createJiraIssue`. Required fields:
+- `cloudId`: `a55c251b-e222-488f-8975-3ccdf0a0db6f`
+- `projectKey`: default `MLDSP` unless specified
 - `summary`: always required
-- `issue_type`: default to `Task` unless the user explicitly specifies a different type (e.g., "create a bug", "create a story", "create an epic")
-- `priority`: default to `Medium` unless the user signals urgency (then `High`) or trivial work (then `Low`)
+- `issueTypeName`: default to `Task` unless the user explicitly specifies a different type
+- `assignee_account_id`: for "assign to me" use `712020:8f764565-591e-4c99-8f53-5eb38b5d21fb`
 
-For description, use plain text — the MCP handles formatting.
+**Epic is mandatory.** Before creating, always ask which epic to link the issue to if the user hasn't specified one. Search existing epics with JQL: `project = MLDSP AND issuetype = Epic AND statusCategory != Done ORDER BY updated DESC`. After creating the issue, set the epic immediately with `editJiraIssue`: `{"parent": {"key": "EPIC-KEY"}}`.
 
 **Language:** Always write the summary and description in Spanish, regardless of the language the user uses to make the request.
 
-**Slack context:** If the issue originates from a Slack thread, always include the thread URL in the description (e.g. under a "Contexto" or "Referencia" section) so there's a direct link back to the conversation.
+**Slack context:** If the issue originates from a Slack thread, always include the thread URL in the description under a "Referencia" section.
 
 After creation, report the new issue key and a link: `https://mercadolibre.atlassian.net/browse/KEY`.
 
-**Assigning during creation:** If the user says "assign to me" or similar, pass `assignee` as `matiasnicolas.moran@mercadolibre.com` directly in the create call.
-
 ### Assigning an Issue
 
-Use `jira_update_issue` with `assignee` set to the user's email — the MCP accepts email directly, no profile lookup needed.
+Use `editJiraIssue`. Look up the account ID first with `lookupJiraAccountId` if needed.
 
-- "assign to me" → use `matiasnicolas.moran@mercadolibre.com`
-- "assign to [name/teammate]" → ask for their email if you don't have it
+- "assign to me" → accountId `712020:8f764565-591e-4c99-8f53-5eb38b5d21fb`
+- "assign to [name/teammate]" → call `lookupJiraAccountId` with their email
 
 ### Transitioning an Issue
 
 Transitions are project-specific — never guess transition IDs.
 
-1. Call `jira_get_transitions` to see what's available for this issue.
-2. Match the user's intent to the closest transition name (e.g., "done" → "Done", "start" → "In Progress", "block" → whatever blocking transition exists).
-3. Call `jira_transition_issue` with the matched transition ID.
-4. Confirm the new status.
+1. Call `getTransitionsForJiraIssue` to see what's available.
+2. Match the user's intent to the closest transition name.
+3. Call `transitionJiraIssue` with the matched transition ID.
 
-Common intent mappings to watch for:
-- "start", "begin", "working on it", "in progress" → In Progress (or equivalent)
-- "done", "finish", "close", "complete", "ship it" → Done (or equivalent)
-- "review", "PR up" → In Review / Code Review (if it exists)
-- "block", "blocked" → Blocked (if it exists)
-- "reopen", "back to backlog" → To Do / Open (or equivalent)
+**Known MLDSP transition path to Done** (from Backlog):
+- Backlog → `Selected to Development` (id `51`) → state: To Do
+- To Do → `Start progress` (id `71`) → state: In Progress
+- In Progress → `Done` (id `321`) → state: Done
 
-### Adding a Comment
+Always call `getTransitionsForJiraIssue` to confirm IDs before transitioning — these may vary by issue state.
 
-Use `jira_add_comment`. Keep it conversational — don't over-format unless the user provides structured content.
+Common intent mappings:
+- "start", "in progress" → Start progress
+- "done", "finish", "close", "complete" → Done
+- "review", "PR up" → Ready to Review / IN REVIEW
+- "block", "blocked" → On Hold
+- "reopen", "back to backlog" → Back to Backlog
+
+### Setting an Epic
+
+Use `editJiraIssue` with `fields: {"parent": {"key": "EPIC-KEY"}}`.
+
+To find available epics: `searchJiraIssuesUsingJql` with `project = MLDSP AND issuetype = Epic AND statusCategory != Done ORDER BY updated DESC`.
 
 ### Sprint Management
 
-**Moving an issue to the current sprint:**
-1. `jira_get_agile_boards` with the project key to find the board ID.
-2. `jira_get_sprints_from_board` with `state = "active"` to get the active sprint ID.
-3. `jira_add_issues_to_sprint` with the sprint ID and issue key.
-4. Confirm with sprint name and end date.
+⚠️ **The Agile board API is not available** in the current MCP configuration. Sprint assignment cannot be done programmatically. Inform the user and ask them to drag the card to the active sprint manually from the Jira board.
 
-If there's no active sprint, look for the next `future` sprint and ask the user to confirm before moving.
+Known active sprint: `223275` (MLDSP 2026Q3 — valid as of 2026-07-30; verify if stale).
 
-**Viewing the active sprint:**
-Use `jira_get_sprint_issues` after finding the active sprint. Group by status when presenting.
+### Adding a Comment
 
-**Listing sprints:**
-Use `jira_get_sprints_from_board` with `state = "active,future"` and show name + dates.
+Use `addCommentToJiraIssue`. Keep it conversational — don't over-format unless the user provides structured content.
 
 ### Linking Issues
 
-1. `jira_get_link_types` to see available link types (blocks, is blocked by, relates to, duplicates, etc.).
+1. `getIssueLinkTypes` to see available link types.
 2. Match user intent to the right type.
-3. `jira_create_issue_link` with inward/outward issue keys.
+3. `createIssueLink` with inward/outward issue keys.
 
 Common intents:
-- "this blocks X" / "X is blocked by this" → "Blocks" link
-- "related to" / "similar to" → "Relates"
+- "this blocks X" → "Blocks"
+- "related to" → "Relates"
 - "duplicate of" → "Duplicates"
 
 ---
 
 ## Output Style
 
-- Always show the Jira URL after create/transition/sprint actions: `https://mercadolibre.atlassian.net/browse/KEY`
+- Always show the Jira URL after create/transition actions: `https://mercadolibre.atlassian.net/browse/KEY`
 - Use compact formatting — developers want info density, not paragraphs
 - For lists of issues, use a table or bullet list with key, summary, status
-- For transitions/moves, a one-liner confirmation is enough: "MLDSP-762 → Done ✓"
+- For transitions, a one-liner confirmation is enough: "MLDSP-762 → Done ✓"
 - If an operation fails (issue not found, no permission, etc.), say what went wrong and suggest a fix
 
 ---
 
 ## Examples
 
-**"create a bug: checkout crashes when cart is empty"**
-→ Create Bug in MLDSP, summary "checkout crashes when cart is empty", priority Medium
+**"create a bug: embeddings task no falla con model mismatch"**
+→ Ask for epic if not provided → Create Bug in MLDSP → Set epic → confirm
 
 **"move MLDSP-762 to done"**
-→ Get transitions → match "Done" → transition → confirm
-
-**"put MLDSP-800 in the current sprint"**
-→ Get board for MLDSP → get active sprint → add issue → confirm
+→ Get transitions → Backlog→To Do (51) → In Progress (71) → Done (321) → confirm
 
 **"assign MLDSP-762 to me"**
-→ Get user profile for matiasnicolas.moran@mercadolibre.com → update assignee
+→ `editJiraIssue` with assignee accountId `712020:8f764565-591e-4c99-8f53-5eb38b5d21fb`
 
 **"what are my open tickets in MLDSP?"**
-→ Search with JQL: `project = MLDSP AND assignee = currentUser() AND statusCategory != Done`
+→ `searchJiraIssuesUsingJql`: `project = MLDSP AND assignee = currentUser() AND statusCategory != Done`
+
+**"put MLDSP-800 in the current sprint"**
+→ Inform that sprint assignment is not supported via API; ask user to move manually from the board

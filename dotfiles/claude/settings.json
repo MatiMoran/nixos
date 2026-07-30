@@ -101,7 +101,17 @@
       "mcp__claude_ai_Atlassian__lookupJiraAccountId",
       "mcp__claude_ai_Atlassian__searchJiraIssuesUsingJql",
       "mcp__claude_ai_Atlassian__transitionJiraIssue",
-      "mcp__claude_ai_Slack__slack_read_thread"
+      "mcp__claude_ai_Slack__slack_read_thread",
+      "mcp__claude_ai_MELI_Atlassian__create_meli_session",
+      "mcp__claude_ai_MELI_Atlassian__getAccessibleAtlassianResources",
+      "mcp__claude_ai_MELI_Atlassian__searchJiraIssuesUsingJql",
+      "mcp__claude_ai_MELI_Atlassian__getJiraIssue",
+      "mcp__claude_ai_MELI_Atlassian__getTransitionsForJiraIssue",
+      "mcp__claude_ai_MELI_Atlassian__search",
+      "mcp__claude_ai_MELI_Github__pull_request_read",
+      "mcp__claude_ai_MELI_Slack__create_meli_session",
+      "mcp__claude_ai_MELI_Slack__slack_read_thread",
+      "mcp__bigquery__dry_run_query"
     ],
     "ask": [
       "Bash(mv *)",
