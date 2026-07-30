@@ -106,6 +106,9 @@ trust_level = "trusted"
 [projects."/Users/matmoran/Downloads"]
 trust_level = "trusted"
 
+[projects."/Users/matmoran/Repos/Meli/models"]
+trust_level = "trusted"
+
 [projects."/Users/matmoran/Repos/Meli/wiki"]
 trust_level = "trusted"
 
@@ -113,9 +116,6 @@ trust_level = "trusted"
 trust_level = "trusted"
 
 [projects."/Users/matmoran/nixos"]
-trust_level = "trusted"
-
-[projects."/Users/matmoran/Repos/Meli/models"]
 trust_level = "trusted"
 
 [tui.model_availability_nux]

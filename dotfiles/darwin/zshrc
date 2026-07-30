@@ -80,9 +80,9 @@ export UV_INDEX_URL='https://pypi.artifacts.furycloud.io/simple'
 # Added by git-ai installer on Mon Jul 27 11:07:57 -03 2026
 export PATH="/Users/matmoran/.git-ai/bin:$PATH"
 
-export PATH="$HOME/.fury/fury_venv/bin:$PATH"
-
 #------------------------------
 # Multiplexer (provided by home-manager module)
 #------------------------------
 [[ -f ~/.config/zsh/multiplexer.zsh ]] && source ~/.config/zsh/multiplexer.zsh
+
+export PATH="$HOME/.fury/fury_venv/bin:$PATH"
