@@ -102,8 +102,10 @@ def get_torrent_file() -> Path:
     print("  Torrent not cached. Fetching metadata from DHT...")
     subprocess.run(
         ["aria2c", "--bt-metadata-only=true",
-         f"--bt-save-metadata={TORRENT_CACHE}", MAGNET],
-        capture_output=True, timeout=120
+         "--bt-save-metadata=true",
+         f"--dir={TORRENT_CACHE.parent}",
+         MAGNET],
+        timeout=120
     )
     if not TORRENT_CACHE.exists():
         print("Error: Could not fetch torrent metadata")
