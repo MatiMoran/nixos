@@ -19,12 +19,12 @@ Block Out
 Blood Bros
 Bottom of the Ninth
 Cadillacs and Dinosaurs
-Capcon vs. SNK
+Capcom vs. SNK
 Captain Commando
 Carrier Air Wing
 Caveman Ninja
 Champion wrestler
-Championsip Sprint
+Championship Sprint
 Cisco Heat
 Dark Seal
 DarkStalkers
@@ -43,7 +43,7 @@ Evolution Soccer
 Exciting Hour
 F-1 Grand Prix Star
 F-1 Super Battle
-F-1 Super Lap
+F1 Super Lap
 Final Fight
 Final Fight 2
 Final Fight 3
@@ -51,21 +51,20 @@ Football Champ
 Gekisou
 Golden Axe
 Grand Prix Star
-Grand Striker
+# gstriker is Grand Striker (original); "Grand Striker 2" below is the sequel
+gstriker
 Grand Striker 2
 Great 1000 Miles
 Gridiron
 Hydra
-Hyper Olimpic
+Hyper Olympic
 Kick And Run
-King of Fighters '94
-King of Fighters '95
 Mad Gear
 Magic Bomb
 Marvel Super Heroes
+Marvel Super Heroes vs. Street Fighter
 Marvel vs. Capcom 2: New Age of Heroes
 Marvel vs. Capcom: Clash of Super Heroes
-Marver Super Heroes vs. Street Fighter
 Mega Man 2: The Power Fighters
 Mega man: The Power Battle
 Metal Slug
@@ -82,7 +81,7 @@ Mortal Kombat 3
 Mortal Kombat II
 MotoRace USA
 Neo bomberman
-Neo geo cup '98: the road to the victory
+Neo-Geo Cup '98 - The Road to the Victory
 Outrun
 Pocket Gal
 Pocket Gal 2
