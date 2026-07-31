@@ -1,27 +1,65 @@
 #!/usr/bin/env nix-shell
 #!nix-shell -i python3 -p python3 aria2
 
-import subprocess
-import sys
-import os
-import re
 import argparse
 import functools
+import os
+import re
+import subprocess
+import sys
+import tempfile
+import zipfile
+from dataclasses import dataclass
 from pathlib import Path
+from urllib.parse import quote
 
 print = functools.partial(print, flush=True)
 
-TORRENT_HASH = "d4d698e5398a83bd762d8137eb196c510a86c23e"
-TORRENT_CACHE = Path.home() / ".local/share/qBittorrent/BT_backup" / f"{TORRENT_HASH}.torrent"
-ROMS_DIR = Path.home() / ".mame" / "roms"
-GAMES_FILE = Path.home() / ".mame" / "games.txt"
+TRACKERS_LIST = [
+    "udp://tracker.opentrackr.org:1337/announce",
+    "udp://exodus.desync.com:6969/announce",
+]
+TRACKERS = ",".join(TRACKERS_LIST)
 
-MAGNET = (
-    "magnet:?xt=urn:btih:d4d698e5398a83bd762d8137eb196c510a86c23e"
-    "&dn=MAME%200.288%20ROMs%20%28non-merged%29"
-    "&xl=162840563456"
-    "&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce"
-    "&tr=udp%3A%2F%2Fexodus.desync.com%3A6969%2Fannounce"
+BT_CACHE_DIR = Path.home() / ".local/share/qBittorrent/BT_backup"
+MAME_DIR = Path.home() / ".mame"
+ROMS_DIR = MAME_DIR / "roms"
+SNAP_DIR = MAME_DIR / "snap"
+TITLES_DIR = MAME_DIR / "titles"
+ARTWORK_DIR = MAME_DIR / "artwork"
+GAMES_FILE = MAME_DIR / "games.txt"
+
+
+@dataclass(frozen=True)
+class Torrent:
+    name: str
+    info_hash: str
+    size: int
+
+    @property
+    def magnet(self) -> str:
+        params = (
+            [f"xt=urn:btih:{self.info_hash}", f"dn={quote(self.name)}",
+             f"xl={self.size}"]
+            + [f"tr={quote(t, safe='')}" for t in TRACKERS_LIST]
+        )
+        return "magnet:?" + "&".join(params)
+
+    @property
+    def cache_path(self) -> Path:
+        return BT_CACHE_DIR / f"{self.info_hash}.torrent"
+
+
+ROMS_TORRENT = Torrent(
+    name="MAME 0.288 ROMs (non-merged)",
+    info_hash="d4d698e5398a83bd762d8137eb196c510a86c23e",
+    size=162840563456,
+)
+
+EXTRAS_TORRENT = Torrent(
+    name="MAME 0.288 EXTRAs",
+    info_hash="1c89382ab9b2fc21712ab20e194a0f7a9ee0bace",
+    size=70542784852,
 )
 
 
@@ -96,43 +134,68 @@ def lookup_rom(game_name: str, mame_list: list[str]) -> str | None:
     return best
 
 
-def get_torrent_file() -> Path:
-    if TORRENT_CACHE.exists():
-        return TORRENT_CACHE
-    print("  Torrent not cached. Fetching metadata from DHT...")
+def get_torrent_file(torrent: Torrent) -> Path:
+    cache = torrent.cache_path
+    if cache.exists():
+        return cache
+    print(f"  Torrent '{torrent.name}' not cached. Fetching metadata from DHT...")
     subprocess.run(
         ["aria2c", "--bt-metadata-only=true",
          "--bt-save-metadata=true",
-         f"--dir={TORRENT_CACHE.parent}",
-         MAGNET],
-        timeout=120
+         f"--dir={cache.parent}",
+         torrent.magnet],
+        timeout=180
     )
-    if not TORRENT_CACHE.exists():
+    if not cache.exists():
         print("Error: Could not fetch torrent metadata")
         sys.exit(1)
-    return TORRENT_CACHE
+    return cache
 
 
-def list_torrent_files(torrent_path: Path) -> dict[str, int]:
+def list_torrent_files(torrent_path: Path) -> dict[int, str]:
     result = subprocess.run(
         ["aria2c", "--show-files", str(torrent_path)],
         capture_output=True, text=True, timeout=30
     )
     output = result.stdout + result.stderr
-    files: dict[str, int] = {}
+    files: dict[int, str] = {}
     for line in output.split("\n"):
         m = re.match(r'\s*(\d+)\|(.+\.zip)$', line)
         if m:
-            idx = int(m.group(1))
-            basename = os.path.basename(m.group(2))
-            files[basename] = idx
+            files[int(m.group(1))] = m.group(2)
     return files
 
 
-TRACKERS = (
-    "udp://tracker.opentrackr.org:1337/announce,"
-    "udp://exodus.desync.com:6969/announce"
-)
+def download_files(torrent_path: Path, dest: Path, pairs: list[tuple[int, str]]):
+    dest.mkdir(parents=True, exist_ok=True)
+    select_str = ",".join(str(idx) for idx, _ in pairs)
+    index_out = [f"--index-out={idx}={name}" for idx, name in pairs]
+    cmd = (["aria2c", f"--select-file={select_str}"] + index_out +
+           [f"--dir={dest}", "--seed-time=0",
+            "--summary-interval=5",
+            "--bt-tracker", TRACKERS,
+            str(torrent_path)])
+    subprocess.run(cmd)
+
+
+def download_bundle(torrent_path: Path, dest: Path, idx: int, name: str) -> Path:
+    download_files(torrent_path, dest, [(idx, name)])
+    return dest / name
+
+
+def extract_missing(bundle: Path, dest: Path, wanted: list[str]) -> list[str]:
+    dest.mkdir(parents=True, exist_ok=True)
+    missing: list[str] = []
+    with zipfile.ZipFile(bundle) as zf:
+        names = set(zf.namelist())
+        for name in wanted:
+            if name in names:
+                zf.extract(name, dest)
+                print(f"  ✓ {name} -> {dest}")
+            else:
+                print(f"  ✗ {name} -> not in bundle")
+                missing.append(name)
+    return missing
 
 
 def is_rom_verified(rom_name: str) -> bool:
@@ -146,38 +209,166 @@ def is_rom_verified(rom_name: str) -> bool:
     return "is good" in result.stdout
 
 
-def download(torrent_path: Path, indices: list[int], roms: list[str]):
-    to_download = []
-    for idx, rom in zip(indices, roms):
-        if is_rom_verified(rom):
-            print(f"  - {rom}.zip already downloaded and verified, skipping")
-        else:
-            to_download.append((idx, rom))
+def download_roms(roms: list[str], not_found: list[str]):
+    print(f"\n[2/5] Downloading ROMs...")
+    print(f"  Target: {ROMS_DIR}")
+    torrent_file = get_torrent_file(ROMS_TORRENT)
+    file_map = list_torrent_files(torrent_file)
+    by_basename = {os.path.basename(path): idx for idx, path in file_map.items()}
 
-    if not to_download:
-        print("  All files already downloaded and verified.")
+    pairs: list[tuple[int, str]] = []
+    for rom in roms:
+        target = f"{rom}.zip"
+        idx = by_basename.get(target)
+        if idx is None:
+            print(f"  ✗ {target} -> not in torrent set")
+            not_found.append(rom)
+            continue
+        if is_rom_verified(rom):
+            print(f"  ✓ {target} already downloaded and verified, skipping")
+            continue
+        print(f"  ✓ {target} -> index {idx}")
+        pairs.append((idx, target))
+
+    if not pairs:
+        print("  All ROMs already downloaded and verified.")
+        return
+    download_files(torrent_file, ROMS_DIR, pairs)
+    print(f"  Downloaded {len(pairs)} file(s) to {ROMS_DIR}")
+
+
+def download_snapshots(roms: list[str], missing_report: dict[str, list[str]]):
+    print(f"\n[3/5] Downloading snapshots...")
+    print(f"  Target: {SNAP_DIR}")
+    missing = [rom for rom in roms if not (SNAP_DIR / f"{rom}.png").exists()]
+    if not missing:
+        print("  All snapshots already present, skipping.")
         return
 
-    select_str = ",".join(str(idx) for idx, _ in to_download)
-    index_out = [f"--index-out={idx}={rom}.zip"
-                 for idx, rom in to_download]
-    cmd = (["aria2c", f"--select-file={select_str}"] + index_out +
-           [f"--dir={ROMS_DIR}", "--seed-time=0",
-            "--summary-interval=5",
-            "--bt-tracker", TRACKERS,
-            str(torrent_path)])
-    subprocess.run(cmd)
+    torrent_file = get_torrent_file(EXTRAS_TORRENT)
+    file_map = list_torrent_files(torrent_file)
+    idx = next((i for i, p in file_map.items()
+                if os.path.basename(p) == "snap.zip"), None)
+    if idx is None:
+        print("  ✗ snap.zip not found in EXTRAs set")
+        missing_report["snapshots"] = missing
+        return
+
+    print(f"  Downloading snap.zip ({len(missing)} snapshot(s) missing)...")
+    with tempfile.TemporaryDirectory(prefix="mame-dl-") as tmp:
+        bundle = download_bundle(torrent_file, Path(tmp), idx, "snap.zip")
+        if not bundle.exists():
+            print("  ✗ Error downloading snap.zip")
+            missing_report["snapshots"] = missing
+            return
+        not_in_set = extract_missing(
+            bundle, SNAP_DIR, [f"{rom}.png" for rom in missing]
+        )
+    if not_in_set:
+        missing_report["snapshots"] = [
+            rom for rom, png in zip(missing, [f"{r}.png" for r in missing])
+            if png in not_in_set
+        ]
+
+
+def download_titles(roms: list[str], missing_report: dict[str, list[str]]):
+    print(f"\n[4/5] Downloading titles...")
+    print(f"  Target: {TITLES_DIR}")
+    missing = [rom for rom in roms if not (TITLES_DIR / f"{rom}.png").exists()]
+    if not missing:
+        print("  All titles already present, skipping.")
+        return
+
+    torrent_file = get_torrent_file(EXTRAS_TORRENT)
+    file_map = list_torrent_files(torrent_file)
+    idx = next((i for i, p in file_map.items()
+                if os.path.basename(p) == "titles.zip"), None)
+    if idx is None:
+        print("  ✗ titles.zip not found in EXTRAs set")
+        missing_report["titles"] = missing
+        return
+
+    print(f"  Downloading titles.zip ({len(missing)} title(s) missing)...")
+    with tempfile.TemporaryDirectory(prefix="mame-dl-") as tmp:
+        bundle = download_bundle(torrent_file, Path(tmp), idx, "titles.zip")
+        if not bundle.exists():
+            print("  ✗ Error downloading titles.zip")
+            missing_report["titles"] = missing
+            return
+        not_in_set = extract_missing(
+            bundle, TITLES_DIR, [f"{rom}.png" for rom in missing]
+        )
+    if not_in_set:
+        missing_report["titles"] = [
+            rom for rom, png in zip(missing, [f"{r}.png" for r in missing])
+            if png in not_in_set
+        ]
+
+
+def download_artwork(roms: list[str], missing_report: dict[str, list[str]]):
+    print(f"\n[5/5] Downloading artwork...")
+    print(f"  Target: {ARTWORK_DIR}")
+    missing = [rom for rom in roms if not (ARTWORK_DIR / f"{rom}.zip").exists()]
+    if not missing:
+        print("  All artwork already present, skipping.")
+        return
+
+    torrent_file = get_torrent_file(EXTRAS_TORRENT)
+    file_map = list_torrent_files(torrent_file)
+    artwork_by_basename: dict[str, int] = {}
+    for idx, path in file_map.items():
+        if "artwork" in Path(path).parts:
+            artwork_by_basename[os.path.basename(path)] = idx
+
+    pairs: list[tuple[int, str]] = []
+    no_artwork: list[str] = []
+    for rom in missing:
+        target = f"{rom}.zip"
+        idx = artwork_by_basename.get(target)
+        if idx is None:
+            print(f"  ✗ {target} -> no artwork in set")
+            no_artwork.append(rom)
+            continue
+        print(f"  ✓ {target} -> index {idx}")
+        pairs.append((idx, target))
+
+    if not pairs:
+        print("  No artwork available in the EXTRAs set for these games.")
+        if no_artwork:
+            missing_report["artwork"] = no_artwork
+        return
+
+    ARTWORK_DIR.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix="mame-dl-") as tmp:
+        download_files(torrent_file, Path(tmp), pairs)
+        for idx, name in pairs:
+            src = Path(tmp) / name
+            if src.exists():
+                os.replace(src, ARTWORK_DIR / name)
+    print(f"  Downloaded {len(pairs)} file(s) to {ARTWORK_DIR}")
+    if no_artwork:
+        missing_report["artwork"] = no_artwork
+    if no_artwork:
+        missing_report["artwork"] = no_artwork
 
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Download MAME ROMs from non-merged torrent",
+        description=(
+            "Download MAME ROMs, snapshots, titles and artwork "
+            "for the games listed in the input file."
+        ),
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=(
             "Input file format (one per line):\n"
             "  Sunset Riders\n"
             "  ssriders          # exact ROM name also works\n"
             "  # this is a comment\n"
+            "\n"
+            "ROMs come from the non-merged set; snapshots, titles and "
+            "artwork from the EXTRAs set. Already downloaded files are "
+            "skipped. Snapshots/titles bundles are deleted after "
+            "extracting the wanted files."
         )
     )
     parser.add_argument(
@@ -198,7 +389,7 @@ def main():
 
     print(f"Reading {len(games)} game(s) from {games_file}\n")
 
-    print("[1/3] Looking up game names in MAME...")
+    print("[1/5] Looking up game names in MAME...")
     mame_list = get_mame_list()
     roms: list[str] = []
     not_found: list[str] = []
@@ -215,37 +406,27 @@ def main():
         print("\nNo games found in MAME. Exiting.")
         sys.exit(1)
 
-    print(f"\n[2/3] Scanning torrent for matching files...")
-    torrent_file = get_torrent_file()
-    file_map = list_torrent_files(torrent_file)
+    download_roms(roms, not_found)
 
-    indices: list[int] = []
-    matched: list[str] = []
-    for rom in roms:
-        target = f"{rom}.zip"
-        idx = file_map.get(target)
-        if idx is not None:
-            print(f"  ✓ {target} -> index {idx}")
-            indices.append(idx)
-            matched.append(rom)
-        else:
-            print(f"  ✗ {target} -> not in torrent set")
-            not_found.append(rom)
+    missing_report: dict[str, list[str]] = {}
+    download_snapshots(roms, missing_report)
+    download_titles(roms, missing_report)
+    download_artwork(roms, missing_report)
 
-    if not indices:
-        print("\nNo files to download. Exiting.")
-        sys.exit(1)
+    print(f"\nDone!")
 
-    print(f"\n[3/3] Downloading {len(indices)} file(s)...")
-    print(f"  Target: {ROMS_DIR}")
-    download(torrent_file, indices, matched)
-
-    print(f"\nDone! {len(indices)} file(s) saved to {ROMS_DIR}")
-
+    if not_found or missing_report:
+        print()
     if not_found:
-        print(f"\nNot found ({len(not_found)}):")
+        print(f"Not found ({len(not_found)}):")
         for n in not_found:
             print(f"  - {n}")
+    for label, items in missing_report.items():
+        if items:
+            print(f"\n{label.capitalize()} not available in the EXTRAs set "
+                  f"({len(items)}):")
+            for i in items:
+                print(f"  - {i}")
 
 
 if __name__ == "__main__":
