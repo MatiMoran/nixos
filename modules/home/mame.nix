@@ -18,6 +18,10 @@
       home.file.".mame/games.txt" = {
         source = config.lib.file.mkOutOfStoreSymlink "${repoDir}/dotfiles/mame/games.txt";
       };
+
+      home.file.".mame/mame.ini" = {
+        source = config.lib.file.mkOutOfStoreSymlink "${repoDir}/dotfiles/mame/mame.ini";
+      };
     })
   ];
 }
