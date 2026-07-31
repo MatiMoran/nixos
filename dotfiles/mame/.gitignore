@@ -1,0 +1,8 @@
+__pycache__/
+roms/
+artwork/
+snap/
+titles/
+nvram/
+cfg/*
+!cfg/default.cfg
