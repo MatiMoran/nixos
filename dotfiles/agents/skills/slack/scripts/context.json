@@ -69,6 +69,41 @@
         "handle": null,
         "level": "Semi-técnico",
         "context": "Backend developer. Mismo stack que Nacho."
+      },
+      {
+        "name": "Carolina",
+        "slack_id": "UURSXCDV3",
+        "handle": "carolina.martinez",
+        "level": "Semi-técnico",
+        "context": "TL/PM del equipo del bidder (Chile). Coordinó el apagado del experimento ROAS en MLB/MLA. Punto de contacto para decisiones de experimentos en video."
+      },
+      {
+        "name": "Benja",
+        "slack_id": "U066S48S1FE",
+        "handle": null,
+        "level": "Semi-técnico",
+        "context": "TL directo del usuario (debajo de Basti en la jerarquía). Lideró trabajo en el experimento ROAS en OLV junto a German."
+      },
+      {
+        "name": "Julio",
+        "slack_id": "U046DH9LSEB",
+        "handle": "julio.guerrero",
+        "level": "Técnico",
+        "context": "Ingeniero del equipo bidder (Chile). Monitoreó el comportamiento post-experimento ROAS: identificó la baja en scores y el aumento de daily budget."
+      },
+      {
+        "name": "Alejandra",
+        "slack_id": "USVGHULLD",
+        "handle": null,
+        "level": "Semi-técnico",
+        "context": "Líder directa del usuario. Basti es su líder. Recibe FYI de análisis de impacto en el equipo DSP-ML."
+      },
+      {
+        "name": "Jorge",
+        "slack_id": "U07ALJN39S5",
+        "handle": null,
+        "level": "No técnico",
+        "context": "Producto. Referenciado por Carolina en el hilo de ROAS en OLV. No tiene background técnico de bidding."
       }
     ],
     "groups": [
@@ -107,6 +142,13 @@
         "level": "Semi-técnico",
         "context": "Canal público de monitoreo, visible para toda la organización.",
         "tone": "Tono siempre formal y polite, evitar lenguaje muy interno o crudo."
+      },
+      {
+        "name": "#adhoc-olv-consideration-conversion",
+        "id": "C0AB1R4KTJP",
+        "monitored": true,
+        "level": "Semi-técnico",
+        "context": "Hilo de seguimiento del experimento ROAS en OLV (MLB/MLA). Audiencia mixta: ingenieros del bidder (Julio, German, Benja) y TLs/PMs de producto (Carolina, Basti, Jorge, Alejandra). Usar lenguaje técnico pero con contexto suficiente para producto."
       }
     ]
   }
