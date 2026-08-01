@@ -59,6 +59,49 @@ in
         };
       };
 
+      # WORKAROUND for hermes-agent bug: secure_parent_dir() in
+      # hermes_constants.py chmods the parent dir of auth files to 0o700 every
+      # time the gateway saves an auth token. That clobbers the 2770
+      # shared-state layout applied by the NixOS activation, so interactive
+      # users in the `hermes` group get EACCES on config.yaml/.hermes_history.
+      # Upstream guards only _secure_dir() (hermes_cli/config.py) with
+      # is_managed() + HERMES_HOME_MODE (PR #6796); the auth path
+      # (hermes_cli/auth.py) is still unguarded on main. Issue #14181, fix PRs
+      # #14280 (closed, unmerged) and #14410 (open). This timer re-applies the
+      # canonical modes every 60s until upstream lands a real fix.
+      systemd.services.hermes-perms = {
+        description = "Restore shared-state permissions under /var/lib/hermes/.hermes";
+        serviceConfig = {
+          Type = "oneshot";
+          User = "hermes";
+          Group = "hermes";
+        };
+        script = ''
+          set -eu
+
+          # Directories: 2770 (setgid + group rwx) so interactive users in the
+          # `hermes` group keep read/write access to gateway state.
+          find /var/lib/hermes/.hermes -type d -exec chmod 2770 {} + || true
+
+          # State files: group read/write. The gateway (hermes) owns everything
+          # it writes; files created by interactive users are left as-is.
+          find /var/lib/hermes/.hermes -type f -exec chmod 660 {} + || true
+
+          # Canonical top-level modes from the NixOS activation script.
+          chmod 2770 /var/lib/hermes /var/lib/hermes/.hermes /var/lib/hermes/workspace || true
+        '';
+      };
+
+      systemd.timers.hermes-perms = {
+        description = "Periodically restore shared-state permissions under /var/lib/hermes/.hermes";
+        wantedBy = [ "timers.target" ];
+        timerConfig = {
+          OnBootSec = 60;
+          OnUnitActiveSec = 60;
+          AccuracySec = "5s";
+        };
+      };
+
       home-manager.users.${shared.username.nixos}.home.file.".hermes/SOUL.md".source =
         config.home-manager.users.${shared.username.nixos}.lib.file.mkOutOfStoreSymlink
           "${config.users.users.${shared.username.nixos}.home}/nixos/dotfiles/hermes/SOUL.md";
