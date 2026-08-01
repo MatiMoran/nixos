@@ -127,11 +127,32 @@ alias -s deb='ex -d'
 #------------------------------
 # Suggestions
 #------------------------------
-ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+ZSH_AUTOSUGGEST_STRATEGY=(history_no_multiline completion)
 ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=
 ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS=forward-word
 
 source $ZSH_PLUGINS/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+_zsh_autosuggest_strategy_history_no_multiline() {
+    emulate -L zsh
+    setopt EXTENDED_GLOB
+
+    local prefix="${1//(#m)[\\*?[\]<>()|^~#]/\\$MATCH}"
+    local pattern="$prefix*"
+    local entry
+    local -i i
+
+    for (( i = ${#history}; i >= 1; i-- )); do
+        entry=${history[$i]}
+        if [[ $entry == ${~pattern} && $entry != *$'\n'* ]]; then
+            typeset -g suggestion="$entry"
+            return 0
+        fi
+    done
+
+    typeset -g suggestion=""
+    return 1
+}
 
 #------------------------------
 # Completions
