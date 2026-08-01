@@ -11,6 +11,13 @@ in
     {
       imports = [ hermesAgentModule ];
 
+      # Serve the user's skills (dotfiles/agents/skills) to the gateway as a
+      # world-readable nix store path. The repo stays the source of truth and
+      # ~/.agents/skills keeps its live symlink for user-side tools; the
+      # gateway (hermes) must NOT traverse the user's 0700 home, so we point
+      # external_dirs at this stable /etc symlink instead of ~/.agents/skills.
+      environment.etc."hermes/skills".source = ../../dotfiles/agents/skills;
+
       services.hermes-agent = {
         enable = true;
         addToSystemPackages = true;
@@ -54,7 +61,7 @@ in
             mode = "none";
           };
           skills = {
-            external_dirs = [ "${config.users.users.${shared.username.nixos}.home}/.agents/skills" ];
+            external_dirs = [ "/etc/hermes/skills" ];
           };
         };
       };
