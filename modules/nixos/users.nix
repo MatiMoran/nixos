@@ -10,7 +10,7 @@ in
       users.users.${shared.username.nixos} = {
         isNormalUser = true;
         description = shared.username.nixos;
-        extraGroups = [ "networkmanager" "wheel" "input" "uinput" ];
+        extraGroups = [ "networkmanager" "wheel" "input" "uinput" "hermes" ];
         packages = with pkgs; [];
       };
       services.getty.autologinUser = shared.username.nixos;
