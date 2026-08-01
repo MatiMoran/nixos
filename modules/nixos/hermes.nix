@@ -66,6 +66,19 @@ in
         };
       };
 
+      # Restart the gateway whenever its runtime inputs change. The unit only
+      # embeds the package + env, while config.yaml/.env are generated into
+      # /var/lib/hermes by the activation script and read once at startup — so
+      # a settings change alone leaves the unit byte-identical and the gateway
+      # keeps running the stale config. NixOS renders restartTriggers into the
+      # unit as X-Restart-Triggers (a writeText store path), so a different hash
+      # flips the unit and systemd restarts the service on `nixos-rebuild switch`.
+      systemd.services.hermes-agent.restartTriggers = [
+        (builtins.hashString "sha256" (builtins.toJSON {
+          inherit (config.services.hermes-agent) settings workingDirectory environment extraArgs;
+        }))
+      ];
+
       # WORKAROUND for hermes-agent bug: secure_parent_dir() in
       # hermes_constants.py chmods the parent dir of auth files to 0o700 every
       # time the gateway saves an auth token. That clobbers the 2770

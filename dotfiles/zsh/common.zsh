@@ -139,11 +139,10 @@ _zsh_autosuggest_strategy_history_no_multiline() {
 
     local prefix="${1//(#m)[\\*?[\]<>()|^~#]/\\$MATCH}"
     local pattern="$prefix*"
-    local entry
-    local -i i
+    local key entry
 
-    for (( i = ${#history}; i >= 1; i-- )); do
-        entry=${history[$i]}
+    for key in ${(Okn)history}; do
+        entry=${history[$key]}
         if [[ $entry == ${~pattern} && $entry != *$'\n'* ]]; then
             typeset -g suggestion="$entry"
             return 0
