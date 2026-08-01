@@ -45,6 +45,12 @@ in
           agent = {
             max_turns = 150;
           };
+          stt = {
+            language = "es";
+            local = {
+              model = "small";
+            };
+          };
           browser = {
             cloud_provider = "local";
             use_gateway = false;
