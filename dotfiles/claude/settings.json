@@ -6,6 +6,7 @@
     "frontend-design@claude-plugins-official": true,
     "fury-cli@meli-claude-marketplace": true,
     "meli-genai-costs@meli-claude-marketplace": true,
+    "meli-security-expert@cyber-plugins-marketplace": true,
     "skill-creator@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
