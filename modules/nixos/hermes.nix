@@ -2,11 +2,10 @@
 
 let
   hermesAgentModule = inputs.hermes-agent.nixosModules.default;
-  shared = import ../../lib/shared.nix;
 in
 {
   config.nixosModules = lib.mkAfter [
-    ({ config, ... }:
+    ({ config, username, ... }:
 
     {
       imports = [ hermesAgentModule ];
@@ -128,9 +127,9 @@ in
         };
       };
 
-      home-manager.users.${shared.username.nixos}.home.file.".hermes/SOUL.md".source =
-        config.home-manager.users.${shared.username.nixos}.lib.file.mkOutOfStoreSymlink
-          "${config.users.users.${shared.username.nixos}.home}/nixos/dotfiles/hermes/SOUL.md";
+      home-manager.users.${username}.home.file.".hermes/SOUL.md".source =
+        config.home-manager.users.${username}.lib.file.mkOutOfStoreSymlink
+          "${config.users.users.${username}.home}/nixos/dotfiles/hermes/SOUL.md";
     })
   ];
 }

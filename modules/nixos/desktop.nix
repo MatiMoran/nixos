@@ -1,15 +1,12 @@
 { lib, ... }:
 
-let
-  shared = import ../../lib/shared.nix;
-in
 {
   config.nixosModules = lib.mkAfter [
-    ({ pkgs, ... }: {
+    ({ pkgs, username, ... }: {
       services.tumbler.enable = true;
 
       services.displayManager = {
-        autoLogin.user = shared.username.nixos;
+        autoLogin.user = username;
         autoLogin.enable = true;
         defaultSession = "none+i3";
       };

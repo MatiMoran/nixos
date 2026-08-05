@@ -1,12 +1,12 @@
 { inputs, lib, config, ... }:
 
 let
-  shared = import ../../lib/shared.nix;
+  username = "matias";
 in
 {
   flake.nixosConfigurations.nixos = inputs.nixpkgs.lib.nixosSystem {
     system = "x86_64-linux";
-    specialArgs = { inherit inputs; };
+    specialArgs = { inherit inputs username; };
     modules = [
       {
         imports = config.nixosModules;
@@ -16,7 +16,7 @@ in
         home-manager = {
           useGlobalPkgs = true;
           useUserPackages = true;
-          users.${shared.username.nixos} = {
+          users.${username} = {
             imports =
               config.homeManager.sharedModules
               ++ config.homeManager.nixosModules;

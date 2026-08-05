@@ -1,11 +1,15 @@
 { lib, ... }:
 
 let
-  shared = import ../../lib/shared.nix;
+  pipewire = {
+    headset = "alsa_output.usb-Kingston_Technology_Company_HyperX_Cloud_Flight_Wireless-00.analog-stereo";
+    speakers = "alsa_output.pci-0000_00_1f.3.analog-stereo";
+    headsetMic = "alsa_input.usb-Kingston_Technology_Company_HyperX_Cloud_Flight_Wireless-00.mono-fallback";
+  };
 in
 {
   config.nixosModules = lib.mkAfter [
-    ({ pkgs, ... }: {
+    ({ pkgs, username, ... }: {
       services.pipewire = {
         pulse.enable = true;
 
@@ -25,13 +29,13 @@ in
                 "stream.rules" = [
                   {
                     matches = [
-                      { "node.name" = shared.pipewire.headset; }
+                      { "node.name" = pipewire.headset; }
                     ];
                     actions.create-stream = { };
                   }
                   {
                     matches = [
-                      { "node.name" = shared.pipewire.speakers; }
+                      { "node.name" = pipewire.speakers; }
                     ];
                     actions.create-stream = { };
                   }
@@ -44,8 +48,8 @@ in
         extraConfig.pipewire-pulse."10-custom-cmds" = {
           "pulse.cmd" = [
             { "cmd" = "load-module"; "args" = "module-always-sink"; "flags" = [ ]; }
-            { "cmd" = "set-default-sink"; "args" = shared.pipewire.headset; "flags" = [ ]; }
-            { "cmd" = "set-default-source"; "args" = shared.pipewire.headsetMic; "flags" = [ ]; }
+            { "cmd" = "set-default-sink"; "args" = pipewire.headset; "flags" = [ ]; }
+            { "cmd" = "set-default-source"; "args" = pipewire.headsetMic; "flags" = [ ]; }
           ];
         };
 
@@ -97,7 +101,7 @@ in
         requires = [ "local-fs.target" ];
         after = [ "local-fs.target" ];
         serviceConfig = {
-          ExecStart = "${pkgs.kanata}/bin/kanata -c /home/${shared.username.nixos}/.config/kanata/config.kbd";
+          ExecStart = "${pkgs.kanata}/bin/kanata -c /home/${username}/.config/kanata/config.kbd";
           Restart = "no";
         };
         wantedBy = [ "sysinit.target" ];

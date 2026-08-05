@@ -1,19 +1,16 @@
 { lib, ... }:
 
-let
-  shared = import ../../lib/shared.nix;
-in
 {
   config.nixosModules = lib.mkAfter [
-    ({ pkgs, ... }: {
+    ({ pkgs, username, ... }: {
       users.groups.uinput = {};
-      users.users.${shared.username.nixos} = {
+      users.users.${username} = {
         isNormalUser = true;
-        description = shared.username.nixos;
+        description = username;
         extraGroups = [ "networkmanager" "wheel" "input" "uinput" "hermes" ];
         packages = with pkgs; [];
       };
-      services.getty.autologinUser = shared.username.nixos;
+      services.getty.autologinUser = username;
     })
   ];
 }

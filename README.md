@@ -25,8 +25,6 @@ modules/
 ├── home/       # Home Manager modules (window manager, terminal, editor, shell, git, etc.)
 ├── hosts/      # Host-specific NixOS and Darwin configurations
 └── defaults.nix
-lib/
-└── shared.nix  # Shared values (usernames, device IDs, common packages)
 docs/           # Additional documentation
 ```
 

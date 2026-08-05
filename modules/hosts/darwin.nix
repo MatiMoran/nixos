@@ -1,12 +1,12 @@
 { inputs, lib, config, ... }:
 
 let
-  shared = import ../../lib/shared.nix;
+  username = "matmoran";
 in
 {
   flake.darwinConfigurations.darwin = inputs.nix-darwin.lib.darwinSystem {
     system = "aarch64-darwin";
-    specialArgs = { inherit inputs; };
+    specialArgs = { inherit inputs username; };
     modules = [
       {
         imports = config.darwinModules;
@@ -15,12 +15,12 @@ in
         home-manager = {
           useGlobalPkgs = true;
           useUserPackages = true;
-          users.${shared.username.darwin} = { pkgs, ... }: {
+          users.${username} = { pkgs, ... }: {
             imports =
               config.homeManager.sharedModules
               ++ config.homeManager.darwinModules;
-            home.username = shared.username.darwin;
-            home.homeDirectory = "/Users/${shared.username.darwin}";
+            home.username = username;
+            home.homeDirectory = "/Users/${username}";
             home.packages = with pkgs; [
               obsidian
               vscode
