@@ -17,9 +17,11 @@
         fzf
         gcc
         gdb
+        gh
         gimp-with-plugins
         gimpPlugins.resynthesizer
         git
+        glab
         gnumake
         htop
         keepassxc
