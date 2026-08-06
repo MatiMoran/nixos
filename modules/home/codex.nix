@@ -7,6 +7,7 @@
     let
       repoDir = "${config.home.homeDirectory}/nixos";
       codexSrc = "${repoDir}/dotfiles/codex";
+      agentsSrc = "${repoDir}/dotfiles/agents";
     in
     {
       home.file = {
@@ -14,7 +15,7 @@
           source = config.lib.file.mkOutOfStoreSymlink "${codexSrc}/config.toml";
           force = true;
         };
-        ".codex/AGENTS.md".source = config.lib.file.mkOutOfStoreSymlink "${codexSrc}/AGENTS.md";
+        ".codex/AGENTS.md".source = config.lib.file.mkOutOfStoreSymlink "${agentsSrc}/AGENTS.md";
       };
     })
   ];
