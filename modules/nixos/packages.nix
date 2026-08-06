@@ -38,6 +38,7 @@
         ripgrep
         rofi
         sox
+        stow
         sysstat
         unar
         ungoogled-chromium
