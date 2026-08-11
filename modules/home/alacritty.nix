@@ -66,7 +66,7 @@
             command.program = if pkgs.stdenv.isDarwin then "open" else "xdg-open";
             mouse.enabled = true;
             mouse.mods = "Shift";
-            binding = { key = "O"; mods = "Control"; };
+            binding = { key = "O"; mods = "Control | Shift"; };
           }];
         };
       };
