@@ -12,9 +12,7 @@ return {
             local cmp = require('cmp')
             cmp.setup({
                 sources = {
-                    { name = 'codeium' },
                     { name = 'nvim_lsp' },
-                    { name = 'copilot' },
                 },
                 mapping = cmp.mapping.preset.insert({}),
             })
