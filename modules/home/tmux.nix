@@ -15,6 +15,7 @@
         set -g mouse on
         set -s escape-time 0
         set -g detach-on-destroy off
+        set-option -g focus-events on
 
         set-option -ga terminal-overrides ",alacritty:Tc"
         set-window-option -g mode-keys vi

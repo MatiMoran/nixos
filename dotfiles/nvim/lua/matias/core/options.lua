@@ -37,28 +37,6 @@ vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold", "CursorHo
     end,
 })
 
-local lsp_restart_timer = nil
-
-vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter", "FileChangedShellPost" }, {
-    pattern = "*",
-    callback = function()
-        if vim.bo.buftype ~= "" or vim.bo.filetype == "" or vim.bo.filetype == "NvimTree" then
-            return
-        end
-
-        if lsp_restart_timer then
-            lsp_restart_timer:stop()
-            lsp_restart_timer:close()
-            lsp_restart_timer = nil
-        end
-
-        lsp_restart_timer = vim.defer_fn(function()
-            lsp_restart_timer = nil
-            vim.cmd("LspRestart")
-        end, 300)
-    end,
-})
-
 -- disabled to nvim-tree
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
