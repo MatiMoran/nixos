@@ -112,7 +112,18 @@
       "mcp__claude_ai_MELI_Github__pull_request_read",
       "mcp__claude_ai_MELI_Slack__create_meli_session",
       "mcp__claude_ai_MELI_Slack__slack_read_thread",
-      "mcp__bigquery__dry_run_query"
+      "mcp__bigquery__dry_run_query",
+      "mcp__bigquery__describe_table",
+      "mcp__bigquery__get_sample_data",
+      "mcp__bigquery__list_tables",
+      "mcp__bigquery__list_datasets",
+      "mcp__bigquery__check_auth_status",
+      "mcp__bigquery__get_job_status",
+      "mcp__bigquery__list_active_jobs",
+      "mcp__bigquery__cancel_job",
+      "mcp__bigquery__analyze_table_data",
+      "mcp__bigquery__search_tables_by_column",
+      "Bash(bash /Users/matmoran/.claude/skills/queriator/scripts/run_query.sh *)"
     ],
     "ask": [
       "Bash(mv *)",
