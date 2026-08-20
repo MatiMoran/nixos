@@ -36,6 +36,7 @@
         pulseaudio
         python3
         qbittorrent
+        rclone
         redshift
         ripgrep
         rofi
