@@ -24,14 +24,6 @@ last_updated = "2026-07-16T21:21:27Z"
 source = "/Users/matmoran/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime"
 source_type = "local"
 
-[mcp_servers.ApplicationSecurityMCP]
-args = [
-    "https://codeguard-mcp.melioffice.com/mcp",
-    "--transport",
-    "http",
-]
-command = "mcp-remote-proxy"
-
 [mcp_servers.backend]
 args = [
     "https://mcp.melioffice.com/namespaces/backend/mcp",
