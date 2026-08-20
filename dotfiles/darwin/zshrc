@@ -41,8 +41,6 @@ export RANGER_FURY_VENV_LOCATION=/Users/matmoran/.fury/fury_venv #Added by Fury 
 export FURY_BIN_LOCATION="/Users/matmoran/.fury/fury_venv/bin"
 export PATH="$PATH:$FURY_BIN_LOCATION"
 
-export ANTHROPIC_MODEL="claude-sonnet-4-6[1m]"
-
 # >>> es-wrapper initialize >>>
 export PATH="$HOME/.es-wrapper/bin:$PATH"
 
