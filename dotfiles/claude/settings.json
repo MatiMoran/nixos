@@ -50,7 +50,18 @@
       "mcp__bigquery__cancel_job",
       "mcp__bigquery__analyze_table_data",
       "mcp__bigquery__search_tables_by_column",
-      "Bash(bash /Users/matmoran/.claude/skills/queriator/scripts/run_query.sh *)"
+      "Bash(bash /Users/matmoran/.claude/skills/queriator/scripts/run_query.sh *)",
+      "Bash(bq query *)",
+      "Bash(bq show*)",
+      "Bash(git fetch *)",
+      "Bash(fdalabs labs get *)",
+      "Bash(fdalabs fetch *)",
+      "Bash(export TIGER_TOKEN=$(fury get-token*)",
+      "mcp__mcp-dataflow-prod-scope__get_job",
+      "mcp__mcp-dataflow-prod-scope__get_all_roles",
+      "mcp__mcp-dataflow-prod-scope__find_job",
+      "mcp__mcp-dataflow-prod-scope__get_log",
+      "mcp__claude_ai_MELI_Github__create_meli_session"
     ],
     "deny": [
       "Bash(chmod -R *)",
