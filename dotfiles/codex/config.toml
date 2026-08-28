@@ -112,3 +112,12 @@ trust_level = "trusted"
 
 [tui.model_availability_nux]
 "gpt-5.6-sol" = 1
+
+[hooks.state."bigquery-meli@workspace-directory:hooks/hooks.json:pre_tool_use:0:0"]
+trusted_hash = "sha256:5fd44a27614c12b2fb0e2d173b9085413c7d2bf3324e381e671dfd3fcc004df1"
+
+[hooks.state."conversational-analytics@workspace-directory:hooks/hooks.json:permission_request:0:0"]
+trusted_hash = "sha256:aa4581a3790f62b215b0b5eff12a13fed66c3eba4685201d4add141c1c45b205"
+
+[hooks.state."rag@workspace-directory:hooks/hooks.json:pre_tool_use:0:0"]
+trusted_hash = "sha256:286cf4bbb02b135f21ad271c00212ad7e7369fb7b79e0b569fcb9e2222236128"
