@@ -6,6 +6,7 @@ notify = [
 ]
 sandbox_mode = "workspace-write"
 model = "gpt-5.6-sol"
+plan_mode_reasoning_effort = "high"
 
 [desktop]
 ambient-suggestions-enabled = true
@@ -22,6 +23,11 @@ source = "/Users/matmoran/.codex/.tmp/bundled-marketplaces/openai-bundled"
 [marketplaces.openai-primary-runtime]
 source_type = "local"
 source = "/Users/matmoran/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime"
+
+[marketplaces.tech-plugins-marketplace]
+last_updated = "2026-09-09T16:38:01Z"
+source_type = "git"
+source = "https://github.com/melisource/fury_tech-plugins-marketplace.git"
 
 [mcp_servers.backend]
 command = "mcp-remote-proxy"
@@ -94,6 +100,9 @@ enabled = true
 enabled = true
 
 [plugins."codex-app-tools@openai-bundled"]
+enabled = true
+
+[plugins."grid-sharing@tech-plugins-marketplace"]
 enabled = true
 
 [projects."/Users/matmoran"]

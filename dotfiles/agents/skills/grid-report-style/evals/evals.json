@@ -1,0 +1,15 @@
+{
+  "skill_name": "grid-report-style",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Generame un HTML para analizar el impacto de una regla de pricing en OLV. Debe tener evidencia global y por segmento, con las queries usadas.",
+      "expected_output": "La skill debe leer references/report-style.md y producir un informe HTML claro: encabezado, conclusión visible, supuestos y límites, evidencia de lo global a lo particular y queries raw agrupadas al final en details."
+    },
+    {
+      "id": 2,
+      "prompt": "Armá un dashboard HTML de completion rate por placement para investigar una caída. Quiero que sea fácil de leer y listo para Grid.",
+      "expected_output": "La skill debe usar el tema claro, reservar verde para mejoras verificadas y ámbar para riesgos, citar las fuentes de los gráficos y usar rutas /d/_libs/ si incorpora Plotly. No debe ejecutar uploads ni compartir el documento."
+    }
+  ]
+}

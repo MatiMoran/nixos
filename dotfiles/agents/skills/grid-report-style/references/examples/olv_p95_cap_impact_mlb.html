@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Impacto del cap P95 de OLV — MLB</title>
+  <style>
+    :root { --ink:#172033; --muted:#667085; --line:#d9dee7; --soft:#f5f7fa; --blue:#2f6fed; --blue-soft:#edf4ff; --green:#16794c; --green-soft:#eaf7ef; --amber:#8a5200; --amber-soft:#fff3cd; }
+    * { box-sizing:border-box; }
+    body { background:#fff; color:var(--ink); font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size:15px; line-height:1.58; margin:0; }
+    main { max-width:1520px; margin:0 auto; padding:54px 28px 70px; }
+    h1,h2,h3,p { margin-top:0; } h1 { font-size:34px; letter-spacing:-.035em; line-height:1.16; margin-bottom:10px; } h2 { border-bottom:1px solid var(--line); font-size:21px; letter-spacing:-.02em; margin:44px 0 18px; padding-bottom:9px; } h3 { font-size:16px; margin:28px 0 10px; }
+    .meta { color:var(--muted); font-size:13px; line-height:1.6; } .intro { color:#39445a; font-size:17px; max-width:850px; margin:24px 0; }
+    .callout { background:var(--blue-soft); border-left:4px solid var(--blue); border-radius:4px; margin:25px 0; padding:17px 20px; } .callout p { margin:0; }
+    .definition { background:var(--soft); border-radius:6px; margin:18px 0; padding:17px 20px; }
+    table { border-collapse:collapse; font-size:13px; margin:15px 0 7px; width:100%; } th,td { border:1px solid var(--line); padding:10px 12px; text-align:left; vertical-align:top; } th { background:var(--soft); font-weight:650; white-space:nowrap; } td.num,th.num { font-variant-numeric:tabular-nums; text-align:right; white-space:nowrap; } tr.highlight td { background:var(--amber-soft); } .source { color:var(--muted); font-size:12px; margin:8px 0 23px; }
+    .curve-wrap { margin:15px auto 7px; max-width:1464px; } .curve-table { font-size:11px; table-layout:fixed; margin:0; } .curve-table th,.curve-table td { padding:7px 5px; } .curve-table th { line-height:1.22; white-space:normal; } .curve-table td:first-child,.curve-table td:nth-child(2) { overflow-wrap:anywhere; } .curve-table th:nth-child(1) { width:12%; } .curve-table th:nth-child(2) { width:12%; } .curve-table th:nth-child(3),.curve-table th:nth-child(4) { width:4%; } .curve-table th:nth-child(5),.curve-table th:nth-child(6) { width:8%; } .curve-table th:nth-child(7),.curve-table th:nth-child(8),.curve-table th:nth-child(9),.curve-table th:nth-child(10) { width:7%; } .curve-table th:nth-child(11) { width:10%; }
+    .pill { border-radius:99px; display:inline-block; font-size:12px; font-weight:650; margin-right:6px; padding:2px 8px; } .pill.warn { background:var(--amber-soft); color:var(--amber); } .local-cap { background:var(--green-soft); color:var(--green); font-weight:650; } .cheap-curve { background:var(--amber-soft); color:var(--amber); font-weight:650; }
+    code { background:#f1f3f6; border-radius:3px; color:#364152; font-family:ui-monospace, SFMono-Regular, Menlo, monospace; font-size:.9em; padding:1px 4px; } ol { padding-left:23px; } li { margin:5px 0; } .footnote { border-top:1px solid var(--line); color:var(--muted); font-size:12px; margin-top:44px; padding-top:18px; } details { border:1px solid var(--line); border-radius:6px; margin:10px 0; } summary { cursor:pointer; font-weight:650; padding:11px 13px; } details pre { background:#f7f8fa; border-top:1px solid var(--line); margin:0; overflow:auto; padding:14px; } details pre code { background:transparent; font-size:11px; padding:0; }
+    @media (max-width:650px) { main { padding:30px 16px 48px; } h1 { font-size:28px; } .table-wrap { overflow-x:auto; } table { min-width:650px; } }
+  </style>
+</head>
+<body><main>
+  <header>
+    <h1>Impacto del cap P95 de OLV — MLB</h1>
+    <p class="intro">El cap P95 sube el BPP promedio observado porque bloquea una masa grande de prints que, en el escenario sin cap, tienen BPP relativamente bajo.</p>
+  </header>
+
+  <div class="callout"><p><strong>Conclusión:</strong> sacar el cap incorporaría 173.707 prints adicionales y reduciría el BPP promedio del mix de 19,87 a 16,95 (−14,71%). Al observar días con Budget similar en Looker, el completion rate se mantuvo similar mientras el CPM aumentó levemente.</p></div>
+
+  <h2>Interpretación</h2>
+  <p>El P95 no representa el 5% más caro del inventario global. Es el percentil 95 de cada curva lognormal de shading; por eso un contexto con una curva de precios baja puede quedar capeado aunque su precio monetario sea bajo frente al resto del inventario. El resultado es que se excluyen prints baratos, se reduce volumen y aumenta el BPP promedio del mix que permanece.</p>
+
+  <h2>Definiciones y límites</h2>
+  <div class="definition"><ul><li><strong>Ventana analizada:</strong> 2026-09-06, 14:00–15:00 (America/Sao_Paulo).</li><li><strong>Inventario:</strong> <code>VIDEO_OFF_ADX</code>.</li><li>El contrafactual sin cap repricea los prints actuales y agrega las losses capeadas cuyo <code>bpp</code> superaría al clearing price.</li></ul></div>
+
+  <h2>Resultado global</h2>
+  <div class="table-wrap"><table><thead><tr><th>Métrica</th><th class="num">Empírico: con cap P95</th><th class="num">Contrafactual: sin cap P95</th><th class="num">Diferencia</th></tr></thead><tbody>
+    <tr><td>Prints</td><td class="num">596.255</td><td class="num">769.962</td><td class="num"><span class="pill warn">+173.707</span></td></tr>
+    <tr><td>Prints perdidos por el cap</td><td class="num">—</td><td class="num">173.707</td><td class="num">22,56% del universo contrafactual</td></tr>
+    <tr class="highlight"><td><strong>BPP promedio</strong></td><td class="num"><strong>19,87</strong></td><td class="num"><strong>16,95</strong></td><td class="num"><span class="pill warn">−2,92 (−14,71%)</span></td></tr>
+    <tr><td>Bids capeados</td><td class="num">346.359 (7,81% de bids)</td><td class="num">—</td><td class="num">—</td></tr>
+  </tbody></table></div>
+  <p class="source">Fuente: query 1.</p>
+  <h2>Evidencia de composición de BPP</h2>
+  <p>La comparación se hace íntegramente en el mundo sin cap: <code>bpp_no_cap</code> para los prints actuales y para las losses que pasarían a print.</p>
+  <div class="table-wrap"><table><thead><tr><th>Categoría</th><th class="num">Prints</th><th class="num">BPP promedio sin cap</th><th class="num">Mediana</th><th class="num">P90</th></tr></thead><tbody>
+    <tr><td>Prints</td><td class="num">596.255</td><td class="num">19,96</td><td class="num">15,93</td><td class="num">40,86</td></tr><tr class="highlight"><td><strong>Prints perdidos por cap</strong></td><td class="num"><strong>173.707</strong></td><td class="num"><strong>6,60</strong></td><td class="num"><strong>3,59</strong></td><td class="num"><strong>15,81</strong></td></tr><tr><td>Universo sin cap</td><td class="num">769.962</td><td class="num">16,95</td><td class="num">—</td><td class="num">—</td></tr>
+  </tbody></table></div>
+  <p>Los prints bloqueados son relativamente baratos en toda la distribución: su mediana (3,59) y hasta su P90 (15,81) quedan por debajo de la mediana de los prints actuales (15,93).</p><p class="source">Fuente: query 3.</p>
+
+  <h2>Distribuciones de shading más afectadas</h2>
+  <p>Las diez curvas de mayor pérdida concentran 128.362 de los 173.707 prints perdidos (73,90%). Cada curva se identifica por los campos de agrupación de signals: <code>placement</code>, <code>domain</code>, μ y σ. <code>Δ BPP local</code> compara el contrafactual de la curva contra su BPP empírico; <code>Brecha vs. BPP global</code> lo compara contra el BPP promedio empírico del mix completo (19,87).</p>
+  <div class="table-wrap curve-wrap"><table class="curve-table"><thead><tr><th>Placement</th><th>Domain</th><th class="num">μ</th><th class="num">σ</th><th class="num">Prints empíricos</th><th class="num">Prints perdidos</th><th class="num">BPP empírico</th><th class="num">BPP sin cap</th><th class="num">Δ local</th><th class="num">BPP global</th><th class="num">Brecha vs. global</th></tr></thead><tbody>
+    <tr><td><code>MELIOFF_ADX_VIDEO_INTERSTITIAL</code></td><td><code>eu.livesport.FlashScore_com</code></td><td class="num">-0,10</td><td class="num">0,68</td><td class="num">7.084</td><td class="num">48.828</td><td class="num">2,64</td><td class="num">3,32</td><td class="num local-cap">+0,68</td><td class="num">19,87</td><td class="num cheap-curve">-16,56 (-83,30%)</td></tr>
+    <tr><td><code>MELIOFF_ADX_VIDEO_INTERSTITIAL</code></td><td><code>eu.livesport.FlashScore_com</code></td><td class="num">-0,49</td><td class="num">0,55</td><td class="num">3.931</td><td class="num">38.015</td><td class="num">1,49</td><td class="num">2,02</td><td class="num local-cap">+0,54</td><td class="num">19,87</td><td class="num cheap-curve">-17,85 (-89,82%)</td></tr>
+    <tr><td><code>MELIOFF_ADX_VIDEO_INTERSTITIAL</code></td><td><code>com.studiosol.cifraclub</code></td><td class="num">2,15</td><td class="num">0,36</td><td class="num">3.793</td><td class="num">16.608</td><td class="num">14,76</td><td class="num">15,35</td><td class="num local-cap">+0,59</td><td class="num">19,87</td><td class="num cheap-curve">-4,52 (-22,77%)</td></tr>
+    <tr><td><code>MELIOFF_ADX_VIDEO_INTERSTITIAL</code></td><td><code>aplicacion.tiempo</code></td><td class="num">0,98</td><td class="num">0,50</td><td class="num">4.171</td><td class="num">6.353</td><td class="num">5,80</td><td class="num">6,73</td><td class="num local-cap">+0,93</td><td class="num">19,87</td><td class="num cheap-curve">-13,14 (-66,12%)</td></tr>
+    <tr><td><code>MELIOFF_ADX_VIDEO_INTERSTITIAL</code></td><td><code>aplicacion.tiempo</code></td><td class="num">1,01</td><td class="num">0,47</td><td class="num">4.296</td><td class="num">5.471</td><td class="num">5,73</td><td class="num">6,67</td><td class="num local-cap">+0,93</td><td class="num">19,87</td><td class="num cheap-curve">-13,21 (-66,45%)</td></tr>
+    <tr><td><code>MELIOFF_ADX_VIDEO_INTERSTITIAL</code></td><td><code>com.magiconnect.tcast</code></td><td class="num">1,64</td><td class="num">0,47</td><td class="num">452</td><td class="num">3.599</td><td class="num">10,19</td><td class="num">10,25</td><td class="num local-cap">+0,06</td><td class="num">19,87</td><td class="num cheap-curve">-9,62 (-48,42%)</td></tr>
+    <tr><td><code>MELIOFF_ADX_VIDEO_INTERSTITIAL</code></td><td><code>com.inmobi.weather</code></td><td class="num">1,08</td><td class="num">0,46</td><td class="num">2.265</td><td class="num">2.695</td><td class="num">6,21</td><td class="num">7,11</td><td class="num local-cap">+0,90</td><td class="num">19,87</td><td class="num cheap-curve">-12,77 (-64,24%)</td></tr>
+    <tr><td><code>MELIOFF_ADX_VIDEO_INTERSTITIAL</code></td><td><code>com.inmobi.weather</code></td><td class="num">1,06</td><td class="num">0,48</td><td class="num">2.063</td><td class="num">2.448</td><td class="num">6,27</td><td class="num">7,15</td><td class="num local-cap">+0,88</td><td class="num">19,87</td><td class="num cheap-curve">-12,73 (-64,04%)</td></tr>
+    <tr><td><code>MELIOFF_ADX_VIDEO_INTERSTITIAL</code></td><td><code>com.magiconnect.tcast</code></td><td class="num">1,67</td><td class="num">0,49</td><td class="num">382</td><td class="num">2.424</td><td class="num">10,64</td><td class="num">10,31</td><td class="num cheap-curve">-0,33</td><td class="num">19,87</td><td class="num cheap-curve">-9,56 (-48,12%)</td></tr>
+    <tr><td><code>MELIOFF_ADX_VIDEO_INTERSTITIAL</code></td><td><code>1102452668</code></td><td class="num">1,36</td><td class="num">0,59</td><td class="num">142</td><td class="num">1.921</td><td class="num">9,95</td><td class="num">10,41</td><td class="num local-cap">+0,46</td><td class="num">19,87</td><td class="num cheap-curve">-9,46 (-47,62%)</td></tr>
+  </tbody></table></div><p class="source">Fuente: query 4.</p>
+  <div class="definition"><p><strong>Conclusión:</strong> localmente, el cap baja el BPP en 9 de las 10 curvas: al sacar el cap, el BPP contrafactual local aumenta. La excepción es <code>com.magiconnect.tcast</code> (μ 1,67; σ 0,49), donde baja 0,33. Sin embargo, las diez curvas mantienen un BPP contrafactual menor que el BPP global empírico. Al perder prints de estas curvas baratas, el mix remanente se encarece y el efecto global del cap se invierte: el BPP observado aumenta.</p></div>
+
+  <h2>Impacto por <code>goal_type</code></h2>
+  <div class="table-wrap"><table><thead><tr><th>Goal</th><th class="num">Prints empíricos</th><th class="num">Prints perdidos</th><th class="num">BPP empírico</th><th class="num">BPP de prints nuevos sin cap</th><th class="num">BPP contrafactual</th><th class="num">Delta BPP</th><th>Lectura</th></tr></thead><tbody>
+    <tr class="highlight"><td><strong>IMPRESSIONS</strong></td><td class="num">470.232</td><td class="num">135.940 (22,43%)</td><td class="num">22,88</td><td class="num">6,98</td><td class="num">19,39</td><td class="num"><span class="pill warn">−15,25%</span></td><td>Principal origen del efecto: se bloquea mucho volumen barato.</td></tr>
+    <tr><td>REACH</td><td class="num">103.660</td><td class="num">37.376 (26,50%)</td><td class="num">7,48</td><td class="num">5,21</td><td class="num">6,93</td><td class="num"><span class="pill warn">−7,31%</span></td><td>Mismo patrón, con pérdida relativa de prints mayor.</td></tr>
+    <tr><td>CPA</td><td class="num">2.206</td><td class="num">387 (14,92%)</td><td class="num">15,16</td><td class="num">9,26</td><td class="num">14,42</td><td class="num"><span class="pill warn">−4,89%</span></td><td>Efecto consistente, aunque de menor volumen.</td></tr>
+    <tr><td>CPC</td><td class="num">16.399</td><td class="num">4 (0,02%)</td><td class="num">13,86</td><td class="num">2,10</td><td class="num">13,86</td><td class="num">−0,02%</td><td>Cap casi sin impacto material.</td></tr>
+    <tr><td>BRANDPLUS</td><td class="num">2.555</td><td class="num">0</td><td class="num">15,46</td><td class="num">—</td><td class="num">15,46</td><td class="num">0,00%</td><td>No hubo bids capeados.</td></tr>
+    <tr><td>ROAS</td><td class="num">1.203</td><td class="num">0</td><td class="num">13,31</td><td class="num">—</td><td class="num">13,31</td><td class="num">0,00%</td><td>No hubo bids capeados.</td></tr>
+  </tbody></table></div><p class="source">Fuente: query 2.</p>
+
+  <h2>Funnel de los bids y losses</h2>
+  <div class="table-wrap"><table><thead><tr><th>Métrica de bids y losses</th><th class="num">Valor</th></tr></thead><tbody>
+    <tr><td>Bids totales</td><td class="num">4.434.032</td></tr><tr><td>Bids sin cap</td><td class="num">4.087.673 (92,19%)</td></tr><tr><td>Bids capeados</td><td class="num">346.359 (7,81%)</td></tr><tr><td>Losses totales</td><td class="num">3.837.777</td></tr><tr><td>Losses sin cap</td><td class="num">3.565.745 (92,91%)</td></tr><tr><td>Losses capeadas</td><td class="num">272.032</td></tr><tr class="highlight"><td><strong>Habrían ganado sin P95</strong></td><td class="num"><strong>173.707 (63,90%)</strong></td></tr><tr><td>Seguirían siendo losses sin P95</td><td class="num">98.325 (36,10%)</td></tr>
+  </tbody></table></div><p class="source">Fuente: query 1.</p>
+  <h3>Detalle de bids y losses por objetivo</h3>
+  <div class="table-wrap"><table><thead><tr><th>Métrica</th><th class="num">IMPRESSIONS</th><th class="num">REACH</th><th class="num">CPA</th><th class="num">CPC</th><th class="num">BRANDPLUS</th><th class="num">ROAS</th></tr></thead><tbody>
+    <tr><td>Bids capeados (% de bids)</td><td class="num">279.586 (9,53%)</td><td class="num">64.758 (9,25%)</td><td class="num">2.007 (13,71%)</td><td class="num">8 (0,00%)</td><td class="num">0</td><td class="num">0</td></tr><tr><td>Losses capeadas</td><td class="num">218.124</td><td class="num">52.307</td><td class="num">1.593</td><td class="num">8</td><td class="num">0</td><td class="num">0</td></tr><tr><td>Losses capeadas que ganarían sin P95</td><td class="num">135.940 (62,30%)</td><td class="num">37.376 (71,50%)</td><td class="num">387 (24,30%)</td><td class="num">4 (50,00%)</td><td class="num">0</td><td class="num">0</td></tr>
+  </tbody></table></div><p class="source">Fuente: query 2.</p>
+  <h2>Índice de queries y data</h2>
+  <ol><li>Impacto agregado global: <code>olv_cpm_cap_impact_yesterday_mlb.sql</code></li><li>Impacto por <code>goal_type</code>: <code>olv_cpm_cap_impact_by_goal_type_mlb.sql</code></li><li>Distribución de BPP de prints actuales frente a prints nuevos sin cap: <code>olv_lost_print_bpp_distribution_mlb.sql</code></li><li>Distribuciones de shading con mayor pérdida de prints por el cap P95: <code>olv_p95_cap_affected_distributions_all_signals_mlb.sql</code></li></ol>
+  <details><summary><code>olv_cpm_cap_impact_yesterday_mlb.sql</code></summary><pre><code>
+/* OLV cap p95 — impacto diario en CPM y prints perdidos, MLB
+   Versión simplificada de wiki/olv_cpm_cap_counterfactual_reconstructed_mlb.sql:
+   esa query reconstruía PRINT/LOSS desde cero (bid_auction_adx + adx_bid_feedback +
+   MELIDATA.ADVERTISING) porque el ETL de BT_ADS_DSP_ADX_PRICING_RAW (job 293894)
+   tenía un bug de regex que perdía las filas LOSS externas de OLV.
+
+   Verificado (bq, ver conversación): ese fix ya está andando para datos recientes
+   — BT_ADS_DSP_ADX_PRICING_RAW en MLB/VIDEO_OFF_ADX pasó de 100% print (bug) a
+   ~9-13% print (tasa de ganancia real) a partir de EXECUTION_DATE = 2026-08-21.
+   El 2026-08-23 (ayer) ya tiene datos completos: 8.692.271 prints / 86.717.869 losses.
+
+   Por eso esta query puede usar BT_ADS_DSP_ADX_PRICING_RAW directo para PRINT/LOSS,
+   FIRST_PRICE/SECOND_PRICE y BID_PRICE_PARTNER, y hace un LEFT JOIN liviano contra
+   bid_auction_adx por BID_ID + LINE_ITEM_ID para traer shading_cap_percentile, optimal_win_rate
+   y el fallback de parámetros de shading para losses (donde raw los deja NULL).
+   — las dos columnas del cap p95 que NO existen en ningún punto del pipeline de
+   BT_ADS_DSP_ADX_PRICING_RAW (confirmado leyendo el código del job 293894). No hace
+   falta tocar adx_bid_feedback ni MELIDATA.ADVERTISING para nada.
+
+   Complete bidder formula for capped bids:
+   O = EXP(MU + SIGMA * qnorm(optimal_win_rate)) * SITE_INTRADAY_FACTOR
+   C = EXP(MU + SIGMA * qnorm(shading_cap_percentile))
+   F = bid_interno * (1 - fee_percentage)
+   BPP real replay = MIN(O, C, F)
+
+   Counterfactual scenarios:
+   bpp_no_cap      = MIN(O, F)
+   bpp_fair_capped = MIN(O, C * SITE_INTRADAY_FACTOR, F)
+
+   `bid_internal` is reconstructed as LEAST(`bids.$.score`, bid_ceiling). The
+   observed `bids.$.local` equals the post-shading bid with fee in OLV and must
+   not be used as the independent fee ceiling.
+
+   Prints perdidos: filas LOSS con shading_cap_percentile IS NOT NULL cuyo BPP
+   contrafactual (no-cap o fair-capped) hubiera superado el FIRST_PRICE.
+
+   qnorm via Abramowitz-Stegun 26.2.17, factorizado en CREATE TEMP FUNCTION
+   (mismo patrón que wiki/olv_bidder_cap_bug_evidence_mlb.sql). */
+
+CREATE TEMP FUNCTION qnorm_approx(p FLOAT64) AS (
+    CASE
+        WHEN p IS NULL OR p &lt;= 0 OR p &gt;= 1 THEN NULL
+        WHEN p &gt;= 0.5 THEN
+            SQRT(-2.0 * LN(1.0 - p))
+            - (2.515517 + 0.802853 * SQRT(-2.0 * LN(1.0 - p)) + 0.010328 * POW(SQRT(-2.0 * LN(1.0 - p)), 2))
+              / (1.0 + 1.432788 * SQRT(-2.0 * LN(1.0 - p)) + 0.189269 * POW(SQRT(-2.0 * LN(1.0 - p)), 2)
+                     + 0.001308 * POW(SQRT(-2.0 * LN(1.0 - p)), 3))
+        ELSE
+            -1.0 * (
+                SQRT(-2.0 * LN(p))
+                - (2.515517 + 0.802853 * SQRT(-2.0 * LN(p)) + 0.010328 * POW(SQRT(-2.0 * LN(p)), 2))
+                  / (1.0 + 1.432788 * SQRT(-2.0 * LN(p)) + 0.189269 * POW(SQRT(-2.0 * LN(p)), 2)
+                         + 0.001308 * POW(SQRT(-2.0 * LN(p)), 3))
+            )
+    END
+);
+
+WITH params_base AS (
+    SELECT
+        DATE '2026-09-06'         AS local_date,
+        'MLB'                      AS site,
+        'VIDEO_OFF_ADX'            AS page,
+        'America/Sao_Paulo'        AS tz,
+        0.001                      AS replay_tolerance,
+        DATETIME(DATE '2026-09-06', TIME '14:00:00')
+                                    AS analysis_start_local,
+        DATETIME(DATE '2026-09-06', TIME '15:00:00')
+                                    AS analysis_end_local,
+        60                         AS signals_partition_padding_minutes
+),
+
+/* Keep partition predicates as scalar constants for reliable pruning. */
+params AS (
+    SELECT
+        *,
+        DATE(TIMESTAMP(analysis_start_local, tz), 'Etc/GMT+4') AS raw_partition_start,
+        DATE(
+            TIMESTAMP(DATETIME_SUB(analysis_end_local, INTERVAL 1 MICROSECOND), tz),
+            'Etc/GMT+4'
+        ) AS raw_partition_end,
+        TIMESTAMP_SUB(
+            TIMESTAMP(analysis_start_local, tz),
+            INTERVAL signals_partition_padding_minutes MINUTE
+        ) AS signals_partition_start,
+        TIMESTAMP_ADD(
+            TIMESTAMP(analysis_end_local, tz),
+            INTERVAL signals_partition_padding_minutes MINUTE
+        ) AS signals_partition_end
+    FROM params_base
+),
+
+/* ── Base: PRINT/LOSS y precios ya resueltos por el ETL fixeado ──────────────
+   DEDUP: BID_ID no es único en esta tabla — verificado (ver conversación): 3.598.339
+   filas duplicadas (~3.77%) en esta ventana, de las cuales 580.410 (16.1% de los
+   duplicados) tienen REASON_NAME_TYPE en conflicto (mismo bid_id aparece como PRINT
+   en una fila y LOSS en otra). Consistente con FEEDBACK_DATETIME "llega en el
+   siguiente ciclo de subasta" (ver wiki/schemas/BT_ADS_DSP_ADX_PRICING_RAW.md): el
+   ETL emite una fila por ciclo de feedback. Nos quedamos con el feedback más
+   reciente por BID_ID como clasificación final. BID_PRICE_PARTNER nunca difiere
+   entre duplicados (0 conflictos) — solo la clasificación PRINT/LOSS y FIRST_PRICE. */
+raw_pricing_dedup AS (
+    SELECT
+        r.BID_ID                                                     AS bid_id,
+        r.LINE_ITEM_ID                                               AS line_item_id,
+        r.SIT_SITE_ID                                                AS sit_site_id,
+        r.AUCTION_DATETIME_LOCAL                                     AS auction_ts_local,
+        r.REASON_NAME_TYPE = 'PRINT'                                 AS is_print,
+        r.BID_PRICE_PARTNER                                          AS bid_price_partner,
+        r.BID_PRICE                                                  AS bid_price,
+        r.FIRST_PRICE                                                AS first_price,
+        r.SECOND_PRICE                                                AS second_price,
+        r.SHADING_MU                                                 AS shading_mu,
+        r.SHADING_SGIMA                                               AS shading_sigma,
+        r.SITE_INTRADAY_FACTOR                                       AS site_intraday_factor,
+        r.FEE_PERCENTAGE                                             AS fee_percentage
+    FROM `meli-bi-data.WHOWNER.BT_ADS_DSP_ADX_PRICING_RAW` r
+    CROSS JOIN params
+    WHERE r.EXECUTION_DATE BETWEEN
+            (SELECT raw_partition_start FROM params)
+        AND (SELECT raw_partition_end FROM params)
+      AND r.SIT_SITE_ID = params.site
+      AND r.PAGE        = params.page
+      AND r.AUCTION_DATETIME_LOCAL &gt;= params.analysis_start_local
+      AND r.AUCTION_DATETIME_LOCAL &lt; params.analysis_end_local
+    QUALIFY ROW_NUMBER() OVER (
+        PARTITION BY r.BID_ID, r.LINE_ITEM_ID
+        ORDER BY
+            r.FEEDBACK_DATETIME_UTC DESC NULLS LAST,
+            r.AUCTION_DATETIME_UTC DESC NULLS LAST,
+            r.BID_PRICE_PARTNER DESC NULLS LAST
+    ) = 1
+),
+
+raw_pricing AS (
+    SELECT *
+    FROM raw_pricing_dedup
+),
+
+/* ── Cap signals + internal bid from the winning element ────────────────────────
+   The cap percentiles are root fields; reconstruct the independent internal bid
+   from `score` and the root bid ceiling before applying the fee ceiling.
+   DEDUP: bid_id tampoco es único acá — verificado (ver conversación): 77.956 filas
+   duplicadas (~1.28%) sobre ~6M filas capeadas en esta ventana. Streaming con
+   posible entrega at-least-once. Nos quedamos con la más reciente por _PARTITIONTIME. */
+cap_signals AS (
+    SELECT
+        ba.bid_id,
+        CAST(JSON_VALUE(win_bid, '$.line_item_id') AS INT64) AS line_item_id,
+        ba.shading_cap_percentile,
+        ba.optimal_win_rate,
+        ba.shading_mean AS signal_shading_mu,
+        ba.shading_std_dev AS signal_shading_sigma,
+        ba.site_intraday_factor AS signal_site_intraday_factor,
+        CAST(JSON_VALUE(win_bid, '$.local') AS FLOAT64) AS bid_local_observed,
+        CAST(JSON_VALUE(win_bid, '$.score') AS FLOAT64) AS bid_score,
+        LEAST(CAST(JSON_VALUE(win_bid, '$.score') AS FLOAT64), ba.bid_ceiling) AS bid_internal
+    FROM raw_pricing rp
+    JOIN `ads-displa-yxim11er7z5-furyid.ads_display_bq_dataset.bid_auction_adx` ba
+        ON ba.bid_id = rp.bid_id
+    CROSS JOIN UNNEST(JSON_EXTRACT_ARRAY(ba.bids)) AS win_bid
+    CROSS JOIN params
+    WHERE ba._PARTITIONTIME &gt;= (SELECT signals_partition_start FROM params)
+      AND ba._PARTITIONTIME &lt;  (SELECT signals_partition_end FROM params)
+      AND ba.site_id = params.site                                    /* cluster: site_id */
+      AND ba.page    = params.page                                    /* cluster: page */
+      AND JSON_VALUE(win_bid, '$.reason_name') = 'WIN'
+      AND CAST(JSON_VALUE(win_bid, '$.line_item_id') AS INT64) = rp.line_item_id
+    QUALIFY ROW_NUMBER() OVER (
+        PARTITION BY ba.bid_id, CAST(JSON_VALUE(win_bid, '$.line_item_id') AS INT64)
+        ORDER BY ba._PARTITIONTIME DESC
+    ) = 1
+),
+
+base AS (
+    SELECT
+        rp.* EXCEPT (shading_mu, shading_sigma, site_intraday_factor),
+        COALESCE(rp.shading_mu, cs.signal_shading_mu) AS shading_mu,
+        COALESCE(rp.shading_sigma, cs.signal_shading_sigma) AS shading_sigma,
+        COALESCE(rp.site_intraday_factor, cs.signal_site_intraday_factor) AS site_intraday_factor,
+        cs.shading_cap_percentile,
+        cs.optimal_win_rate,
+        cs.bid_local_observed,
+        cs.bid_score,
+        cs.bid_internal,
+        params.replay_tolerance
+    FROM raw_pricing rp
+    CROSS JOIN params
+    LEFT JOIN cap_signals cs
+        ON rp.bid_id = cs.bid_id
+       AND rp.line_item_id = cs.line_item_id
+),
+
+/* ── Formula candidates and counterfactual scenarios ─────────────────────────── */
+with_candidates AS (
+    SELECT
+        *,
+        CASE
+            WHEN shading_cap_percentile IS NOT NULL
+                 AND optimal_win_rate IS NOT NULL
+                 AND shading_mu    IS NOT NULL
+                 AND shading_sigma IS NOT NULL
+                 AND fee_percentage IS NOT NULL
+            THEN EXP(shading_mu + shading_sigma * qnorm_approx(optimal_win_rate)) * site_intraday_factor
+        END                                                           AS candidate_optimal,
+        CASE
+            WHEN shading_cap_percentile IS NOT NULL
+                 AND shading_mu    IS NOT NULL
+                 AND shading_sigma IS NOT NULL
+                 AND fee_percentage IS NOT NULL
+            THEN EXP(shading_mu + shading_sigma * 1.6448536269514722)
+        END                                                           AS candidate_p95,
+        CASE
+            WHEN shading_cap_percentile IS NOT NULL
+                 AND bid_internal  IS NOT NULL
+                 AND fee_percentage IS NOT NULL
+            THEN bid_internal * (1 - fee_percentage)
+        END                                                           AS candidate_fee
+    FROM base
+),
+
+with_scenarios AS (
+    SELECT
+        *,
+        CASE
+            WHEN shading_cap_percentile IS NULL THEN bid_price_partner
+            WHEN candidate_optimal IS NOT NULL
+             AND candidate_p95 IS NOT NULL
+             AND candidate_fee IS NOT NULL
+            THEN LEAST(candidate_optimal, candidate_p95, candidate_fee)
+        END                                                           AS bpp_real_replay,
+        CASE
+            WHEN shading_cap_percentile IS NULL THEN bid_price_partner
+            WHEN candidate_optimal IS NOT NULL AND candidate_fee IS NOT NULL
+            THEN LEAST(candidate_optimal, candidate_fee)
+        END                                                           AS bpp_no_cap,
+        CASE
+            WHEN shading_cap_percentile IS NULL THEN bid_price_partner
+            WHEN candidate_optimal IS NOT NULL
+             AND candidate_p95 IS NOT NULL
+             AND candidate_fee IS NOT NULL
+            THEN LEAST(candidate_optimal,
+                       candidate_p95 * site_intraday_factor,
+                       candidate_fee)
+        END                                                           AS bpp_fair_capped,
+        CASE
+            WHEN shading_cap_percentile IS NULL THEN 'NOT_CAPPED'
+            WHEN candidate_optimal IS NULL
+              OR candidate_p95 IS NULL
+              OR candidate_fee IS NULL THEN 'INELIGIBLE'
+            WHEN candidate_fee &lt;= candidate_optimal
+             AND candidate_fee &lt;= candidate_p95 THEN 'FEE'
+            WHEN candidate_p95 &lt;= candidate_optimal THEN 'P95'
+            ELSE 'OPTIMAL'
+        END                                                           AS binding_term
+    FROM with_candidates
+),
+
+with_replay_check AS (
+    SELECT
+        *,
+        shading_cap_percentile IS NOT NULL
+        AND bpp_real_replay IS NOT NULL
+        AND ABS(bpp_real_replay - bid_price_partner) &lt;= replay_tolerance
+                                                                    AS replay_matches_observed,
+        bpp_no_cap IS NOT NULL                                      AS eligible_for_counterfactual
+    FROM with_scenarios
+),
+
+/* ── CPM contrafactual sin cap: no solo re-precia los prints capeados que ya
+   ganamos, sino que también suma al promedio los prints que hoy son LOSS y que
+   hubiéramos ganado sin cap (cola pesada de la lognormal) con su propio precio
+   contrafactual. Sin esto, el CPM sin cap subestima el efecto: solo repricea el
+   ~10% de wins que ya estaban capeados e ignora los ~926k prints "nuevos" caros. */
+with_counterfactual_flag AS (
+    SELECT
+        *,
+        (NOT is_print
+         AND shading_cap_percentile IS NOT NULL
+         AND first_price IS NOT NULL
+         AND bpp_no_cap &gt;= first_price)                               AS is_newly_won_no_cap
+    FROM with_replay_check
+),
+
+/* ── Agregación horaria (una hora local de MLB) ───────────────────────────────── */
+hourly_agg AS (
+    SELECT
+        DATETIME_TRUNC(auction_ts_local, HOUR)                        AS auction_hour_local,
+        sit_site_id,
+        COUNTIF(is_print)                                             AS empirical_prints,
+        COUNTIF(is_print AND eligible_for_counterfactual)             AS counterfactual_eligible_prints,
+        COUNTIF(is_print AND shading_cap_percentile IS NOT NULL)      AS capped_wins,
+        COUNTIF(NOT is_print)                                         AS total_losses,
+        COUNTIF(NOT is_print AND shading_cap_percentile IS NOT NULL)  AS capped_losses,
+        COUNTIF(shading_cap_percentile IS NOT NULL)                   AS capped_bids,
+        COUNTIF(shading_cap_percentile IS NOT NULL
+                AND bpp_real_replay IS NOT NULL)                      AS replay_eligible_capped_bids,
+        COUNTIF(replay_matches_observed)                              AS replay_match_capped_bids,
+        COUNTIF(shading_cap_percentile IS NOT NULL AND binding_term = 'OPTIMAL') AS optimal_binding_capped_bids,
+        COUNTIF(shading_cap_percentile IS NOT NULL AND binding_term = 'P95')     AS p95_binding_capped_bids,
+        COUNTIF(shading_cap_percentile IS NOT NULL AND binding_term = 'FEE')     AS fee_binding_capped_bids,
+        COUNTIF(NOT is_print
+                AND shading_cap_percentile IS NOT NULL
+                AND first_price IS NOT NULL
+                AND bpp_no_cap IS NOT NULL
+                AND bpp_no_cap &gt;= first_price)                        AS lost_prints_no_cap,
+        COUNTIF(NOT is_print
+                AND shading_cap_percentile IS NOT NULL
+                AND first_price IS NOT NULL
+                AND bpp_no_cap IS NOT NULL)                           AS eligible_capped_losses_no_cap,
+        COUNTIF(NOT is_print
+                AND shading_cap_percentile IS NOT NULL
+                AND first_price IS NOT NULL
+                AND bpp_no_cap IS NOT NULL
+                AND bpp_no_cap &lt; first_price)                         AS capped_losses_below_first_price_no_cap,
+        COUNTIF(NOT is_print
+                AND shading_cap_percentile IS NOT NULL
+                AND (first_price IS NULL OR bpp_no_cap IS NULL))      AS ineligible_capped_losses_no_cap,
+        COUNTIF(NOT is_print
+                AND shading_cap_percentile IS NOT NULL
+                AND first_price IS NULL)                              AS capped_losses_missing_first_price,
+        COUNTIF(NOT is_print
+                AND shading_cap_percentile IS NOT NULL
+                AND candidate_optimal IS NULL)                        AS capped_losses_missing_optimal,
+        COUNTIF(NOT is_print
+                AND shading_cap_percentile IS NOT NULL
+                AND optimal_win_rate IS NULL)                         AS capped_losses_missing_optimal_win_rate,
+        COUNTIF(NOT is_print
+                AND shading_cap_percentile IS NOT NULL
+                AND shading_mu IS NULL)                               AS capped_losses_missing_shading_mu,
+        COUNTIF(NOT is_print
+                AND shading_cap_percentile IS NOT NULL
+                AND shading_sigma IS NULL)                            AS capped_losses_missing_shading_sigma,
+        COUNTIF(NOT is_print
+                AND shading_cap_percentile IS NOT NULL
+                AND candidate_fee IS NULL)                            AS capped_losses_missing_fee,
+        COUNTIF(NOT is_print
+                AND shading_cap_percentile IS NOT NULL
+                AND first_price IS NOT NULL
+                AND bpp_fair_capped IS NOT NULL
+                AND bpp_fair_capped &gt;= first_price)                   AS lost_prints_fair_capped,
+        ROUND(SAFE_DIVIDE(SUM(IF(is_print, bid_price_partner, NULL)), COUNTIF(is_print)), 4) AS empirical_cpm_all,
+        ROUND(SAFE_DIVIDE(SUM(IF(is_print AND eligible_for_counterfactual, bid_price_partner, NULL)),
+                          COUNTIF(is_print AND eligible_for_counterfactual)), 4)             AS empirical_cpm,
+        ROUND(SAFE_DIVIDE(SUM(IF(is_print AND bpp_fair_capped IS NOT NULL, bpp_fair_capped, NULL)),
+                          COUNTIF(is_print AND bpp_fair_capped IS NOT NULL)), 4)               AS fair_capped_cpm,
+        /* Full no-cap counterfactual: reprice current wins and add newly won prints. */
+        ROUND(SAFE_DIVIDE(
+            COALESCE(SUM(IF(is_print AND eligible_for_counterfactual, bpp_no_cap, NULL)), 0)
+              + COALESCE(SUM(IF(is_newly_won_no_cap, bpp_no_cap, NULL)), 0),
+            COUNTIF(is_print AND eligible_for_counterfactual) + COUNTIF(is_newly_won_no_cap)
+        ), 4)                                                          AS no_cap_cpm
+    FROM with_counterfactual_flag
+    GROUP BY ALL
+)
+
+/* ── SELECT FINAL ─────────────────────────────────────────────────────────── */
+SELECT
+    auction_hour_local,
+    sit_site_id,
+    empirical_prints,
+    counterfactual_eligible_prints,
+    capped_wins,
+    total_losses,
+    capped_losses,
+    capped_bids,
+    replay_eligible_capped_bids,
+    replay_match_capped_bids,
+    ROUND(SAFE_DIVIDE(replay_match_capped_bids, replay_eligible_capped_bids) * 100, 2)
+                                                                       AS replay_match_pct,
+    optimal_binding_capped_bids,
+    p95_binding_capped_bids,
+    fee_binding_capped_bids,
+    lost_prints_no_cap,
+    eligible_capped_losses_no_cap,
+    capped_losses_below_first_price_no_cap,
+    ineligible_capped_losses_no_cap,
+    capped_losses_missing_first_price,
+    capped_losses_missing_optimal,
+    capped_losses_missing_optimal_win_rate,
+    capped_losses_missing_shading_mu,
+    capped_losses_missing_shading_sigma,
+    capped_losses_missing_fee,
+    lost_prints_fair_capped,
+    empirical_cpm_all,
+    empirical_cpm,
+    fair_capped_cpm,
+    no_cap_cpm,
+    ROUND(no_cap_cpm - empirical_cpm, 4)                              AS delta_cpm_no_cap,
+    ROUND(SAFE_DIVIDE(no_cap_cpm - empirical_cpm, empirical_cpm) * 100, 2)
+                                                                       AS pct_cpm_no_cap,
+    /* efecto de que el cap nunca reciba el throttler (asimetría) */
+    ROUND(fair_capped_cpm - empirical_cpm, 4)                         AS delta_cpm_throttler_asymmetry,
+    ROUND(SAFE_DIVIDE(fair_capped_cpm - empirical_cpm, empirical_cpm) * 100, 2)
+                                                                       AS pct_cpm_throttler_asymmetry,
+    ROUND(SAFE_DIVIDE(lost_prints_no_cap, empirical_prints + lost_prints_no_cap) * 100, 2)
+                                                                       AS pct_prints_lost_no_cap,
+    ROUND(SAFE_DIVIDE(lost_prints_fair_capped, empirical_prints + lost_prints_fair_capped) * 100, 2)
+                                                                       AS pct_prints_lost_fair_capped,
+    ROUND(SAFE_DIVIDE(capped_wins, empirical_prints) * 100, 2)        AS pct_wins_capped,
+    ROUND(SAFE_DIVIDE(capped_losses, total_losses) * 100, 2)          AS pct_losses_capped
+FROM hourly_agg
+ORDER BY sit_site_id, auction_hour_local
+LIMIT 1000
+  </code></pre></details>
+  <details><summary><code>olv_cpm_cap_impact_by_goal_type_mlb.sql</code></summary><pre><code>
+/* OLV cap p95 — impact by goal type in CPM and lost prints, MLB
+   Versión simplificada de wiki/olv_cpm_cap_counterfactual_reconstructed_mlb.sql:
+   esa query reconstruía PRINT/LOSS desde cero (bid_auction_adx + adx_bid_feedback +
+   MELIDATA.ADVERTISING) porque el ETL de BT_ADS_DSP_ADX_PRICING_RAW (job 293894)
+   tenía un bug de regex que perdía las filas LOSS externas de OLV.
+
+   Verificado (bq, ver conversación): ese fix ya está andando para datos recientes
+   — BT_ADS_DSP_ADX_PRICING_RAW en MLB/VIDEO_OFF_ADX pasó de 100% print (bug) a
+   ~9-13% print (tasa de ganancia real) a partir de EXECUTION_DATE = 2026-08-21.
+   El 2026-08-23 (ayer) ya tiene datos completos: 8.692.271 prints / 86.717.869 losses.
+
+   Por eso esta query puede usar BT_ADS_DSP_ADX_PRICING_RAW directo para PRINT/LOSS,
+   FIRST_PRICE/SECOND_PRICE y BID_PRICE_PARTNER, y hace un LEFT JOIN liviano contra
+   bid_auction_adx por BID_ID + LINE_ITEM_ID para traer shading_cap_percentile, optimal_win_rate
+   y el fallback de parámetros de shading para losses (donde raw los deja NULL).
+   — las dos columnas del cap p95 que NO existen en ningún punto del pipeline de
+   BT_ADS_DSP_ADX_PRICING_RAW (confirmado leyendo el código del job 293894). No hace
+   falta tocar adx_bid_feedback ni MELIDATA.ADVERTISING para nada.
+
+   Complete bidder formula for capped bids:
+   O = EXP(MU + SIGMA * qnorm(optimal_win_rate)) * SITE_INTRADAY_FACTOR
+   C = EXP(MU + SIGMA * qnorm(shading_cap_percentile))
+   F = bid_interno * (1 - fee_percentage)
+   BPP real replay = MIN(O, C, F)
+
+   Counterfactual scenarios:
+   bpp_no_cap      = MIN(O, F)
+   bpp_fair_capped = MIN(O, C * SITE_INTRADAY_FACTOR, F)
+
+   `bid_internal` is reconstructed as LEAST(`bids.$.score`, bid_ceiling). The
+   observed `bids.$.local` equals the post-shading bid with fee in OLV and must
+   not be used as the independent fee ceiling.
+
+   Prints perdidos: filas LOSS con shading_cap_percentile IS NOT NULL cuyo BPP
+   contrafactual (no-cap o fair-capped) hubiera superado el FIRST_PRICE.
+
+   qnorm via Abramowitz-Stegun 26.2.17, factorizado en CREATE TEMP FUNCTION
+   (mismo patrón que wiki/olv_bidder_cap_bug_evidence_mlb.sql). */
+
+CREATE TEMP FUNCTION qnorm_approx(p FLOAT64) AS (
+    CASE
+        WHEN p IS NULL OR p &lt;= 0 OR p &gt;= 1 THEN NULL
+        WHEN p &gt;= 0.5 THEN
+            SQRT(-2.0 * LN(1.0 - p))
+            - (2.515517 + 0.802853 * SQRT(-2.0 * LN(1.0 - p)) + 0.010328 * POW(SQRT(-2.0 * LN(1.0 - p)), 2))
+              / (1.0 + 1.432788 * SQRT(-2.0 * LN(1.0 - p)) + 0.189269 * POW(SQRT(-2.0 * LN(1.0 - p)), 2)
+                     + 0.001308 * POW(SQRT(-2.0 * LN(1.0 - p)), 3))
+        ELSE
+            -1.0 * (
+                SQRT(-2.0 * LN(p))
+                - (2.515517 + 0.802853 * SQRT(-2.0 * LN(p)) + 0.010328 * POW(SQRT(-2.0 * LN(p)), 2))
+                  / (1.0 + 1.432788 * SQRT(-2.0 * LN(p)) + 0.189269 * POW(SQRT(-2.0 * LN(p)), 2)
+                         + 0.001308 * POW(SQRT(-2.0 * LN(p)), 3))
+            )
+    END
+);
+
+WITH params_base AS (
+    SELECT
+        DATE '2026-09-06'         AS local_date,
+        'MLB'                      AS site,
+        'VIDEO_OFF_ADX'            AS page,
+        'America/Sao_Paulo'        AS tz,
+        0.001                      AS replay_tolerance,
+        DATETIME(DATE '2026-09-06', TIME '14:00:00')
+                                    AS analysis_start_local,
+        DATETIME(DATE '2026-09-06', TIME '15:00:00')
+                                    AS analysis_end_local,
+        60                         AS signals_partition_padding_minutes
+),
+
+/* Keep partition predicates as scalar constants for reliable pruning. */
+params AS (
+    SELECT
+        *,
+        DATE(TIMESTAMP(analysis_start_local, tz), 'Etc/GMT+4') AS raw_partition_start,
+        DATE(
+            TIMESTAMP(DATETIME_SUB(analysis_end_local, INTERVAL 1 MICROSECOND), tz),
+            'Etc/GMT+4'
+        ) AS raw_partition_end,
+        TIMESTAMP_SUB(
+            TIMESTAMP(analysis_start_local, tz),
+            INTERVAL signals_partition_padding_minutes MINUTE
+        ) AS signals_partition_start,
+        TIMESTAMP_ADD(
+            TIMESTAMP(analysis_end_local, tz),
+            INTERVAL signals_partition_padding_minutes MINUTE
+        ) AS signals_partition_end
+    FROM params_base
+),
+
+/* ── Base: PRINT/LOSS y precios ya resueltos por el ETL fixeado ──────────────
+   DEDUP: BID_ID no es único en esta tabla — verificado (ver conversación): 3.598.339
+   filas duplicadas (~3.77%) en esta ventana, de las cuales 580.410 (16.1% de los
+   duplicados) tienen REASON_NAME_TYPE en conflicto (mismo bid_id aparece como PRINT
+   en una fila y LOSS en otra). Consistente con FEEDBACK_DATETIME "llega en el
+   siguiente ciclo de subasta" (ver wiki/schemas/BT_ADS_DSP_ADX_PRICING_RAW.md): el
+   ETL emite una fila por ciclo de feedback. Nos quedamos con el feedback más
+   reciente por BID_ID como clasificación final. BID_PRICE_PARTNER nunca difiere
+   entre duplicados (0 conflictos) — solo la clasificación PRINT/LOSS y FIRST_PRICE. */
+raw_pricing_dedup AS (
+    SELECT
+        r.BID_ID                                                     AS bid_id,
+        r.LINE_ITEM_ID                                               AS line_item_id,
+        COALESCE(r.GOAL_TYPE, 'UNKNOWN')                             AS goal_type,
+        r.SIT_SITE_ID                                                AS sit_site_id,
+        r.AUCTION_DATETIME_LOCAL                                     AS auction_ts_local,
+        r.REASON_NAME_TYPE = 'PRINT'                                 AS is_print,
+        r.BID_PRICE_PARTNER                                          AS bid_price_partner,
+        r.BID_PRICE                                                  AS bid_price,
+        r.FIRST_PRICE                                                AS first_price,
+        r.SECOND_PRICE                                                AS second_price,
+        r.SHADING_MU                                                 AS shading_mu,
+        r.SHADING_SGIMA                                               AS shading_sigma,
+        r.SITE_INTRADAY_FACTOR                                       AS site_intraday_factor,
+        r.FEE_PERCENTAGE                                             AS fee_percentage
+    FROM `meli-bi-data.WHOWNER.BT_ADS_DSP_ADX_PRICING_RAW` r
+    CROSS JOIN params
+    WHERE r.EXECUTION_DATE BETWEEN
+            (SELECT raw_partition_start FROM params)
+        AND (SELECT raw_partition_end FROM params)
+      AND r.SIT_SITE_ID = params.site
+      AND r.PAGE        = params.page
+      AND r.AUCTION_DATETIME_LOCAL &gt;= params.analysis_start_local
+      AND r.AUCTION_DATETIME_LOCAL &lt; params.analysis_end_local
+    QUALIFY ROW_NUMBER() OVER (
+        PARTITION BY r.BID_ID, r.LINE_ITEM_ID
+        ORDER BY
+            r.FEEDBACK_DATETIME_UTC DESC NULLS LAST,
+            r.AUCTION_DATETIME_UTC DESC NULLS LAST,
+            r.BID_PRICE_PARTNER DESC NULLS LAST
+    ) = 1
+),
+
+raw_pricing AS (
+    SELECT *
+    FROM raw_pricing_dedup
+),
+
+/* ── Cap signals + internal bid from the winning element ────────────────────────
+   The cap percentiles are root fields; reconstruct the independent internal bid
+   from `score` and the root bid ceiling before applying the fee ceiling.
+   DEDUP: bid_id tampoco es único acá — verificado (ver conversación): 77.956 filas
+   duplicadas (~1.28%) sobre ~6M filas capeadas en esta ventana. Streaming con
+   posible entrega at-least-once. Nos quedamos con la más reciente por _PARTITIONTIME. */
+cap_signals AS (
+    SELECT
+        ba.bid_id,
+        CAST(JSON_VALUE(win_bid, '$.line_item_id') AS INT64) AS line_item_id,
+        ba.shading_cap_percentile,
+        ba.optimal_win_rate,
+        ba.shading_mean AS signal_shading_mu,
+        ba.shading_std_dev AS signal_shading_sigma,
+        ba.site_intraday_factor AS signal_site_intraday_factor,
+        CAST(JSON_VALUE(win_bid, '$.local') AS FLOAT64) AS bid_local_observed,
+        CAST(JSON_VALUE(win_bid, '$.score') AS FLOAT64) AS bid_score,
+        LEAST(CAST(JSON_VALUE(win_bid, '$.score') AS FLOAT64), ba.bid_ceiling) AS bid_internal
+    FROM raw_pricing rp
+    JOIN `ads-displa-yxim11er7z5-furyid.ads_display_bq_dataset.bid_auction_adx` ba
+        ON ba.bid_id = rp.bid_id
+    CROSS JOIN UNNEST(JSON_EXTRACT_ARRAY(ba.bids)) AS win_bid
+    CROSS JOIN params
+    WHERE ba._PARTITIONTIME &gt;= (SELECT signals_partition_start FROM params)
+      AND ba._PARTITIONTIME &lt;  (SELECT signals_partition_end FROM params)
+      AND ba.site_id = params.site                                    /* cluster: site_id */
+      AND ba.page    = params.page                                    /* cluster: page */
+      AND JSON_VALUE(win_bid, '$.reason_name') = 'WIN'
+      AND CAST(JSON_VALUE(win_bid, '$.line_item_id') AS INT64) = rp.line_item_id
+    QUALIFY ROW_NUMBER() OVER (
+        PARTITION BY ba.bid_id, CAST(JSON_VALUE(win_bid, '$.line_item_id') AS INT64)
+        ORDER BY ba._PARTITIONTIME DESC
+    ) = 1
+),
+
+base AS (
+    SELECT
+        rp.* EXCEPT (shading_mu, shading_sigma, site_intraday_factor),
+        COALESCE(rp.shading_mu, cs.signal_shading_mu) AS shading_mu,
+        COALESCE(rp.shading_sigma, cs.signal_shading_sigma) AS shading_sigma,
+        COALESCE(rp.site_intraday_factor, cs.signal_site_intraday_factor) AS site_intraday_factor,
+        cs.shading_cap_percentile,
+        cs.optimal_win_rate,
+        cs.bid_local_observed,
+        cs.bid_score,
+        cs.bid_internal,
+        params.replay_tolerance
+    FROM raw_pricing rp
+    CROSS JOIN params
+    LEFT JOIN cap_signals cs
+        ON rp.bid_id = cs.bid_id
+       AND rp.line_item_id = cs.line_item_id
+),
+
+/* ── Formula candidates and counterfactual scenarios ─────────────────────────── */
+with_candidates AS (
+    SELECT
+        *,
+        CASE
+            WHEN shading_cap_percentile IS NOT NULL
+                 AND optimal_win_rate IS NOT NULL
+                 AND shading_mu    IS NOT NULL
+                 AND shading_sigma IS NOT NULL
+                 AND fee_percentage IS NOT NULL
+            THEN EXP(shading_mu + shading_sigma * qnorm_approx(optimal_win_rate)) * site_intraday_factor
+        END                                                           AS candidate_optimal,
+        CASE
+            WHEN shading_cap_percentile IS NOT NULL
+                 AND shading_mu    IS NOT NULL
+                 AND shading_sigma IS NOT NULL
+                 AND fee_percentage IS NOT NULL
+            THEN EXP(shading_mu + shading_sigma * 1.6448536269514722)
+        END                                                           AS candidate_p95,
+        CASE
+            WHEN shading_cap_percentile IS NOT NULL
+                 AND bid_internal  IS NOT NULL
+                 AND fee_percentage IS NOT NULL
+            THEN bid_internal * (1 - fee_percentage)
+        END                                                           AS candidate_fee
+    FROM base
+),
+
+with_scenarios AS (
+    SELECT
+        *,
+        CASE
+            WHEN shading_cap_percentile IS NULL THEN bid_price_partner
+            WHEN candidate_optimal IS NOT NULL
+             AND candidate_p95 IS NOT NULL
+             AND candidate_fee IS NOT NULL
+            THEN LEAST(candidate_optimal, candidate_p95, candidate_fee)
+        END                                                           AS bpp_real_replay,
+        CASE
+            WHEN shading_cap_percentile IS NULL THEN bid_price_partner
+            WHEN candidate_optimal IS NOT NULL AND candidate_fee IS NOT NULL
+            THEN LEAST(candidate_optimal, candidate_fee)
+        END                                                           AS bpp_no_cap,
+        CASE
+            WHEN shading_cap_percentile IS NULL THEN bid_price_partner
+            WHEN candidate_optimal IS NOT NULL
+             AND candidate_p95 IS NOT NULL
+             AND candidate_fee IS NOT NULL
+            THEN LEAST(candidate_optimal,
+                       candidate_p95 * site_intraday_factor,
+                       candidate_fee)
+        END                                                           AS bpp_fair_capped,
+        CASE
+            WHEN shading_cap_percentile IS NULL THEN 'NOT_CAPPED'
+            WHEN candidate_optimal IS NULL
+              OR candidate_p95 IS NULL
+              OR candidate_fee IS NULL THEN 'INELIGIBLE'
+            WHEN candidate_fee &lt;= candidate_optimal
+             AND candidate_fee &lt;= candidate_p95 THEN 'FEE'
+            WHEN candidate_p95 &lt;= candidate_optimal THEN 'P95'
+            ELSE 'OPTIMAL'
+        END                                                           AS binding_term
+    FROM with_candidates
+),
+
+with_replay_check AS (
+    SELECT
+        *,
+        shading_cap_percentile IS NOT NULL
+        AND bpp_real_replay IS NOT NULL
+        AND ABS(bpp_real_replay - bid_price_partner) &lt;= replay_tolerance
+                                                                    AS replay_matches_observed,
+        bpp_no_cap IS NOT NULL                                      AS eligible_for_counterfactual
+    FROM with_scenarios
+),
+
+/* ── CPM contrafactual sin cap: no solo re-precia los prints capeados que ya
+   ganamos, sino que también suma al promedio los prints que hoy son LOSS y que
+   hubiéramos ganado sin cap (cola pesada de la lognormal) con su propio precio
+   contrafactual. Sin esto, el CPM sin cap subestima el efecto: solo repricea el
+   ~10% de wins que ya estaban capeados e ignora los ~926k prints "nuevos" caros. */
+with_counterfactual_flag AS (
+    SELECT
+        *,
+        (NOT is_print
+         AND shading_cap_percentile IS NOT NULL
+         AND first_price IS NOT NULL
+         AND bpp_no_cap &gt;= first_price)                               AS is_newly_won_no_cap
+    FROM with_replay_check
+),
+
+/* ── Agregación horaria (una hora local de MLB) ───────────────────────────────── */
+hourly_agg AS (
+    SELECT
+        DATETIME_TRUNC(auction_ts_local, HOUR)                        AS auction_hour_local,
+        sit_site_id,
+        goal_type,
+        COUNTIF(is_print)                                             AS empirical_prints,
+        COUNTIF(is_print AND eligible_for_counterfactual)             AS counterfactual_eligible_prints,
+        COUNTIF(is_print AND shading_cap_percentile IS NOT NULL)      AS capped_wins,
+        COUNTIF(NOT is_print)                                         AS total_losses,
+        COUNTIF(NOT is_print AND shading_cap_percentile IS NOT NULL)  AS capped_losses,
+        COUNTIF(shading_cap_percentile IS NOT NULL)                   AS capped_bids,
+        COUNTIF(shading_cap_percentile IS NOT NULL
+                AND bpp_real_replay IS NOT NULL)                      AS replay_eligible_capped_bids,
+        COUNTIF(replay_matches_observed)                              AS replay_match_capped_bids,
+        COUNTIF(shading_cap_percentile IS NOT NULL AND binding_term = 'OPTIMAL') AS optimal_binding_capped_bids,
+        COUNTIF(shading_cap_percentile IS NOT NULL AND binding_term = 'P95')     AS p95_binding_capped_bids,
+        COUNTIF(shading_cap_percentile IS NOT NULL AND binding_term = 'FEE')     AS fee_binding_capped_bids,
+        COUNTIF(NOT is_print
+                AND shading_cap_percentile IS NOT NULL
+                AND first_price IS NOT NULL
+                AND bpp_no_cap IS NOT NULL
+                AND bpp_no_cap &gt;= first_price)                        AS lost_prints_no_cap,
+        COUNTIF(NOT is_print
+                AND shading_cap_percentile IS NOT NULL
+                AND first_price IS NOT NULL
+                AND bpp_no_cap IS NOT NULL)                           AS eligible_capped_losses_no_cap,
+        COUNTIF(NOT is_print
+                AND shading_cap_percentile IS NOT NULL
+                AND first_price IS NOT NULL
+                AND bpp_no_cap IS NOT NULL
+                AND bpp_no_cap &lt; first_price)                         AS capped_losses_below_first_price_no_cap,
+        COUNTIF(NOT is_print
+                AND shading_cap_percentile IS NOT NULL
+                AND (first_price IS NULL OR bpp_no_cap IS NULL))      AS ineligible_capped_losses_no_cap,
+        COUNTIF(NOT is_print
+                AND shading_cap_percentile IS NOT NULL
+                AND first_price IS NULL)                              AS capped_losses_missing_first_price,
+        COUNTIF(NOT is_print
+                AND shading_cap_percentile IS NOT NULL
+                AND candidate_optimal IS NULL)                        AS capped_losses_missing_optimal,
+        COUNTIF(NOT is_print
+                AND shading_cap_percentile IS NOT NULL
+                AND optimal_win_rate IS NULL)                         AS capped_losses_missing_optimal_win_rate,
+        COUNTIF(NOT is_print
+                AND shading_cap_percentile IS NOT NULL
+                AND shading_mu IS NULL)                               AS capped_losses_missing_shading_mu,
+        COUNTIF(NOT is_print
+                AND shading_cap_percentile IS NOT NULL
+                AND shading_sigma IS NULL)                            AS capped_losses_missing_shading_sigma,
+        COUNTIF(NOT is_print
+                AND shading_cap_percentile IS NOT NULL
+                AND candidate_fee IS NULL)                            AS capped_losses_missing_fee,
+        COUNTIF(NOT is_print
+                AND shading_cap_percentile IS NOT NULL
+                AND first_price IS NOT NULL
+                AND bpp_fair_capped IS NOT NULL
+                AND bpp_fair_capped &gt;= first_price)                   AS lost_prints_fair_capped,
+        ROUND(SAFE_DIVIDE(SUM(IF(is_print, bid_price_partner, NULL)), COUNTIF(is_print)), 4) AS empirical_cpm_all,
+        ROUND(SAFE_DIVIDE(SUM(IF(is_print AND eligible_for_counterfactual, bid_price_partner, NULL)),
+                          COUNTIF(is_print AND eligible_for_counterfactual)), 4)             AS empirical_cpm,
+        ROUND(SAFE_DIVIDE(SUM(IF(is_print AND bpp_fair_capped IS NOT NULL, bpp_fair_capped, NULL)),
+                          COUNTIF(is_print AND bpp_fair_capped IS NOT NULL)), 4)               AS fair_capped_cpm,
+        ROUND(SAFE_DIVIDE(SUM(IF(is_newly_won_no_cap, bpp_no_cap, NULL)),
+                          COUNTIF(is_newly_won_no_cap)), 4)                                     AS new_print_no_cap_cpm,
+        /* Full no-cap counterfactual: reprice current wins and add newly won prints. */
+        ROUND(SAFE_DIVIDE(
+            COALESCE(SUM(IF(is_print AND eligible_for_counterfactual, bpp_no_cap, NULL)), 0)
+              + COALESCE(SUM(IF(is_newly_won_no_cap, bpp_no_cap, NULL)), 0),
+            COUNTIF(is_print AND eligible_for_counterfactual) + COUNTIF(is_newly_won_no_cap)
+        ), 4)                                                          AS no_cap_cpm
+    FROM with_counterfactual_flag
+    GROUP BY ALL
+)
+
+/* ── SELECT FINAL ─────────────────────────────────────────────────────────── */
+SELECT
+    auction_hour_local,
+    sit_site_id,
+    goal_type,
+    empirical_prints,
+    counterfactual_eligible_prints,
+    capped_wins,
+    total_losses,
+    capped_losses,
+    capped_bids,
+    replay_eligible_capped_bids,
+    replay_match_capped_bids,
+    ROUND(SAFE_DIVIDE(replay_match_capped_bids, replay_eligible_capped_bids) * 100, 2)
+                                                                       AS replay_match_pct,
+    optimal_binding_capped_bids,
+    p95_binding_capped_bids,
+    fee_binding_capped_bids,
+    lost_prints_no_cap,
+    eligible_capped_losses_no_cap,
+    capped_losses_below_first_price_no_cap,
+    ineligible_capped_losses_no_cap,
+    capped_losses_missing_first_price,
+    capped_losses_missing_optimal,
+    capped_losses_missing_optimal_win_rate,
+    capped_losses_missing_shading_mu,
+    capped_losses_missing_shading_sigma,
+    capped_losses_missing_fee,
+    lost_prints_fair_capped,
+    empirical_cpm_all,
+    empirical_cpm,
+    fair_capped_cpm,
+    new_print_no_cap_cpm,
+    ROUND(new_print_no_cap_cpm - empirical_cpm, 4)                    AS delta_new_print_vs_empirical_cpm,
+    ROUND(SAFE_DIVIDE(new_print_no_cap_cpm - empirical_cpm, empirical_cpm) * 100, 2)
+                                                                       AS pct_new_print_vs_empirical_cpm,
+    no_cap_cpm,
+    ROUND(no_cap_cpm - empirical_cpm, 4)                              AS delta_cpm_no_cap,
+    ROUND(SAFE_DIVIDE(no_cap_cpm - empirical_cpm, empirical_cpm) * 100, 2)
+                                                                       AS pct_cpm_no_cap,
+    /* efecto de que el cap nunca reciba el throttler (asimetría) */
+    ROUND(fair_capped_cpm - empirical_cpm, 4)                         AS delta_cpm_throttler_asymmetry,
+    ROUND(SAFE_DIVIDE(fair_capped_cpm - empirical_cpm, empirical_cpm) * 100, 2)
+                                                                       AS pct_cpm_throttler_asymmetry,
+    ROUND(SAFE_DIVIDE(lost_prints_no_cap, empirical_prints + lost_prints_no_cap) * 100, 2)
+                                                                       AS pct_prints_lost_no_cap,
+    ROUND(SAFE_DIVIDE(lost_prints_fair_capped, empirical_prints + lost_prints_fair_capped) * 100, 2)
+                                                                       AS pct_prints_lost_fair_capped,
+    ROUND(SAFE_DIVIDE(capped_wins, empirical_prints) * 100, 2)        AS pct_wins_capped,
+    ROUND(SAFE_DIVIDE(capped_losses, total_losses) * 100, 2)          AS pct_losses_capped
+FROM hourly_agg
+ORDER BY sit_site_id, auction_hour_local, goal_type
+LIMIT 1000
+  </code></pre></details>
+  <details><summary><code>olv_lost_print_bpp_distribution_mlb.sql</code></summary><pre><code>
+/* Compare no-cap BPP distributions for current and newly won prints (MLB). */
+CREATE TEMP FUNCTION qnorm_approx(p FLOAT64) AS (
+  CASE WHEN p IS NULL OR p &lt;= 0 OR p &gt;= 1 THEN NULL WHEN p &gt;= 0.5 THEN
+    SQRT(-2 * LN(1 - p)) - (2.515517 + 0.802853 * SQRT(-2 * LN(1 - p)) + 0.010328 * POW(SQRT(-2 * LN(1 - p)), 2)) /
+    (1 + 1.432788 * SQRT(-2 * LN(1 - p)) + 0.189269 * POW(SQRT(-2 * LN(1 - p)), 2) + 0.001308 * POW(SQRT(-2 * LN(1 - p)), 3))
+  ELSE -1 * (SQRT(-2 * LN(p)) - (2.515517 + 0.802853 * SQRT(-2 * LN(p)) + 0.010328 * POW(SQRT(-2 * LN(p)), 2)) /
+    (1 + 1.432788 * SQRT(-2 * LN(p)) + 0.189269 * POW(SQRT(-2 * LN(p)), 2) + 0.001308 * POW(SQRT(-2 * LN(p)), 3))) END
+);
+
+WITH params_base AS (
+  SELECT 'MLB' AS site, 'VIDEO_OFF_ADX' AS page, 'America/Sao_Paulo' AS tz,
+    DATETIME(DATE '2026-09-06', TIME '14:00:00') AS start_local,
+    DATETIME(DATE '2026-09-06', TIME '15:00:00') AS end_local,
+    60 AS signals_padding_minutes
+), params AS (
+  SELECT *, DATE(TIMESTAMP(start_local, tz), 'Etc/GMT+4') AS raw_partition_start,
+    DATE(TIMESTAMP(DATETIME_SUB(end_local, INTERVAL 1 MICROSECOND), tz), 'Etc/GMT+4') AS raw_partition_end,
+    TIMESTAMP_SUB(TIMESTAMP(start_local, tz), INTERVAL signals_padding_minutes MINUTE) AS signals_partition_start,
+    TIMESTAMP_ADD(TIMESTAMP(end_local, tz), INTERVAL signals_padding_minutes MINUTE) AS signals_partition_end
+  FROM params_base
+), raw_bids AS (
+  SELECT r.BID_ID AS bid_id, r.LINE_ITEM_ID AS line_item_id, r.REASON_NAME_TYPE = 'PRINT' AS is_print,
+    r.BID_PRICE_PARTNER AS observed_bpp, r.FIRST_PRICE AS first_price, r.FEE_PERCENTAGE AS fee_percentage,
+    r.SHADING_MU AS raw_shading_mu, r.SHADING_SGIMA AS raw_shading_sigma,
+    r.SITE_INTRADAY_FACTOR AS raw_site_intraday_factor
+  FROM `meli-bi-data.WHOWNER.BT_ADS_DSP_ADX_PRICING_RAW` r CROSS JOIN params p
+  WHERE r.EXECUTION_DATE BETWEEN p.raw_partition_start AND p.raw_partition_end
+    AND r.SIT_SITE_ID = p.site AND r.PAGE = p.page
+    AND r.AUCTION_DATETIME_LOCAL &gt;= p.start_local AND r.AUCTION_DATETIME_LOCAL &lt; p.end_local
+  QUALIFY ROW_NUMBER() OVER (PARTITION BY r.BID_ID, r.LINE_ITEM_ID ORDER BY r.FEEDBACK_DATETIME_UTC DESC NULLS LAST, r.AUCTION_DATETIME_UTC DESC NULLS LAST, r.BID_PRICE_PARTNER DESC NULLS LAST) = 1
+), signals AS (
+  SELECT ba.bid_id, CAST(JSON_VALUE(e, '$.line_item_id') AS INT64) AS line_item_id,
+    ba.shading_cap_percentile, ba.optimal_win_rate, ba.shading_mean AS signal_mu,
+    ba.shading_std_dev AS signal_sigma, ba.site_intraday_factor AS signal_factor,
+    LEAST(CAST(JSON_VALUE(e, '$.score') AS FLOAT64), ba.bid_ceiling) AS bid_internal
+  FROM raw_bids r JOIN `ads-displa-yxim11er7z5-furyid.ads_display_bq_dataset.bid_auction_adx` ba ON ba.bid_id = r.bid_id
+  CROSS JOIN UNNEST(JSON_EXTRACT_ARRAY(ba.bids)) AS e CROSS JOIN params p
+  WHERE ba._PARTITIONTIME &gt;= p.signals_partition_start AND ba._PARTITIONTIME &lt; p.signals_partition_end
+    AND ba.site_id = p.site AND ba.page = p.page AND JSON_VALUE(e, '$.reason_name') = 'WIN'
+    AND CAST(JSON_VALUE(e, '$.line_item_id') AS INT64) = r.line_item_id
+  QUALIFY ROW_NUMBER() OVER (PARTITION BY ba.bid_id, CAST(JSON_VALUE(e, '$.line_item_id') AS INT64) ORDER BY ba._PARTITIONTIME DESC) = 1
+), scenarios AS (
+  SELECT r.*, s.shading_cap_percentile,
+    CASE WHEN s.shading_cap_percentile IS NOT NULL THEN LEAST(
+      EXP(COALESCE(r.raw_shading_mu, s.signal_mu) + COALESCE(r.raw_shading_sigma, s.signal_sigma) * qnorm_approx(s.optimal_win_rate)) * COALESCE(r.raw_site_intraday_factor, s.signal_factor),
+      s.bid_internal * (1 - r.fee_percentage)) ELSE r.observed_bpp END AS bpp_no_cap
+  FROM raw_bids r LEFT JOIN signals s ON r.bid_id = s.bid_id AND r.line_item_id = s.line_item_id
+), cohorts AS (
+  SELECT CASE WHEN is_print THEN 'CURRENT_PRINT' ELSE 'NEW_PRINT_NO_CAP' END AS cohort,
+    bpp_no_cap, observed_bpp
+  FROM scenarios
+  WHERE is_print OR (NOT is_print AND shading_cap_percentile IS NOT NULL AND first_price IS NOT NULL AND bpp_no_cap &gt;= first_price)
+), distributions AS (
+  SELECT cohort, COUNT(*) AS print_count, AVG(bpp_no_cap) AS avg_no_cap_bpp,
+    AVG(IF(cohort = 'CURRENT_PRINT', observed_bpp, NULL)) AS avg_observed_bpp,
+    APPROX_QUANTILES(bpp_no_cap, 10) AS deciles
+  FROM cohorts GROUP BY cohort
+), combined AS (
+  SELECT COUNT(*) AS print_count, AVG(bpp_no_cap) AS avg_no_cap_bpp FROM cohorts
+)
+SELECT cohort, print_count, ROUND(avg_no_cap_bpp, 4) AS avg_no_cap_bpp,
+  ROUND(avg_observed_bpp, 4) AS avg_observed_bpp,
+  ROUND(deciles[OFFSET(1)], 4) AS p10_no_cap_bpp, ROUND(deciles[OFFSET(2)], 4) AS p20_no_cap_bpp,
+  ROUND(deciles[OFFSET(3)], 4) AS p30_no_cap_bpp, ROUND(deciles[OFFSET(4)], 4) AS p40_no_cap_bpp,
+  ROUND(deciles[OFFSET(5)], 4) AS p50_no_cap_bpp, ROUND(deciles[OFFSET(6)], 4) AS p60_no_cap_bpp,
+  ROUND(deciles[OFFSET(7)], 4) AS p70_no_cap_bpp, ROUND(deciles[OFFSET(8)], 4) AS p80_no_cap_bpp,
+  ROUND(deciles[OFFSET(9)], 4) AS p90_no_cap_bpp
+FROM distributions
+UNION ALL
+SELECT 'COMBINED_NO_CAP', print_count, ROUND(avg_no_cap_bpp, 4), NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL
+FROM combined
+ORDER BY CASE cohort WHEN 'CURRENT_PRINT' THEN 1 WHEN 'NEW_PRINT_NO_CAP' THEN 2 ELSE 3 END
+LIMIT 10
+  </code></pre></details>
+  <details><summary><code>olv_p95_cap_affected_distributions_all_signals_mlb.sql</code></summary><pre><code>
+/* All OLV shading distributions affected by the P95 cap, MLB.
+   A distribution is the auction-signals placement, domain, and rounded mu/sigma.
+   Signals are the single source of the grouping key for both prints and losses.
+   The ranking cohort contains only P95-bound losses that would win with bpp_no_cap.
+   The combined counterfactual BPP is weighted across repriced current prints and
+   recovered losses; it is not an average of the two cohort averages. */
+
+CREATE TEMP FUNCTION qnorm_approx(p FLOAT64) AS (
+    CASE
+        WHEN p IS NULL OR p &lt;= 0 OR p &gt;= 1 THEN NULL
+        WHEN p &gt;= 0.5 THEN
+            SQRT(-2.0 * LN(1.0 - p))
+            - (2.515517 + 0.802853 * SQRT(-2.0 * LN(1.0 - p)) + 0.010328 * POW(SQRT(-2.0 * LN(1.0 - p)), 2))
+              / (1.0 + 1.432788 * SQRT(-2.0 * LN(1.0 - p)) + 0.189269 * POW(SQRT(-2.0 * LN(1.0 - p)), 2)
+                     + 0.001308 * POW(SQRT(-2.0 * LN(1.0 - p)), 3))
+        ELSE
+            -1.0 * (
+                SQRT(-2.0 * LN(p))
+                - (2.515517 + 0.802853 * SQRT(-2.0 * LN(p)) + 0.010328 * POW(SQRT(-2.0 * LN(p)), 2))
+                  / (1.0 + 1.432788 * SQRT(-2.0 * LN(p)) + 0.189269 * POW(SQRT(-2.0 * LN(p)), 2)
+                         + 0.001308 * POW(SQRT(-2.0 * LN(p)), 3))
+            )
+    END
+);
+
+WITH params_base AS (
+    SELECT
+        DATE '2026-09-06' AS local_date,
+        'MLB' AS site,
+        'VIDEO_OFF_ADX' AS page,
+        'America/Sao_Paulo' AS tz,
+        DATETIME(DATE '2026-09-06', TIME '14:00:00') AS analysis_start_local,
+        DATETIME(DATE '2026-09-06', TIME '15:00:00') AS analysis_end_local,
+        60 AS signals_partition_padding_minutes
+),
+
+params AS (
+    SELECT
+        *,
+        DATE(TIMESTAMP(analysis_start_local, tz), 'Etc/GMT+4') AS raw_partition_start,
+        DATE(TIMESTAMP(DATETIME_SUB(analysis_end_local, INTERVAL 1 MICROSECOND), tz), 'Etc/GMT+4') AS raw_partition_end,
+        TIMESTAMP_SUB(TIMESTAMP(analysis_start_local, tz), INTERVAL signals_partition_padding_minutes MINUTE) AS signals_partition_start,
+        TIMESTAMP_ADD(TIMESTAMP(analysis_end_local, tz), INTERVAL signals_partition_padding_minutes MINUTE) AS signals_partition_end
+    FROM params_base
+),
+
+raw_bids AS (
+    SELECT
+        r.BID_ID AS bid_id,
+        r.LINE_ITEM_ID AS line_item_id,
+        r.REASON_NAME_TYPE = 'PRINT' AS is_print,
+        r.BID_PRICE_PARTNER AS observed_bpp,
+        r.FIRST_PRICE AS first_price,
+        r.FEE_PERCENTAGE AS fee_percentage,
+        r.PLACEMENT AS placement,
+        r.DOMAIN AS domain,
+        r.SHADING_MATCH_TYPE AS raw_shading_match_type,
+        r.SHADING_MU AS raw_shading_mu,
+        r.SHADING_SGIMA AS raw_shading_sigma,
+        r.SITE_INTRADAY_FACTOR AS raw_site_intraday_factor
+    FROM `meli-bi-data.WHOWNER.BT_ADS_DSP_ADX_PRICING_RAW` r
+    CROSS JOIN params p
+    WHERE r.EXECUTION_DATE BETWEEN p.raw_partition_start AND p.raw_partition_end
+      AND r.SIT_SITE_ID = p.site
+      AND r.PAGE = p.page
+      AND r.AUCTION_DATETIME_LOCAL &gt;= p.analysis_start_local
+      AND r.AUCTION_DATETIME_LOCAL &lt; p.analysis_end_local
+    QUALIFY ROW_NUMBER() OVER (
+        PARTITION BY r.BID_ID, r.LINE_ITEM_ID
+        ORDER BY r.FEEDBACK_DATETIME_UTC DESC NULLS LAST,
+                 r.AUCTION_DATETIME_UTC DESC NULLS LAST,
+                 r.BID_PRICE_PARTNER DESC NULLS LAST
+    ) = 1
+),
+
+signals AS (
+    SELECT
+        ba.bid_id,
+        CAST(JSON_VALUE(win_bid, '$.line_item_id') AS INT64) AS line_item_id,
+        ba.shading_cap_percentile,
+        ba.optimal_win_rate,
+        ba.placement_id AS signal_placement,
+        ba.domain_id AS signal_domain,
+        ba.shading_mean AS signal_shading_mu,
+        ba.shading_std_dev AS signal_shading_sigma,
+        ba.site_intraday_factor AS signal_site_intraday_factor,
+        LEAST(CAST(JSON_VALUE(win_bid, '$.score') AS FLOAT64), ba.bid_ceiling) AS bid_internal
+    FROM raw_bids rb
+    JOIN `ads-displa-yxim11er7z5-furyid.ads_display_bq_dataset.bid_auction_adx` ba
+        ON ba.bid_id = rb.bid_id
+    CROSS JOIN UNNEST(JSON_EXTRACT_ARRAY(ba.bids)) AS win_bid
+    CROSS JOIN params p
+    WHERE ba._PARTITIONTIME &gt;= p.signals_partition_start
+      AND ba._PARTITIONTIME &lt; p.signals_partition_end
+      AND ba.site_id = p.site
+      AND ba.page = p.page
+      AND JSON_VALUE(win_bid, '$.reason_name') = 'WIN'
+      AND CAST(JSON_VALUE(win_bid, '$.line_item_id') AS INT64) = rb.line_item_id
+    QUALIFY ROW_NUMBER() OVER (
+        PARTITION BY ba.bid_id, CAST(JSON_VALUE(win_bid, '$.line_item_id') AS INT64)
+        ORDER BY ba._PARTITIONTIME DESC
+    ) = 1
+),
+
+scenarios AS (
+    SELECT
+        rb.*,
+        s.shading_cap_percentile,
+        CASE
+            WHEN s.shading_cap_percentile IS NULL THEN 'NOT_CAPPED'
+            WHEN s.optimal_win_rate IS NULL
+              OR COALESCE(rb.raw_shading_mu, s.signal_shading_mu) IS NULL
+              OR COALESCE(rb.raw_shading_sigma, s.signal_shading_sigma) IS NULL
+              OR rb.fee_percentage IS NULL
+              OR s.bid_internal IS NULL THEN 'INELIGIBLE'
+            WHEN s.bid_internal * (1 - rb.fee_percentage) &lt;= EXP(COALESCE(rb.raw_shading_mu, s.signal_shading_mu) + COALESCE(rb.raw_shading_sigma, s.signal_shading_sigma) * qnorm_approx(s.optimal_win_rate)) * COALESCE(rb.raw_site_intraday_factor, s.signal_site_intraday_factor)
+             AND s.bid_internal * (1 - rb.fee_percentage) &lt;= EXP(COALESCE(rb.raw_shading_mu, s.signal_shading_mu) + COALESCE(rb.raw_shading_sigma, s.signal_shading_sigma) * 1.6448536269514722) THEN 'FEE'
+            WHEN EXP(COALESCE(rb.raw_shading_mu, s.signal_shading_mu) + COALESCE(rb.raw_shading_sigma, s.signal_shading_sigma) * 1.6448536269514722) &lt;= EXP(COALESCE(rb.raw_shading_mu, s.signal_shading_mu) + COALESCE(rb.raw_shading_sigma, s.signal_shading_sigma) * qnorm_approx(s.optimal_win_rate)) * COALESCE(rb.raw_site_intraday_factor, s.signal_site_intraday_factor) THEN 'P95'
+            ELSE 'OPTIMAL'
+        END AS binding_term,
+        CASE
+            WHEN s.shading_cap_percentile IS NULL THEN rb.observed_bpp
+            WHEN s.optimal_win_rate IS NOT NULL
+             AND COALESCE(rb.raw_shading_mu, s.signal_shading_mu) IS NOT NULL
+             AND COALESCE(rb.raw_shading_sigma, s.signal_shading_sigma) IS NOT NULL
+             AND COALESCE(rb.raw_site_intraday_factor, s.signal_site_intraday_factor) IS NOT NULL
+             AND rb.fee_percentage IS NOT NULL
+             AND s.bid_internal IS NOT NULL
+            THEN LEAST(
+                EXP(COALESCE(rb.raw_shading_mu, s.signal_shading_mu) + COALESCE(rb.raw_shading_sigma, s.signal_shading_sigma) * qnorm_approx(s.optimal_win_rate)) * COALESCE(rb.raw_site_intraday_factor, s.signal_site_intraday_factor),
+                s.bid_internal * (1 - rb.fee_percentage)
+            )
+        END AS bpp_no_cap,
+        ROUND(COALESCE(rb.raw_shading_mu, s.signal_shading_mu), 6) AS formula_shading_mu,
+        ROUND(COALESCE(rb.raw_shading_sigma, s.signal_shading_sigma), 6) AS formula_shading_sigma,
+        s.signal_placement AS curve_placement,
+        s.signal_domain AS curve_domain,
+        ROUND(s.signal_shading_mu, 6) AS curve_shading_mu,
+        ROUND(s.signal_shading_sigma, 6) AS curve_shading_sigma
+    FROM raw_bids rb
+    LEFT JOIN signals s
+        ON rb.bid_id = s.bid_id
+       AND rb.line_item_id = s.line_item_id
+),
+
+affected_distributions AS (
+    SELECT
+        curve_placement,
+        curve_domain,
+        curve_shading_mu,
+        curve_shading_sigma,
+        COUNTIF(NOT is_print AND binding_term = 'P95' AND first_price IS NOT NULL AND bpp_no_cap &gt;= first_price) AS lost_prints_no_cap
+    FROM scenarios
+    WHERE shading_cap_percentile IS NOT NULL
+      AND binding_term = 'P95'
+      AND curve_shading_mu IS NOT NULL
+      AND curve_shading_sigma IS NOT NULL
+    GROUP BY ALL
+),
+
+distribution_metrics AS (
+    SELECT
+        s.curve_placement,
+        s.curve_domain,
+        s.curve_shading_mu,
+        s.curve_shading_sigma,
+        COUNT(*) AS total_bids_curve,
+        COUNTIF(s.is_print) AS empirical_prints_total_curve,
+        COUNTIF(s.is_print AND s.binding_term = 'P95') AS empirical_prints_p95_binding,
+        COUNTIF(NOT s.is_print AND s.binding_term = 'P95') AS p95_binding_losses,
+        COUNTIF(NOT s.is_print AND s.binding_term = 'P95' AND s.first_price IS NOT NULL AND s.bpp_no_cap &gt;= s.first_price) AS lost_prints_no_cap,
+        AVG(IF(s.is_print, s.observed_bpp, NULL)) AS empirical_print_bpp_avg,
+        APPROX_QUANTILES(IF(s.is_print, s.observed_bpp, NULL), 100)[OFFSET(50)] AS empirical_print_bpp_p50,
+        APPROX_QUANTILES(IF(s.is_print, s.observed_bpp, NULL), 100)[OFFSET(90)] AS empirical_print_bpp_p90,
+        AVG(IF(s.is_print, s.bpp_no_cap, NULL)) AS repriced_prints_bpp_no_cap,
+        AVG(IF(NOT s.is_print AND s.first_price IS NOT NULL AND s.bpp_no_cap &gt;= s.first_price, s.bpp_no_cap, NULL)) AS recovered_losses_bpp_no_cap,
+        SAFE_DIVIDE(
+            SUM(IF(s.is_print OR (NOT s.is_print AND s.first_price IS NOT NULL AND s.bpp_no_cap &gt;= s.first_price), s.bpp_no_cap, NULL)),
+            COUNTIF(s.is_print OR (NOT s.is_print AND s.first_price IS NOT NULL AND s.bpp_no_cap &gt;= s.first_price))
+        ) AS counterfactual_bpp_no_cap
+    FROM scenarios s
+    JOIN affected_distributions d
+        ON s.curve_placement IS NOT DISTINCT FROM d.curve_placement
+       AND s.curve_domain IS NOT DISTINCT FROM d.curve_domain
+       AND s.curve_shading_mu = d.curve_shading_mu
+       AND s.curve_shading_sigma = d.curve_shading_sigma
+    GROUP BY ALL
+)
+
+SELECT
+    curve_placement AS placement,
+    curve_domain AS domain,
+    curve_shading_mu AS shading_mu,
+    curve_shading_sigma AS shading_sigma,
+    total_bids_curve,
+    empirical_prints_total_curve,
+    empirical_prints_p95_binding,
+    p95_binding_losses,
+    lost_prints_no_cap,
+    ROUND(SAFE_DIVIDE(lost_prints_no_cap, empirical_prints_total_curve + lost_prints_no_cap) * 100, 2) AS pct_prints_lost_no_cap,
+    ROUND(empirical_print_bpp_avg, 4) AS empirical_print_bpp_avg,
+    ROUND(empirical_print_bpp_p50, 4) AS empirical_print_bpp_p50,
+    ROUND(empirical_print_bpp_p90, 4) AS empirical_print_bpp_p90,
+    ROUND(repriced_prints_bpp_no_cap, 4) AS repriced_prints_bpp_no_cap,
+    ROUND(recovered_losses_bpp_no_cap, 4) AS recovered_losses_bpp_no_cap,
+    ROUND(counterfactual_bpp_no_cap, 4) AS counterfactual_bpp_no_cap
+FROM distribution_metrics
+ORDER BY lost_prints_no_cap DESC, placement, domain, shading_mu, shading_sigma
+  </code></pre></details>
+</main></body></html>
