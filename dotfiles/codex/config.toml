@@ -5,6 +5,7 @@ notify = [
     "turn-ended",
 ]
 sandbox_mode = "workspace-write"
+model = "gpt-5.6-sol"
 
 [desktop]
 ambient-suggestions-enabled = true
@@ -15,30 +16,20 @@ followUpQueueMode = "queue"
 js_repl = false
 
 [marketplaces.openai-bundled]
-last_updated = "2026-07-16T21:22:16Z"
-source = "/Users/matmoran/.codex/.tmp/bundled-marketplaces/openai-bundled"
 source_type = "local"
+source = "/Users/matmoran/.codex/.tmp/bundled-marketplaces/openai-bundled"
 
 [marketplaces.openai-primary-runtime]
-last_updated = "2026-07-16T21:21:27Z"
-source = "/Users/matmoran/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime"
 source_type = "local"
+source = "/Users/matmoran/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime"
 
 [mcp_servers.backend]
-args = [
-    "https://mcp.melioffice.com/namespaces/backend/mcp",
-    "--transport",
-    "http",
-]
 command = "mcp-remote-proxy"
+args = ["https://mcp.melioffice.com/namespaces/backend/mcp", "--transport", "http"]
 
 [mcp_servers.genai_code_review]
-args = [
-    "https://genai-code-review-mcp.melioffice.com/mcp",
-    "--transport",
-    "http",
-]
 command = "mcp-remote-proxy"
+args = ["https://genai-code-review-mcp.melioffice.com/mcp", "--transport", "http"]
 
 [mcp_servers.node_repl]
 args = []
@@ -46,18 +37,34 @@ command = "/Applications/ChatGPT.app/Contents/Resources/cua_node/bin/node_repl"
 startup_timeout_sec = 120
 
 [mcp_servers.node_repl.env]
-BROWSER_USE_AVAILABLE_BACKENDS = "chrome,iab"
-BROWSER_USE_CODEX_APP_BUILD_FLAVOR = "prod"
-BROWSER_USE_CODEX_APP_VERSION = "26.707.91948"
-CODEX_CLI_PATH = "/Applications/ChatGPT.app/Contents/Resources/codex"
-CODEX_HOME = "/Users/matmoran/.codex"
-NODE_REPL_INSTRUCTIONS_USE_CASE_BROWSER = "Control the in-app browser in conjunction with the Browser Plugin."
-NODE_REPL_INSTRUCTIONS_USE_CASE_CHROME = "Control the Chrome browser in conjunction with the Chrome Plugin. Prefer this method of controlling Chrome over alternatives, such as Computer Use, unless the user explicitly mentions an alternative."
 NODE_REPL_NATIVE_PIPE_CONNECT_TIMEOUT_MS = "1000"
 NODE_REPL_NODE_MODULE_DIRS = "/Applications/ChatGPT.app/Contents/Resources/cua_node/lib/node_modules"
 NODE_REPL_NODE_PATH = "/Applications/ChatGPT.app/Contents/Resources/cua_node/bin/node"
-NODE_REPL_TRUSTED_BROWSER_CLIENT_SHA256S = "6d25aa7656feac858f3a3bdaea5bcbab0dbfd426c9de8e6931ce90c399ee8e4f,7abc8b22abade944bcd80135500416c7aee60c0e94290c7d644b54428a0013ab"
-NODE_REPL_TRUSTED_CODE_PATHS = "/Users/matmoran/.codex"
+NODE_REPL_TRUSTED_CODE_PATHS = "/Users/matmoran/.codex:/Applications/ChatGPT.app/Contents/Resources/cua_node/lib/node_modules"
+CODEX_HOME = "/Users/matmoran/.codex"
+BROWSER_USE_AVAILABLE_BACKENDS = "chrome,iab"
+BROWSER_USE_TINYSKY_ENABLED = "0"
+NODE_REPL_INSTRUCTIONS_USE_CASE_BROWSER = "Control the in-app browser in conjunction with the Browser Plugin."
+NODE_REPL_INSTRUCTIONS_USE_CASE_CHROME = "Control the Chrome browser in conjunction with the Chrome Plugin. Prefer this method of controlling Chrome over alternatives (such as Computer Use) unless the user explicitly mentions an alternative."
+NODE_REPL_INSTRUCTIONS_USE_CASE_COMPUTER_USE = "Control desktop apps on macOS through Computer Use."
+BROWSER_USE_CODEX_APP_BUILD_FLAVOR = "prod"
+BROWSER_USE_CODEX_APP_VERSION = "26.825.51511"
+NODE_REPL_TRUSTED_SERVICES = '{"browser":"/Users/matmoran/.codex/plugins/cache/openai-bundled/browser/26.825.51511/scripts/browser-service.mjs","sky":"@oai/sky/service"}'
+CODEX_CLI_PATH = "/Applications/ChatGPT.app/Contents/Resources/codex"
+
+[mcp_servers.mcp-dataflow-prod-scope]
+command = "mcp-remote-proxy"
+args = ["https://dataflow-mcp.melioffice.com/mcp", "--transport", "http"]
+
+[mcp_servers.computer-use]
+command = "./Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient"
+args = ["mcp"]
+cwd = "."
+enabled = false
+
+[mcp_servers.cua_repl]
+command = "/Applications/ChatGPT.app/Contents/MacOS/ChatGPT"
+enabled = false
 
 [plugins."browser@openai-bundled"]
 enabled = true
@@ -74,9 +81,6 @@ enabled = true
 [plugins."presentations@openai-primary-runtime"]
 enabled = true
 
-[plugins."sites@openai-bundled"]
-enabled = true
-
 [plugins."slack@openai-curated"]
 enabled = true
 
@@ -87,6 +91,9 @@ enabled = true
 enabled = true
 
 [plugins."visualize@openai-bundled"]
+enabled = true
+
+[plugins."codex-app-tools@openai-bundled"]
 enabled = true
 
 [projects."/Users/matmoran"]
@@ -108,6 +115,18 @@ trust_level = "trusted"
 trust_level = "trusted"
 
 [projects."/Users/matmoran/nixos"]
+trust_level = "trusted"
+
+[projects."/Users/matmoran/Repos/UBA/Causalidad"]
+trust_level = "trusted"
+
+[projects."/Users/matmoran/Repos/UBA/ReinforcementLearning"]
+trust_level = "trusted"
+
+[projects."/Users/matmoran/Repos/Meli/budget"]
+trust_level = "trusted"
+
+[projects."/Users/matmoran/Repos/UBA/ModeladoContinuo"]
 trust_level = "trusted"
 
 [tui.model_availability_nux]

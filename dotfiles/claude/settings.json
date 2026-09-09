@@ -56,7 +56,6 @@
       "Bash(git fetch *)",
       "Bash(fdalabs labs get *)",
       "Bash(fdalabs fetch *)",
-      "Bash(export TIGER_TOKEN=$(fury get-token*)",
       "mcp__mcp-dataflow-prod-scope__get_job",
       "mcp__mcp-dataflow-prod-scope__get_all_roles",
       "mcp__mcp-dataflow-prod-scope__find_job",
@@ -149,7 +148,8 @@
     "fury-cli@meli-claude-marketplace": true,
     "meli-genai-costs@meli-claude-marketplace": true,
     "meli-security-expert@cyber-plugins-marketplace": true,
-    "skill-creator@claude-plugins-official": true
+    "skill-creator@claude-plugins-official": true,
+    "grid-sharing@tech-plugins-marketplace": true
   },
   "extraKnownMarketplaces": {
     "cyber-plugins-marketplace": {
@@ -164,6 +164,12 @@
         "url": "git@github.com:melisource/fury_meli-claude-marketplace.git"
       },
       "autoUpdate": true
+    },
+    "tech-plugins-marketplace": {
+      "source": {
+        "source": "git",
+        "url": "git@github.com:melisource/fury_tech-plugins-marketplace.git"
+      }
     }
   },
   "language": "espanol",
