@@ -3,6 +3,63 @@
   "tui": {
     "showThinking": false
   },
+  "plugin": [
+    [
+      "./guard.ts",
+      {
+        "rules": [
+          {
+            "pattern": "\\brm\\s+-[A-Za-z]*[fr]",
+            "reason": "recursive or force delete (rm -f / -r / -rf)"
+          },
+          {
+            "pattern": "\\bgit\\b[^\\n]*(reset\\s+--hard|clean\\s+-\\w*[fxd]|checkout\\b[^\\n]*\\.(\\/|\\s|$)|push\\s+[^\\n]*(-f|--force)\\b|stash\\s+drop\\b|update-ref\\s+-d\\b|branch\\s+[^\\n]*(-D|--delete)\\b)",
+            "reason": "destructive git operation (reset --hard, clean -f, checkout ., push --force, stash drop)"
+          },
+          {
+            "pattern": "\\b(git\\s+)?(dd|mkfs[\\w.-]*|shred|wipefs|fdisk|parted|gdisk|sgdisk|mkswap|sfdisk|blkdiscard)\\b",
+            "reason": "disk or filesystem destructive utility"
+          },
+          {
+            "pattern": "(\\bfind\\b[^\\n]*-delete\\b)|(\\bfind\\b[^\\n]*\\s-exec\\b[^\\n]*\\brm\\b)|(\\bxargs\\b[^\\n]*\\brm\\b)",
+            "reason": "bulk delete via find -delete, find -exec rm, or xargs rm"
+          },
+          {
+            "pattern": "\\bsudo\\b[^\\n]*(rm\\b|dd\\b|mkfs|shred|wipefs|fdisk|parted|reboot\\b|shutdown\\b|poweroff\\b|halt\\b)",
+            "reason": "destructive command via sudo"
+          },
+          {
+            "pattern": "\\b(shutdown|reboot|poweroff|halt)\\b",
+            "reason": "system shutdown, reboot, or halt"
+          },
+          {
+            "pattern": "\\b(kill\\s+-9\\b|pkill\\s+-9\\b|killall\\b)",
+            "reason": "force kill of processes"
+          },
+          {
+            "pattern": "\\b(chmod|chown)\\s+-R\\b",
+            "reason": "recursive chmod or chown"
+          },
+          {
+            "pattern": "\\b(DROP|TRUNCATE)\\s+(TABLE|DATABASE|SCHEMA)\\b",
+            "reason": "database drop or truncate"
+          },
+          {
+            "pattern": "\\b(curl|wget)\\b[^\\n|;]*\\|\\s*(sudo\\s+)?(ba)?sh\\b",
+            "reason": "piping a network download to a shell"
+          },
+          {
+            "pattern": "\\btruncate\\s+-s\\b",
+            "reason": "file truncation"
+          },
+          {
+            "pattern": "\\beval\\b[^\\n]*(rm\\b|dd\\b|mkfs|shred|DROP|TRUNCATE|>>|\\s>\\s)",
+            "reason": "eval with destructive content"
+          }
+        ]
+      }
+    ]
+  ],
   "permission": {
     "read": {
       "*": "allow",
@@ -15,7 +72,7 @@
       "*": "allow"
     },
     "bash": {
-      "*": "ask",
+      "*": "allow",
       "cat *": "allow",
       "cp *": "allow",
       "diff *": "allow",
@@ -68,11 +125,9 @@
       "which *": "allow",
       "xxd *": "allow",
       "xdg-open *": "allow",
-      "curl *": "ask",
-      "mv *": "ask",
-      "rm -f *": "ask",
-      "rm -rf *": "ask",
-      "wget *": "ask",
+      "curl *": "allow",
+      "mv *": "allow",
+      "wget *": "allow",
       ":(){:|:&};:": "deny",
       "> *": "deny",
       "chmod -R *": "deny",
@@ -83,15 +138,19 @@
       "diskutil *": "deny",
       "fdisk *": "deny",
       "git checkout -- . *": "deny",
+      "git checkout .": "deny",
       "git clean -f *": "deny",
       "git push --force *": "deny",
       "git reset --hard *": "deny",
+      "git stash drop *": "deny",
       "kill -9 *": "deny",
       "killall *": "deny",
       "mkfs *": "deny",
       "reboot *": "deny",
+      "rm *": "deny",
       "shred *": "deny",
       "shutdown *": "deny",
+      "truncate *": "deny",
       "wget * | bash *": "deny",
       "wget * | sh *": "deny"
     },
