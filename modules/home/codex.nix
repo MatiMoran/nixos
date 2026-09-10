@@ -16,6 +16,8 @@
           force = true;
         };
         ".codex/AGENTS.md".source = config.lib.file.mkOutOfStoreSymlink "${agentsSrc}/AGENTS.md";
+        ".codex/agents/implementer.toml".source =
+          config.lib.file.mkOutOfStoreSymlink "${codexSrc}/agents/implementer.toml";
       };
     })
   ];

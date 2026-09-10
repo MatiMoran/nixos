@@ -25,7 +25,8 @@ source_type = "local"
 source = "/Users/matmoran/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime"
 
 [marketplaces.tech-plugins-marketplace]
-last_updated = "2026-09-09T16:38:01Z"
+last_updated = "2026-09-10T16:44:32Z"
+last_revision = "5d3375e110daa93f6620ce4807866a104c37ad0f"
 source_type = "git"
 source = "https://github.com/melisource/fury_tech-plugins-marketplace.git"
 
@@ -61,6 +62,12 @@ CODEX_CLI_PATH = "/Applications/ChatGPT.app/Contents/Resources/codex"
 [mcp_servers.mcp-dataflow-prod-scope]
 command = "mcp-remote-proxy"
 args = ["https://dataflow-mcp.melioffice.com/mcp", "--transport", "http"]
+
+[mcp_servers.mcp-dataflow-prod-scope.tools.update_job_step]
+approval_mode = "approve"
+
+[mcp_servers.mcp-dataflow-prod-scope.tools.execute_job]
+approval_mode = "approve"
 
 [mcp_servers.computer-use]
 command = "./Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient"
