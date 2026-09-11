@@ -5,8 +5,8 @@
     ({ pkgs, lib, ... }:
 
     let
-      aiCmd = if pkgs.stdenv.isDarwin then "claude" else "opencode";
-      aiLabel = if pkgs.stdenv.isDarwin then "claude" else "opencode";
+      aiCmd = if pkgs.stdenv.hostPlatform.isDarwin then "claude" else "opencode";
+      aiLabel = if pkgs.stdenv.hostPlatform.isDarwin then "claude" else "opencode";
 
       # Fetch the pre-built terminal-notifier binary (avoids the broken nixpkgs xcbuild derivation).
       # x86_64 binary runs via Rosetta 2 on Apple Silicon. Provides click-to-focus via -execute.
@@ -28,18 +28,18 @@
       '';
 
       # Resolved at Nix eval time; empty string on NixOS so the Python script gets a clean no-op.
-      terminalNotifierBin = if pkgs.stdenv.isDarwin
+      terminalNotifierBin = if pkgs.stdenv.hostPlatform.isDarwin
         then "${terminalNotifierPkg}/bin/terminal-notifier"
         else "";
     in
     {
       home.packages = with pkgs;
         [ herdr jq ]
-        ++ (if pkgs.stdenv.isDarwin then [ terminalNotifierPkg ] else []);
+        ++ (if pkgs.stdenv.hostPlatform.isDarwin then [ terminalNotifierPkg ] else []);
 
       home.activation.herdrSetup = lib.hm.dag.entryAfter [ "writeBoundary" ] (
         lib.concatStringsSep "\n" (
-          lib.optionals pkgs.stdenv.isDarwin [
+          lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
             # Register terminal-notifier with Launch Services so macOS grants notification permissions
             ''
               /System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister \

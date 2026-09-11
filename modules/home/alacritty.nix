@@ -63,7 +63,7 @@
             post_processing = true;
             persist = false;
             regex = "(ipfs:|ipns:|magnet:|mailto:|gemini://|gopher://|https://|http://|news:|file:|git://|ssh:|ftp://)\\S+";
-            command.program = if pkgs.stdenv.isDarwin then "open" else "xdg-open";
+            command.program = if pkgs.stdenv.hostPlatform.isDarwin then "open" else "xdg-open";
             mouse.enabled = true;
             mouse.mods = "Shift";
             binding = { key = "O"; mods = "Control | Shift"; };

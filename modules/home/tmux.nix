@@ -5,7 +5,7 @@
     ({ pkgs, lib, ... }:
 
     let
-      aiCmd = if pkgs.stdenv.isDarwin then "codex" else "opencode";
+      aiCmd = if pkgs.stdenv.hostPlatform.isDarwin then "codex" else "opencode";
     in
     {
       home.packages = [ pkgs.tmux ];

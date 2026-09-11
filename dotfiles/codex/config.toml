@@ -1,4 +1,5 @@
 approval_policy = "on-request"
+approvals_reviewer = "auto_review"
 model_reasoning_effort = "high"
 notify = [
     "/Users/matmoran/.codex/computer-use/Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient",
