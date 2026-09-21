@@ -1,6 +1,15 @@
 { inputs, lib, ... }:
 
-let
+# =============================================================================
+# hermes-agent DISABLED on NixOS — the whole body below is commented out.
+# To re-enable:
+#   1. Delete the `/*` and the `*/` at the end of this file.
+#   2. Restore the "hermes-agent" input in flake.nix.
+#   3. Restore "hermes" in modules/nixos/users.nix.
+# =============================================================================
+{
+  /*
+  let
   hermesAgentModule = inputs.hermes-agent.nixosModules.default;
 in
 {
@@ -132,4 +141,6 @@ in
           "${config.users.users.${username}.home}/nixos/dotfiles/hermes/SOUL.md";
     })
   ];
+  }
+  */
 }
