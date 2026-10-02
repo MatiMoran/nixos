@@ -6,7 +6,7 @@ notify = [
     "turn-ended",
 ]
 sandbox_mode = "workspace-write"
-model = "gpt-6.1-sol"
+model = "gpt-6-luna"
 plan_mode_reasoning_effort = "high"
 
 [desktop]
