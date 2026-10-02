@@ -2,14 +2,13 @@
 
 {
   config.homeManager.darwinModules = lib.mkAfter [
-    ({ pkgs, config, ... }:
+    ({ config, ... }:
 
     let
       repoDir = "${config.home.homeDirectory}/nixos";
       claudeSrc = "${repoDir}/dotfiles/claude";
     in
     {
-      home.packages = [ pkgs.claude-code ];
       home.file = {
         ".claude/settings.json".source = config.lib.file.mkOutOfStoreSymlink "${claudeSrc}/settings.json";
         ".claude/CLAUDE.md".text = "@${repoDir}/dotfiles/agents/AGENTS.md";

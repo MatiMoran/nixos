@@ -15,6 +15,7 @@ source ~/nixos/dotfiles/zsh/common.zsh
 # macOS-specific aliases
 #------------------------------
 alias d='dirs -v'
+alias codex='codex --model gpt-6.1-sol -c model_reasoning_effort=high'
 
 # Media suffix aliases
 alias -s pdf=open

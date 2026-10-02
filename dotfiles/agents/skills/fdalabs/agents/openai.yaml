@@ -1,0 +1,4 @@
+interface:
+  display_name: "FDA Labs CLI"
+  short_description: "Manage labs and run Python remotely with fdalabs"
+  default_prompt: "Use $fdalabs to inspect my labs and help me run a Python script remotely."

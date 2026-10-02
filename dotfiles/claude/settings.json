@@ -89,7 +89,7 @@
     ],
     "defaultMode": "plan"
   },
-  "model": "claude-sonnet-5",
+  "model": "sonnet",
   "hooks": {
     "Notification": [
       {
@@ -149,7 +149,9 @@
     "meli-genai-costs@meli-claude-marketplace": true,
     "meli-security-expert@cyber-plugins-marketplace": true,
     "skill-creator@claude-plugins-official": true,
-    "grid-sharing@tech-plugins-marketplace": true
+    "grid-sharing@tech-plugins-marketplace": true,
+    "ai-assets@tech-plugins-marketplace": true,
+    "ai-assets@ai-assets-local-marketplace": true
   },
   "extraKnownMarketplaces": {
     "cyber-plugins-marketplace": {
@@ -170,10 +172,21 @@
         "source": "git",
         "url": "git@github.com:melisource/fury_tech-plugins-marketplace.git"
       }
+    },
+    "ai-assets-local-marketplace": {
+      "source": {
+        "source": "directory",
+        "path": "/Users/matmoran/.claude/ai-assets-local-marketplace"
+      }
     }
   },
   "language": "espanol",
   "effortLevel": "high",
+  "modelSettings": {
+    "claude-sonnet-5": {
+      "effortLevel": "medium"
+    }
+  },
   "voice": {
     "enabled": true,
     "mode": "hold"
