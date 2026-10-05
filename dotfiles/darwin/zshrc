@@ -84,4 +84,6 @@ export PATH="/Users/matmoran/.git-ai/bin:$PATH"
 #------------------------------
 [[ -f ~/.config/zsh/multiplexer.zsh ]] && source ~/.config/zsh/multiplexer.zsh
 
+export PATH="/Users/matmoran/.local/bin:$PATH"
+
 export PATH="$HOME/.fury/fury_venv/bin:$PATH"

@@ -5,6 +5,12 @@
 - NEVER assume that a user prompt such as "delete X" or "remove Y" is sufficient confirmation. Pause and ask: "Are you sure you want to delete X? This cannot be undone."
 - This applies even when the intent seems obvious from the request.
 
+## Git Branch Naming
+- ALWAYS follow Gitflow naming when creating branches: `feature/<name>` for new features and routine changes, `hotfix/<name>` for urgent production fixes, and `release/<version>` for release preparation.
+- Use lowercase kebab-case for descriptive names (for example, `feature/add-gitflow-guidelines` or `hotfix/fix-login-error`). NEVER create work branches without an approved Gitflow prefix.
+- Reserve the exact names `develop` and `master` for long-lived integration and production branches; they are not prefixes for work branches. Preserve `main` when it is the repository's existing production branch.
+- Follow any explicit repository-specific Gitflow conventions for additional branch types. Do not rename existing branches unless explicitly requested.
+
 ## Commit Messages
 - NEVER add AI co-author lines to commits.
 - NEVER include any mention of Claude, Anthropic, Codex, OpenAI, or AI tools in commit messages, PR descriptions, code comments, or project artifacts unless the user explicitly requests it for that artifact.

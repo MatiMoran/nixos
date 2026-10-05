@@ -33,6 +33,10 @@ source = "https://github.com/melisource/fury_tech-plugins-marketplace.git"
 source_type = "local"
 source = "/Users/matmoran/.codex/ai-assets-local-marketplace"
 
+[marketplaces.dsp-ml-guardia-marketplace]
+source_type = "local"
+source = "/Users/matmoran/Repos/Meli/fury_ads-dsp-ml-guardia"
+
 [mcp_servers.backend]
 command = "mcp-remote-proxy"
 args = ["https://mcp.melioffice.com/namespaces/backend/mcp", "--transport", "http"]
@@ -120,6 +124,15 @@ enabled = true
 [plugins."ai-assets@ai-assets-local-marketplace"]
 enabled = true
 
+[plugins."dsp-ml-guardia@dsp-ml-guardia-marketplace"]
+enabled = true
+
+[plugins."meli-slack@tech-plugins-marketplace"]
+enabled = true
+
+[plugins."meli-atlassian@tech-plugins-marketplace"]
+enabled = true
+
 [projects."/Users/matmoran"]
 trust_level = "trusted"
 
@@ -168,12 +181,17 @@ trust_level = "trusted"
 [projects."/Users/matmoran/Repos/Meli/fury_advertising-dsp-vpp-contextual"]
 trust_level = "trusted"
 
+[projects."/Users/matmoran/Repos/Meli/fury_ads-dsp-ml-guardia"]
+trust_level = "trusted"
+
 [tui]
 screen_reader_detection_done = true
 
 [tui.model_availability_nux]
 "gpt-5.6-sol" = 1
 "gpt-6.1-sol" = 4
+
+[hooks.state]
 
 [hooks.state."bigquery-meli@workspace-directory:hooks/hooks.json:pre_tool_use:0:0"]
 trusted_hash = "sha256:5fd44a27614c12b2fb0e2d173b9085413c7d2bf3324e381e671dfd3fcc004df1"
@@ -183,3 +201,15 @@ trusted_hash = "sha256:aa4581a3790f62b215b0b5eff12a13fed66c3eba4685201d4add141c1
 
 [hooks.state."rag@workspace-directory:hooks/hooks.json:pre_tool_use:0:0"]
 trusted_hash = "sha256:286cf4bbb02b135f21ad271c00212ad7e7369fb7b79e0b569fcb9e2222236128"
+
+[hooks.state."meli-atlassian@tech-plugins-marketplace:hooks/hooks.json:pre_tool_use:0:0"]
+trusted_hash = "sha256:d7c41d9472a506a1561628c593bfe1465ff8927352a77e4c373fbbb6f8c3063d"
+
+[hooks.state."meli-atlassian@tech-plugins-marketplace:hooks/hooks.json:permission_request:0:0"]
+trusted_hash = "sha256:800952496a9f4f6995f4d8856d41d41daee7701645ec2208c09cebb08ee66807"
+
+[hooks.state."meli-slack@tech-plugins-marketplace:hooks/hooks.json:pre_tool_use:0:0"]
+trusted_hash = "sha256:235f3001555d64afaecf5a5e2563de6ac3a25f3d0c11fb0f5a13d7c9838c410e"
+
+[hooks.state."meli-slack@tech-plugins-marketplace:hooks/hooks.json:permission_request:0:0"]
+trusted_hash = "sha256:ed49ee746082e7ded2ea99b97bdca627093fe18259ad7260c978ed96f569af80"
