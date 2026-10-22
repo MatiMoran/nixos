@@ -27,7 +27,7 @@ Collect everything needed to understand the changes. All steps here are read-onl
 
 1. **Get the PR metadata**
    ```bash
-   gh pr view --json number,title,url,headRefName,baseRefName
+   gh pr view --json number,title,url,headRefName,baseRefName,body,reviewRequests,statusCheckRollup,isDraft
    ```
    If no PR exists for the current branch, tell the user and offer to create one
    with `gh pr create`. Stop here until there's a PR to work with.
@@ -46,8 +46,17 @@ Collect everything needed to understand the changes. All steps here are read-onl
    entries it may already contain.
 
 5. **Derive the project name** for the Slack message prefix. Extract a short,
-   human-friendly name from the repo (e.g. `fury_advertising-dsp-ml-budget` →
-   `Budget`). When in doubt, use the last meaningful word from the repo name.
+   human-friendly initiative or component name from the repo and changed scope
+   (e.g. `Budget`, `Pricing`, `Spend Plan`, `Models`, or `Wiki`). Preserve a known
+   team name rather than blindly taking the last word of the repository name.
+
+6. **Gather Slack review context** — use the PR body, diff, check results, and
+   user-provided evidence to identify why the change matters, what needs review,
+   and any operational impact. Requested GitHub reviewers are candidates; resolve
+   their Slack identities only when a reliable mapping is available. Use any
+   priority, deadline, or reviewer choice the user already supplied. Flag missing
+   reviewer choices in the draft; do not invent urgency or passing validations.
+   A draft PR or pending/failed checks must not be described as ready or green.
 
 ---
 
@@ -91,22 +100,20 @@ detail since the audience is developers reviewing code.
 
 ### C. Slack Message
 
-Format for pasting into a Slack channel:
+Use the team format for
+[#dsp-ml-prs](https://meli.enterprise.slack.com/archives/C0C53VDHES0).
+Read [references/slack-template.md](references/slack-template.md) before drafting
+this artifact; it defines the field schema, optional sections, formatting, and
+handling of missing information.
 
-```
-[ProjectName]
+Lead with `[Initiative] Short change title`, then labeled bullets for `PR`,
+`Contexto`, `Review solicitado`, and `Reviewers`. Add `Validación` and `Impacto`
+when supported and useful. Include `Prioridad o fecha` only for a concrete need
+already established in the context. Keep the message concise and technical,
+in natural Spanish, with the actual PR URL and a specific review focus.
 
-Buenas team :hi_pepe: - Dejo PR de <project> con los siguientes cambios:
-<full PR URL>
-
-* Bullet point 1
-* Bullet point 2
-```
-
-- Use the actual PR URL from step 1.
-- Bullets should be user-friendly summaries (slightly less technical than the PR
-  description).
-- Use `*` (Unicode bullet) for bullet points.
+Generate one message per PR. The Slack announcement coordinates review; keep
+the fuller implementation details in the GitHub PR description.
 
 ### Presenting the Draft
 

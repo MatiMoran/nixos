@@ -135,6 +135,17 @@
           }
         ]
       }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "'/Users/matmoran/.local/bin/furyassist' hook session-start --tool claude",
+            "timeout": 2
+          }
+        ]
+      }
     ]
   },
   "statusLine": {
