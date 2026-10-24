@@ -5,7 +5,9 @@
     ({ ... }: {
       programs.rofi = {
         enable = true;
-        terminal = "alacritty";
+        settings = {
+            terminal = "alacritty";
+        };
         theme = ../../dotfiles/rofi/Theme.rasi;
       };
     })
