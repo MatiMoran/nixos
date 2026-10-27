@@ -8,7 +8,11 @@
         bat
         bc
         brave
-        calibre
+        # Temporarily disabled: cache miss in nixpkgs, and building from source
+        # fails because pyopenjtalk-plus (via piper-tts) has a test expecting
+        # "must be str" while the newer Cython reports "Expected str, got int".
+        # Re-enable once nixpkgs fixes the package or it is back in the cache.
+        # calibre
         clang
         curl
         dunst

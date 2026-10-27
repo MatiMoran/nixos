@@ -2,7 +2,7 @@
 # NixOS platform setup
 #------------------------------
 
-export COMMON_DIRS="$HOME $HOME/Database/files $HOME/Database/files/Vault/files/Repos/Personal $HOME/Database/files/Repos/UBA $HOME/.local"
+export COMMON_DIRS="$HOME $HOME/Database/files $HOME/Database/files/Vault/files/Repos/Personal $HOME/Database/files/Repos/Personal $HOME/Database/files/Repos/UBA $HOME/.local"
 export DISPLAY=:0.0
 alias open='xdg-open'
 export BROWSER="brave"

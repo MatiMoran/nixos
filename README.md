@@ -16,6 +16,20 @@ sudo nixos-rebuild switch --flake ~/nixos
 sudo darwin-rebuild switch --flake ~/nixos#darwin
 ```
 
+## Updating Dependencies
+
+**nixpkgs only** (recommended for routine updates):
+```bash
+nix flake update nixpkgs
+```
+Updates only the `nixpkgs` input; inputs that follow it (`home-manager`, `nix-darwin`) pick up the new rev automatically, while pinned inputs like `hermes-agent` stay untouched.
+
+**All inputs:**
+```bash
+nix flake update
+```
+Updates every input in `flake.lock`, including pinned ones — use it only when you intend to move everything.
+
 ## Structure
 
 ```
