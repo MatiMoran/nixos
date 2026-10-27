@@ -1,210 +1,230 @@
 {
-  "permissions": {
-    "allow": [
-      "Bash(bq version *)",
-      "Bash(command -v bq)",
-      "Bash(dataflow-toolkit *)",
-      "Bash(fury ai *)",
-      "Bash(fury token *)",
-      "Bash(gcloud auth *)",
-      "Bash(gh api *)",
-      "Bash(gh pr create*)",
-      "Bash(git add*)",
-      "Bash(git commit*)",
-      "Bash(git push*)",
-      "Bash(open *)",
-      "Bash(pbcopy)",
-      "Bash(pip install *)",
-      "Bash(poetry env info*)",
-      "Bash(poetry init*)",
-      "Bash(poetry lock*)",
-      "Bash(poetry version*)",
-      "Bash(python3 *)",
-      "mcp__bigquery__execute_query",
-      "mcp__claude_ai_Atlassian__createJiraIssue",
-      "mcp__claude_ai_Atlassian__editJiraIssue",
-      "mcp__claude_ai_Atlassian__getAccessibleAtlassianResources",
-      "mcp__claude_ai_Atlassian__getJiraIssue",
-      "mcp__claude_ai_Atlassian__getTransitionsForJiraIssue",
-      "mcp__claude_ai_Atlassian__lookupJiraAccountId",
-      "mcp__claude_ai_Atlassian__searchJiraIssuesUsingJql",
-      "mcp__claude_ai_Atlassian__transitionJiraIssue",
-      "mcp__claude_ai_Slack__slack_read_thread",
-      "mcp__claude_ai_MELI_Atlassian__create_meli_session",
-      "mcp__claude_ai_MELI_Atlassian__getAccessibleAtlassianResources",
-      "mcp__claude_ai_MELI_Atlassian__searchJiraIssuesUsingJql",
-      "mcp__claude_ai_MELI_Atlassian__getJiraIssue",
-      "mcp__claude_ai_MELI_Atlassian__getTransitionsForJiraIssue",
-      "mcp__claude_ai_MELI_Atlassian__search",
-      "mcp__claude_ai_MELI_Github__pull_request_read",
-      "mcp__claude_ai_MELI_Slack__create_meli_session",
-      "mcp__claude_ai_MELI_Slack__slack_read_thread",
-      "mcp__bigquery__dry_run_query",
-      "mcp__bigquery__describe_table",
-      "mcp__bigquery__get_sample_data",
-      "mcp__bigquery__list_tables",
-      "mcp__bigquery__list_datasets",
-      "mcp__bigquery__check_auth_status",
-      "mcp__bigquery__get_job_status",
-      "mcp__bigquery__list_active_jobs",
-      "mcp__bigquery__cancel_job",
-      "mcp__bigquery__analyze_table_data",
-      "mcp__bigquery__search_tables_by_column",
-      "Bash(bash /Users/matmoran/.claude/skills/queriator/scripts/run_query.sh *)",
-      "Bash(bq query *)",
-      "Bash(bq show*)",
-      "Bash(git fetch *)",
-      "Bash(fdalabs labs get *)",
-      "Bash(fdalabs fetch *)",
-      "mcp__mcp-dataflow-prod-scope__get_job",
-      "mcp__mcp-dataflow-prod-scope__get_all_roles",
-      "mcp__mcp-dataflow-prod-scope__find_job",
-      "mcp__mcp-dataflow-prod-scope__get_log",
-      "mcp__claude_ai_MELI_Github__create_meli_session"
-    ],
-    "deny": [
-      "Bash(chmod -R *)",
-      "Bash(chown *)",
-      "Bash(curl * | bash *)",
-      "Bash(curl * | sh *)",
-      "Bash(dd *)",
-      "Bash(diskutil *)",
-      "Bash(fdisk *)",
-      "Bash(git checkout -- . *)",
-      "Bash(git clean -f *)",
-      "Bash(git push --force *)",
-      "Bash(git reset --hard *)",
-      "Bash(kill -9 *)",
-      "Bash(killall *)",
-      "Bash(mkfs *)",
-      "Bash(reboot *)",
-      "Bash(shutdown *)",
-      "Bash(wget * | bash *)",
-      "Bash(wget * | sh *)"
-    ],
-    "ask": [
-      "Bash(mv *)",
-      "Bash(rm -f *)",
-      "Bash(rm -rf *)"
-    ],
-    "defaultMode": "plan"
-  },
-  "model": "sonnet",
-  "hooks": {
-    "Notification": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "true",
-            "async": true
-          }
-        ]
-      }
-    ],
-    "PostToolUse": [
-      {
-        "matcher": "*",
-        "hooks": []
-      }
-    ],
-    "PreToolUse": [
-      {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash ~/.claude/scripts/confirm-destructive.sh"
-          }
-        ]
-      },
-      {
-        "matcher": "*",
-        "hooks": []
-      }
-    ],
-    "Stop": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "true",
-            "async": true
-          }
-        ]
-      }
-    ],
-    "SessionStart": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "'/Users/matmoran/.local/bin/furyassist' hook session-start --tool claude",
-            "timeout": 2
-          }
-        ]
-      }
-    ]
-  },
-  "statusLine": {
-    "type": "command",
-    "command": "bash ~/.claude/statusline-command.sh"
-  },
-  "enabledPlugins": {
-    "dataflow-develop-toolkit@meli-claude-marketplace": true,
-    "fda@meli-claude-marketplace": true,
-    "frontend-design@claude-plugins-official": true,
-    "fury-cli@meli-claude-marketplace": true,
-    "meli-genai-costs@meli-claude-marketplace": true,
-    "meli-security-expert@cyber-plugins-marketplace": true,
-    "skill-creator@claude-plugins-official": true,
-    "grid-sharing@tech-plugins-marketplace": true,
-    "ai-assets@tech-plugins-marketplace": true,
-    "ai-assets@ai-assets-local-marketplace": true
-  },
-  "extraKnownMarketplaces": {
-    "cyber-plugins-marketplace": {
-      "source": {
-        "source": "git",
-        "url": "git@github.com:melisource/fury_cyber-plugins-marketplace.git"
-      }
+    "effortLevel": "high",
+    "enabledPlugins": {
+        "dataflow-develop-toolkit@meli-claude-marketplace": true,
+        "fda@meli-claude-marketplace": true,
+        "frontend-design@claude-plugins-official": true,
+        "fury-cli@meli-claude-marketplace": true,
+        "meli-genai-costs@meli-claude-marketplace": true,
+        "meli-security-expert@cyber-plugins-marketplace": true,
+        "skill-creator@claude-plugins-official": true,
+        "grid-sharing@tech-plugins-marketplace": true,
+        "ai-assets@tech-plugins-marketplace": true,
+        "ai-assets@ai-assets-local-marketplace": true
     },
-    "meli-claude-marketplace": {
-      "source": {
-        "source": "git",
-        "url": "git@github.com:melisource/fury_meli-claude-marketplace.git"
-      },
-      "autoUpdate": true
+    "extraKnownMarketplaces": {
+        "cyber-plugins-marketplace": {
+            "source": {
+                "source": "git",
+                "url": "git@github.com:melisource/fury_cyber-plugins-marketplace.git"
+            }
+        },
+        "meli-claude-marketplace": {
+            "source": {
+                "source": "git",
+                "url": "git@github.com:melisource/fury_meli-claude-marketplace.git"
+            },
+            "autoUpdate": true
+        },
+        "tech-plugins-marketplace": {
+            "source": {
+                "source": "git",
+                "url": "git@github.com:melisource/fury_tech-plugins-marketplace.git"
+            }
+        },
+        "ai-assets-local-marketplace": {
+            "source": {
+                "source": "directory",
+                "path": "/Users/matmoran/.claude/ai-assets-local-marketplace"
+            }
+        }
     },
-    "tech-plugins-marketplace": {
-      "source": {
-        "source": "git",
-        "url": "git@github.com:melisource/fury_tech-plugins-marketplace.git"
-      }
+    "hooks": {
+        "Notification": [
+            {
+                "matcher": "",
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "true",
+                        "async": true
+                    }
+                ]
+            }
+        ],
+        "PostToolUse": [
+            {
+                "matcher": "*",
+                "hooks": []
+            }
+        ],
+        "PreToolUse": [
+            {
+                "matcher": "Bash",
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "bash ~/.claude/scripts/confirm-destructive.sh"
+                    }
+                ]
+            },
+            {
+                "matcher": "*",
+                "hooks": []
+            }
+        ],
+        "SessionStart": [
+            {
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "'/Users/matmoran/.local/bin/furyassist' hook session-start --tool claude",
+                        "timeout": 2
+                    }
+                ]
+            }
+        ],
+        "Stop": [
+            {
+                "matcher": "",
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "true",
+                        "async": true
+                    }
+                ]
+            },
+            {
+                "matcher": "",
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "/opt/homebrew/bin/node /Users/matmoran/.mission-control/bin/session-stop-hook.js"
+                    }
+                ]
+            }
+        ],
+        "UserPromptSubmit": [
+            {
+                "matcher": "",
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "/opt/homebrew/bin/node /Users/matmoran/.mission-control/bin/session-stop-hook.js"
+                    }
+                ]
+            }
+        ]
     },
-    "ai-assets-local-marketplace": {
-      "source": {
-        "source": "directory",
-        "path": "/Users/matmoran/.claude/ai-assets-local-marketplace"
-      }
-    }
-  },
-  "language": "espanol",
-  "effortLevel": "high",
-  "modelSettings": {
-    "claude-sonnet-5": {
-      "effortLevel": "medium"
-    }
-  },
-  "voice": {
-    "enabled": true,
-    "mode": "hold"
-  },
-  "theme": "dark",
-  "remoteControlAtStartup": false,
-  "skipAutoPermissionPrompt": true,
-  "useAutoModeDuringPlan": true,
-  "voiceEnabled": true
+    "language": "espanol",
+    "model": "sonnet",
+    "modelSettings": {
+        "claude-sonnet-5": {
+            "effortLevel": "medium"
+        }
+    },
+    "permissions": {
+        "allow": [
+            "Bash(bq version *)",
+            "Bash(command -v bq)",
+            "Bash(dataflow-toolkit *)",
+            "Bash(fury ai *)",
+            "Bash(fury token *)",
+            "Bash(gcloud auth *)",
+            "Bash(gh api *)",
+            "Bash(gh pr create*)",
+            "Bash(git add*)",
+            "Bash(git commit*)",
+            "Bash(git push*)",
+            "Bash(open *)",
+            "Bash(pbcopy)",
+            "Bash(pip install *)",
+            "Bash(poetry env info*)",
+            "Bash(poetry init*)",
+            "Bash(poetry lock*)",
+            "Bash(poetry version*)",
+            "Bash(python3 *)",
+            "mcp__bigquery__execute_query",
+            "mcp__claude_ai_Atlassian__createJiraIssue",
+            "mcp__claude_ai_Atlassian__editJiraIssue",
+            "mcp__claude_ai_Atlassian__getAccessibleAtlassianResources",
+            "mcp__claude_ai_Atlassian__getJiraIssue",
+            "mcp__claude_ai_Atlassian__getTransitionsForJiraIssue",
+            "mcp__claude_ai_Atlassian__lookupJiraAccountId",
+            "mcp__claude_ai_Atlassian__searchJiraIssuesUsingJql",
+            "mcp__claude_ai_Atlassian__transitionJiraIssue",
+            "mcp__claude_ai_Slack__slack_read_thread",
+            "mcp__claude_ai_MELI_Atlassian__create_meli_session",
+            "mcp__claude_ai_MELI_Atlassian__getAccessibleAtlassianResources",
+            "mcp__claude_ai_MELI_Atlassian__searchJiraIssuesUsingJql",
+            "mcp__claude_ai_MELI_Atlassian__getJiraIssue",
+            "mcp__claude_ai_MELI_Atlassian__getTransitionsForJiraIssue",
+            "mcp__claude_ai_MELI_Atlassian__search",
+            "mcp__claude_ai_MELI_Github__pull_request_read",
+            "mcp__claude_ai_MELI_Slack__create_meli_session",
+            "mcp__claude_ai_MELI_Slack__slack_read_thread",
+            "mcp__bigquery__dry_run_query",
+            "mcp__bigquery__describe_table",
+            "mcp__bigquery__get_sample_data",
+            "mcp__bigquery__list_tables",
+            "mcp__bigquery__list_datasets",
+            "mcp__bigquery__check_auth_status",
+            "mcp__bigquery__get_job_status",
+            "mcp__bigquery__list_active_jobs",
+            "mcp__bigquery__cancel_job",
+            "mcp__bigquery__analyze_table_data",
+            "mcp__bigquery__search_tables_by_column",
+            "Bash(bash /Users/matmoran/.claude/skills/queriator/scripts/run_query.sh *)",
+            "Bash(bq query *)",
+            "Bash(bq show*)",
+            "Bash(git fetch *)",
+            "Bash(fdalabs labs get *)",
+            "Bash(fdalabs fetch *)",
+            "mcp__mcp-dataflow-prod-scope__get_job",
+            "mcp__mcp-dataflow-prod-scope__get_all_roles",
+            "mcp__mcp-dataflow-prod-scope__find_job",
+            "mcp__mcp-dataflow-prod-scope__get_log",
+            "mcp__claude_ai_MELI_Github__create_meli_session"
+        ],
+        "deny": [
+            "Bash(chmod -R *)",
+            "Bash(chown *)",
+            "Bash(curl * | bash *)",
+            "Bash(curl * | sh *)",
+            "Bash(dd *)",
+            "Bash(diskutil *)",
+            "Bash(fdisk *)",
+            "Bash(git checkout -- . *)",
+            "Bash(git clean -f *)",
+            "Bash(git push --force *)",
+            "Bash(git reset --hard *)",
+            "Bash(kill -9 *)",
+            "Bash(killall *)",
+            "Bash(mkfs *)",
+            "Bash(reboot *)",
+            "Bash(shutdown *)",
+            "Bash(wget * | bash *)",
+            "Bash(wget * | sh *)"
+        ],
+        "ask": [
+            "Bash(mv *)",
+            "Bash(rm -f *)",
+            "Bash(rm -rf *)"
+        ],
+        "defaultMode": "plan"
+    },
+    "remoteControlAtStartup": false,
+    "skipAutoPermissionPrompt": true,
+    "statusLine": {
+        "type": "command",
+        "command": "bash ~/.claude/statusline-command.sh"
+    },
+    "theme": "dark",
+    "useAutoModeDuringPlan": true,
+    "voice": {
+        "enabled": true,
+        "mode": "hold"
+    },
+    "voiceEnabled": true
 }
