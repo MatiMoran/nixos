@@ -4,3 +4,4 @@ __pycache__/
 *.env
 dotfiles/agents/skills/.system/
 dotfiles/agents/skills/synced/
+dotfiles/agents/skills/grid-report-style/references/examples/
